@@ -87,7 +87,7 @@ public class DyeMakerUI extends JFrame {
         //======== this ========
         setTitle("PF Dye Maker");
         setName("this");
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
