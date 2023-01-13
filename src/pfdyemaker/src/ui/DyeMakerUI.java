@@ -33,44 +33,44 @@ public class DyeMakerUI extends JFrame {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get(config.WOAD_LEAVES));
-            Logger.log("ingredient price: " + config.getIngredientPrice());
-            Logger.log("Dye ingredient: " + config.getDyeIngredient());
+            Logger.log("config -> ingredient price -> " + config.getIngredientPrice());
+            Logger.log("config -> dye ingredient -> " + config.getDyeIngredient());
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_BLUE_DYE)) {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake("Blue dye");
             config.setIngredientPrice(LivePrices.get("Blue dye"));
-            Logger.log("ingredient price: " + config.getIngredientPrice());
-            Logger.log("Dye ingredient: " + config.getDyeIngredient());
+            Logger.log("config -> dye price: " + config.getIngredientPrice());
+            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.COLLECT_REDBERRIES)) {
             config.setDyeIngredient(config.REDBERRIES);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get(config.REDBERRIES));
-            Logger.log("ingredient price: " + config.getIngredientPrice());
-            Logger.log("Dye ingredient: " + config.getDyeIngredient());
+            Logger.log("config -> dye price: " + config.getIngredientPrice());
+            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_RED_DYE)) {
             config.setDyeIngredient(config.REDBERRIES);
             config.setDyeToMake("Red dye");
             config.setIngredientPrice(LivePrices.get("Red dye"));
-            Logger.log("ingredient price: " + config.getIngredientPrice());
-            Logger.log("Dye ingredient: " + config.getDyeIngredient());
+            Logger.log("config -> dye price: " + config.getIngredientPrice());
+            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.COLLECT_ONIONS)) {
             config.setDyeIngredient(config.ONION);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get("Onion"));
-            Logger.log("ingredient price: " + config.getIngredientPrice());
-            Logger.log("Dye ingredient: " + config.getDyeIngredient());
+            Logger.log("config -> dye price: " + config.getIngredientPrice());
+            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_YELLOW_DYE)) {
             config.setDyeIngredient(config.ONION);
             config.setDyeToMake("Yellow Dye");
             config.setIngredientPrice(LivePrices.get("Yellow dye"));
-            Logger.log("ingredient price: " + config.getIngredientPrice());
-            Logger.log("Dye ingredient: " + config.getDyeIngredient());
+            Logger.log("config -> dye price: " + config.getIngredientPrice());
+            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
         }
 
         selectedBranch = (ActivityBranch) comboBox1.getSelectedItem();
         startLoop = true;
-        Logger.log("[GUI] Chosen activity: " + selectedBranch);
-        Logger.log("script started: " + startLoop);
+        Logger.log("gui -> selected activity: " + selectedBranch);
+        Logger.log("manager -> script started: " + startLoop);
         this.dispose();
     }
 

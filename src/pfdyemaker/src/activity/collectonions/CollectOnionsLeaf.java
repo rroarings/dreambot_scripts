@@ -1,0 +1,38 @@
+package pfdyemaker.src.activity.collectonions;
+
+import org.dreambot.api.methods.container.impl.Inventory;
+import org.dreambot.api.methods.interactive.GameObjects;
+import org.dreambot.api.methods.interactive.Players;
+import org.dreambot.api.utilities.Sleep;
+import org.dreambot.api.wrappers.interactive.GameObject;
+import pfdyemaker.src.data.DyeMakerConfig;
+import pfdyemaker.src.framework.Leaf;
+
+public class CollectOnionsLeaf extends Leaf {
+
+    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
+
+    @Override
+    public boolean isValid() {
+        return !Inventory.isFull() && config.ONION_AREA.contains(Players.getLocal());
+    }
+
+    @Override
+    public int onLoop() {
+        GameObject ONION = GameObjects.closest(gameObject -> gameObject.getName().contains("Onion") && gameObject.hasAction("Pick"));
+
+        if (ONION == null) return 600;
+
+        if (ONION.interact("Pick")) {
+            config.setStatus("Picking onions");
+            Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 900);
+        }
+
+        if (Inventory.contains("Onion seed")) {
+            config.setStatus("Drop onion seed");
+            Inventory.interact("Onion seed", "Drop");
+            Sleep.sleepUntil(() -> !Inventory.contains("Onion seed"), 600);
+        }
+        return 600;
+    }
+}
