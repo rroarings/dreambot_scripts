@@ -12,7 +12,7 @@ Features:
 
 ---
 
-![An old rock in the desert](/assets/dyes.png) **PF Dye Maker**
+**PF Dye Maker**  v 1.1
 
 Creates three types of colored dye or collects the ingredients to create each one. 
 
