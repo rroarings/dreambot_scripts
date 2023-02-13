@@ -4,7 +4,6 @@ import org.dreambot.api.Client;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.interactive.GameObjects;
 import org.dreambot.api.methods.interactive.Players;
-import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.methods.world.World;
 import org.dreambot.api.methods.world.Worlds;
 import org.dreambot.api.methods.worldhopper.WorldHopper;
@@ -12,7 +11,6 @@ import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.GameObject;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.framework.Leaf;
-
 
 public class CollectRedberriesLeaf extends Leaf {
 

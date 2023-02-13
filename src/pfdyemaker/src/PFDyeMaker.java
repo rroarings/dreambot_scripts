@@ -7,8 +7,9 @@ import org.dreambot.api.utilities.Timer;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.framework.Tree;
 import pfdyemaker.src.ui.DyeMakerUI;
+import pfdyemaker.src.util.API;
 import pfdyemaker.src.util.QuantityFormatter;
-import pfgoldcrafter.src.util.API;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

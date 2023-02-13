@@ -13,7 +13,6 @@ import org.dreambot.api.wrappers.interactive.NPC;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.framework.Leaf;
 
-
 public class MakeRedDyeLeaf extends Leaf {
 
     DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
@@ -30,7 +29,6 @@ public class MakeRedDyeLeaf extends Leaf {
     @Override
     public int onLoop() {
         NPC AGGIE = NPCs.closest(npc -> npc.getName().equals("Aggie") && npc.isClickable());
-        //config.getPricedItem().update();
 
         if (Dialogues.inDialogue()) {
             config.setStatus("Skipping dialogue");
@@ -59,7 +57,7 @@ public class MakeRedDyeLeaf extends Leaf {
             ScriptManager.getScriptManager().stop();
         }
 
-
+        config.getPricedItem().update();
         return 1000;
     }
 }
