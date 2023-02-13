@@ -2,6 +2,7 @@ package pfdyemaker.src.data;
 
 import org.dreambot.api.methods.map.Area;
 import org.dreambot.api.methods.map.Tile;
+import pfdyemaker.src.util.PricedItem;
 
 public class DyeMakerConfig {
 
@@ -9,14 +10,20 @@ public class DyeMakerConfig {
 
     private DyeMakerConfig() {}
 
-    public  Area AGGIES_HOUSE = new Area(3083, 3261, 3089, 3256);
-    public  Area REDBERRY_AREA = new Area(3278, 3375, 3267, 3367);
+    public Area AGGIES_HOUSE = new Area(3083, 3261, 3089, 3256);
+    public Area REDBERRY_AREA = new Area(3278, 3375, 3267, 3367);
     public Area ONION_AREA = new Area(3186, 3269, 3192, 3265);
-    public  Area WYSON_AREA = new Area(
-            new Tile(3031, 3375, 0),
-            new Tile(3023, 3375, 0),
-            new Tile(3023, 3384, 0),
-            new Tile(3030, 3384, 0));
+    public Tile FALADOR_PARK_TILE = new Tile(3025, 3379, 0);
+
+    public PricedItem getPricedItem() {
+        return pricedItem;
+    }
+
+    public PricedItem pricedItem;
+
+    public String getDyeToMake() {
+        return dyeToMake;
+    }
 
     public String dyeToMake;
     public String dyeIngredient;
@@ -32,10 +39,6 @@ public class DyeMakerConfig {
 
     public int getDyesMade() {
         return dyesMade;
-    }
-
-    public void setDyesMade(int dyesMade) {
-        this.dyesMade = dyesMade;
     }
 
     public int getProfit() {
@@ -58,16 +61,8 @@ public class DyeMakerConfig {
         return ingredientsCollected;
     }
 
-    public void setIngredientsCollected(int ingredientsCollected) {
-        this.ingredientsCollected = ingredientsCollected;
-    }
-
     public static DyeMakerConfig getDyeMakerConfig() {
         return dyeMakerConfig;
-    }
-
-    public String getDyeToMake() {
-        return dyeToMake;
     }
 
     public void setDyeToMake(String dyeToMake) {
@@ -89,5 +84,4 @@ public class DyeMakerConfig {
     public void setStatus(String status) {
         DyeMakerConfig.status = status;
     }
-
 }

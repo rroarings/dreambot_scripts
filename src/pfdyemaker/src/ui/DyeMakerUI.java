@@ -8,6 +8,7 @@ import org.dreambot.api.methods.grandexchange.LivePrices;
 import org.dreambot.api.utilities.Logger;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.util.ActivityBranch;
+import pfdyemaker.src.util.PricedItem;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -33,44 +34,41 @@ public class DyeMakerUI extends JFrame {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get(config.WOAD_LEAVES));
-            Logger.log("config -> ingredient price -> " + config.getIngredientPrice());
-            Logger.log("config -> dye ingredient -> " + config.getDyeIngredient());
+            config.pricedItem = new PricedItem(config.WOAD_LEAVES, true);
+            Logger.log("config: ingredient price: " + config.getIngredientPrice());
+            Logger.log("config: dye ingredient: " + config.getDyeIngredient());
+            Logger.log("config: priced item: " + config.getPricedItem().getName());
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_BLUE_DYE)) {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake("Blue dye");
-            config.setIngredientPrice(LivePrices.get("Blue dye"));
-            Logger.log("config -> dye price: " + config.getIngredientPrice());
-            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
+            config.setIngredientPrice(LivePrices.get(config.WOAD_LEAVES));
+            config.pricedItem = new PricedItem("Blue dye", true);
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.COLLECT_REDBERRIES)) {
             config.setDyeIngredient(config.REDBERRIES);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get(config.REDBERRIES));
-            Logger.log("config -> dye price: " + config.getIngredientPrice());
-            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
+            config.pricedItem = new PricedItem(config.REDBERRIES, true);
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_RED_DYE)) {
             config.setDyeIngredient(config.REDBERRIES);
+            config.setIngredientPrice(LivePrices.get(config.REDBERRIES));
             config.setDyeToMake("Red dye");
-            config.setIngredientPrice(LivePrices.get("Red dye"));
-            Logger.log("config -> dye price: " + config.getIngredientPrice());
-            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
+            config.pricedItem = new PricedItem("Red dye", true);
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.COLLECT_ONIONS)) {
             config.setDyeIngredient(config.ONION);
+            config.setIngredientPrice(LivePrices.get(config.ONION));
             config.setDyeToMake(null);
-            config.setIngredientPrice(LivePrices.get("Onion"));
-            Logger.log("config -> dye price: " + config.getIngredientPrice());
-            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
+            config.pricedItem = new PricedItem(config.ONION, true);
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_YELLOW_DYE)) {
             config.setDyeIngredient(config.ONION);
-            config.setDyeToMake("Yellow Dye");
-            config.setIngredientPrice(LivePrices.get("Yellow dye"));
-            Logger.log("config -> dye price: " + config.getIngredientPrice());
-            Logger.log("config -> dye ingredient ingredient: " + config.getDyeIngredient());
+            config.setIngredientPrice(LivePrices.get(config.ONION));
+            config.setDyeToMake("Yellow dye");
+            config.pricedItem = new PricedItem("Yellow dye", true);
         }
 
         selectedBranch = (ActivityBranch) comboBox1.getSelectedItem();
         startLoop = true;
-        Logger.log("gui -> selected activity: " + selectedBranch);
-        Logger.log("manager -> script started: " + startLoop);
+        Logger.log("selected activity: " + selectedBranch);
+        Logger.log("script started: " + startLoop);
         this.dispose();
     }
 

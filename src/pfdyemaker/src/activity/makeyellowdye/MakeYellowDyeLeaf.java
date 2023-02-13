@@ -1,9 +1,13 @@
 package pfdyemaker.src.activity.makeyellowdye;
 
 import org.dreambot.api.methods.container.impl.Inventory;
+import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.dialogues.Dialogues;
 import org.dreambot.api.methods.interactive.NPCs;
 import org.dreambot.api.methods.interactive.Players;
+import org.dreambot.api.methods.walking.impl.Walking;
+import org.dreambot.api.script.ScriptManager;
+import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 import pfdyemaker.src.data.DyeMakerConfig;
@@ -25,26 +29,35 @@ public class MakeYellowDyeLeaf extends Leaf {
     @Override
     public int onLoop() {
         NPC AGGIE = NPCs.closest(npc -> npc.getName().equals("Aggie") && npc.isClickable());
+
+        if (Dialogues.inDialogue()) {
+            config.setStatus("Skipping dialogue");
+            Dialogues.spaceToContinue();
+            return 600;
+        }
+
         if (config.AGGIES_HOUSE.contains(Players.getLocal())) {
             if (!Dialogues.inDialogue()) {
                 if (Inventory.interact(config.ONION, "Use")) {
                     config.setStatus("Selecting item");
-                    Sleep.sleepUntil(Inventory::isItemSelected, 2000, 600);
+                    Sleep.sleepUntil(Inventory::isItemSelected, 4000, 800);
                 }
                 if (Inventory.isItemSelected()) {
-                    config.setStatus("Interact with Aggie");
-                    if (Inventory.get(config.ONION).useOn(AGGIE)) {
-                        Sleep.sleepUntil(Dialogues::inDialogue, 1000, 600);
+                    if (AGGIE.interact("Use")) {
+                        Sleep.sleepUntil(Dialogues::inDialogue, 4000, 200);
                     }
                 }
             }
-
-            if (Dialogues.inDialogue()) {
-                config.setStatus("Dialogue skip");
-                Dialogues.spaceToContinue();
-                return 600;
-            }
         }
+
+        if (!Inventory.contains(config.ONION)) {
+            Walking.walk(BankLocation.getNearest());
+            Sleep.sleepUntil(() -> BankLocation.getNearest().getArea(1).contains(Players.getLocal()), 4000, 800);
+            Logger.log("Exiting script - Out of onion");
+            ScriptManager.getScriptManager().stop();
+        }
+
+        config.getPricedItem().update();
         return 800;
     }
 }

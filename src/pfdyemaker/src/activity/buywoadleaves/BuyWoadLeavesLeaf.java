@@ -4,6 +4,7 @@ import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.dialogues.Dialogues;
 import org.dreambot.api.methods.interactive.NPCs;
 import org.dreambot.api.methods.interactive.Players;
+import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 import pfdyemaker.src.data.DyeMakerConfig;
@@ -16,9 +17,8 @@ public class BuyWoadLeavesLeaf extends Leaf {
     @Override
     public boolean isValid() {
         return Inventory.contains("Coins")
-                && Inventory.count("Coins") > 100
-                && !Inventory.isFull()
-                && config.WYSON_AREA.contains(Players.getLocal());
+                && Inventory.count("Coins") >= 20
+                && !Inventory.isFull();
     }
 
     @Override
@@ -30,20 +30,24 @@ public class BuyWoadLeavesLeaf extends Leaf {
             if (WYSON != null) {
                 if (WYSON.interact("Talk-to")) {
                     config.setStatus("Talking to Wyson");
-                    Sleep.sleepUntil(Dialogues::inDialogue, 600, 300);
+                    Sleep.sleepUntil(Dialogues::inDialogue, 6000, 100);
                 }
             }
+
         }
 
         if (Dialogues.inDialogue()) {
             if (Dialogues.canContinue()) {
                 Dialogues.spaceToContinue();
+
             }
 
             if (Dialogues.getOptions() != null) {
                 Dialogues.chooseFirstOptionContaining(DIALOGUE_OPTIONS);
             }
         }
-        return 100;
+
+        config.pricedItem.update();
+        return 300;
     }
 }

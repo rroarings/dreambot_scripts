@@ -4,7 +4,7 @@ import pfdyemaker.src.activity.buywoadleaves.WalkToWysonLeaf;
 import pfdyemaker.src.activity.buywoadleaves.BuyWoadLeavesBranch;
 import pfdyemaker.src.activity.collectonions.WalkToOnionsLeaf;
 import pfdyemaker.src.activity.collectredberries.*;
-import pfdyemaker.src.activity.makebluedye.DepositBlueDyeLeaf;
+import pfdyemaker.src.activity.makebluedye.BankBlueDyeLeaf;
 import pfdyemaker.src.activity.navigation.WalkToDraynorBankLeaf;
 import pfdyemaker.src.activity.navigation.WalkToAggieLeaf;
 import pfdyemaker.src.activity.collectonions.CollectOnionsBranch;
@@ -14,14 +14,13 @@ import pfdyemaker.src.activity.makeyellowdye.MakeYellowDyeBranch;
 import pfdyemaker.src.framework.Branch;
 import pfdyemaker.src.activity.collectonions.BankOnionsLeaf;
 import pfdyemaker.src.activity.makeyellowdye.BankYellowDyeLeaf;
-import pfdyemaker.src.activity.makereddye.DepositRedDyeLeaf;
+import pfdyemaker.src.activity.makereddye.BankRedDyeLeaf;
 import pfdyemaker.src.activity.buywoadleaves.BuyWoadLeavesLeaf;
 import pfdyemaker.src.activity.collectonions.CollectOnionsLeaf;
 import pfdyemaker.src.activity.makebluedye.MakeBlueDyeLeaf;
 import pfdyemaker.src.activity.makereddye.MakeRedDyeLeaf;
 import pfdyemaker.src.activity.makeyellowdye.MakeYellowDyeLeaf;
 
-import java.util.Locale;
 import java.util.function.Supplier;
 
 public enum ActivityBranch {
@@ -63,7 +62,7 @@ public enum ActivityBranch {
                 new WalkToAggieLeaf(),
                 new MakeBlueDyeLeaf(),
                 new WalkToDraynorBankLeaf(),
-                new DepositBlueDyeLeaf()
+                new BankBlueDyeLeaf()
         );
         return activityBranch;
     }),
@@ -74,7 +73,7 @@ public enum ActivityBranch {
                 new WalkToAggieLeaf(),
                 new MakeRedDyeLeaf(),
                 new WalkToDraynorBankLeaf(),
-                new DepositRedDyeLeaf()
+                new BankRedDyeLeaf()
         );
         return activityBranch;
     }),

@@ -26,6 +26,7 @@ public class CollectOnionsLeaf extends Leaf {
         if (ONION.interact("Pick")) {
             config.setStatus("Picking onions");
             Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 900);
+            config.pricedItem.update();
         }
 
         if (Inventory.contains("Onion seed")) {

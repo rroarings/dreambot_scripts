@@ -15,15 +15,15 @@ public class WalkToWysonLeaf extends Leaf {
     public boolean isValid() {
         return  Inventory.contains("Coins")
                 && Inventory.count("Coins") > 100
-                && !config.WYSON_AREA.contains(Players.getLocal());
+                && !config.FALADOR_PARK_TILE.getArea(5).contains(Players.getLocal());
     }
 
     @Override
     public int onLoop() {
         if (Walking.shouldWalk()) {
             config.setStatus("Walking to Wyson");
-            Walking.walk(config.WYSON_AREA.getCenter());
-            Sleep.sleepUntil(() -> config.WYSON_AREA.contains(Players.getLocal()), 1000);
+            Walking.walk(config.FALADOR_PARK_TILE);
+            Sleep.sleepUntil(() -> config.FALADOR_PARK_TILE.getArea(10).contains(Players.getLocal()), 5000, 600);
         }
         return 800;
     }

@@ -4,6 +4,7 @@ import org.dreambot.api.Client;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.interactive.GameObjects;
 import org.dreambot.api.methods.interactive.Players;
+import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.methods.world.World;
 import org.dreambot.api.methods.world.Worlds;
 import org.dreambot.api.methods.worldhopper.WorldHopper;
@@ -30,15 +31,16 @@ public class CollectRedberriesLeaf extends Leaf {
         if (REDBERRY_BUSH == null) {
             config.setStatus("Hopping worlds");
             WorldHopper.hopWorld(worldToHop);
-            Sleep.sleepUntil(Client::isLoggedIn, 5000);
+            Sleep.sleepUntil(Client::isLoggedIn, 8000, 100);
         }
 
         if (REDBERRY_BUSH != null) {
             if (REDBERRY_BUSH.interact("Pick-from")) {
                 config.setStatus("Picking redberry bush");
-                Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 1000);
+                Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 5000, 100);
             }
         }
+        config.getPricedItem().update();
         return 800;
     }
 }
