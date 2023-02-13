@@ -10,9 +10,8 @@ Features:
 * Banking
 * Powermining
 
----
 
-**PF Dye Maker**  v 1.1
+## PF Dye Maker  v 1.2
 
 Creates three types of colored dye or collects the ingredients to create each one. 
 
@@ -31,3 +30,12 @@ Requirements:
 
 * If you are **MAKING DYES**, please start with Coins in your inventory, start in Draynor 
 * If you are **COLLECTING INGREDIENTS**, please start with an empty inventory, script can walk to Falador Park (easier and better if starting in Falador)
+
+## PF Enchanter v 1.0
+
+Enchants all varities of jewellery within the game. Start at a bank location with supplies in the bank and Cosmic runes in the inventory.
+
+Features:
+
+* Enchants jewellery
+
