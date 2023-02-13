@@ -1,6 +1,8 @@
 package pfenchanter.src.data;
 
 import org.dreambot.api.methods.magic.Spell;
+import pfenchanter.src.util.PricedItem;
+
 
 public class EnchanterConfig {
 
@@ -16,8 +18,6 @@ public class EnchanterConfig {
         }
         return instance;
     }
-
-    private int itemsEnchanted;
 
     public int getStopAtLevel() {
         return stopAtLevel;
@@ -37,11 +37,26 @@ public class EnchanterConfig {
 
     private int stopAtLevel;
     private int stopAtMinutesRan;
-
+    private int itemsEnchanted;
     private Spell spellToCast;
     private String itemToEnchant;
     private String enchantedItem;
     private String status;
+    public int profit = 0;
+
+    public int getProfit() {
+        return profit;
+    }
+
+    public void setProfit(int profit) {
+        this.profit = profit;
+    }
+
+    public PricedItem getPricedItem() {
+        return pricedItem;
+    }
+
+    public PricedItem pricedItem;
 
     public String getStatus() {
         return status;

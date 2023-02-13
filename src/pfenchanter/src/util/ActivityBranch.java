@@ -3,6 +3,7 @@ package pfenchanter.src.util;
 import pfenchanter.src.activity.enchanting.CastSpellLeaf;
 import pfenchanter.src.activity.enchanting.EnchantItemBranch;
 import pfenchanter.src.activity.banking.HandleBankLeaf;
+import pfenchanter.src.activity.stopping.StopScriptLeaf;
 import pfenchanter.src.framework.Branch;
 
 import java.util.function.Supplier;
