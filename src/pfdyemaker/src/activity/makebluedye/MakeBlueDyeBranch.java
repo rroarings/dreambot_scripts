@@ -1,6 +1,6 @@
 package pfdyemaker.src.activity.makebluedye;
 
-import pfdyemaker.src.framework.Branch;
+import org.dreambot.api.script.frameworks.treebranch.Branch;
 
 public class MakeBlueDyeBranch extends Branch {
 

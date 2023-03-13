@@ -22,7 +22,7 @@ public class CastSpellLeaf extends Leaf {
 
     @Override
     public int onLoop() {
-        int r = Calculations.random(3, 7);
+        int r = Calculations.random(3, 5);
         String ein = ec.getItemToEnchant();
         Item ei = Inventory.get(item -> item.getName().contains(ein));
         if (ei == null) return 300;
@@ -30,9 +30,12 @@ public class CastSpellLeaf extends Leaf {
         if (Magic.canCast(ec.getSpellToCast())) {
                ec.setStatus("Enchanting " + ec.getItemToEnchant());
                Magic.castSpellOn(ec.getSpellToCast(), ei);
-                Sleep.sleepTicks(1);
                ec.setStatus("Enchant sleep");
                Sleep.sleepTicks(r);
+        }
+
+        if (ec.getPricedItem() != null) {
+            ec.getPricedItem().update();
         }
         return 900;
     }

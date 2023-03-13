@@ -7,6 +7,4 @@ public class Root extends Branch {
     {
         return true;
     }
-
-
 }

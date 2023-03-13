@@ -6,7 +6,8 @@ import org.dreambot.api.methods.map.Tile;
 import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.utilities.Sleep;
 import pfdyemaker.src.data.DyeMakerConfig;
-import pfdyemaker.src.framework.Leaf;
+
+import org.dreambot.api.script.frameworks.treebranch.Leaf;
 
 public class WalkToDraynorBankLeaf extends Leaf {
 

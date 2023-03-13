@@ -1,6 +1,7 @@
 package pfenchanter.src.ui;
 
 import org.dreambot.api.methods.magic.Normal;
+import pfenchanter.src.util.PricedItem;
 import pfenchanter.src.data.EnchantSpell;
 import pfenchanter.src.data.Enchantable;
 import pfenchanter.src.data.EnchanterConfig;
@@ -29,7 +30,7 @@ public class EnchanterGUI extends JFrame {
 
     private final ButtonGroup stopConditions = new ButtonGroup();
     private final JCheckBox stopAtLevelCheckbox = new JCheckBox("Stop at Level");
-    private final JCheckBox stopAtTimeCheckbox = new JCheckBox("Stop at Time");
+    private final JCheckBox stopAtTimeCheckbox = new JCheckBox("Stop in");
 
     private final JPanel spellPanel = new JPanel();
     private final JPanel itemPanel = new JPanel();
@@ -63,18 +64,25 @@ public class EnchanterGUI extends JFrame {
             enchantSpell = (EnchantSpell) spellBox.getSelectedItem();
 
             if (enchantSpell != null) {
-                        switch (enchantSpell) {
-                            case LEVEL_1 -> ec.setSpellToCast(Normal.LEVEL_1_ENCHANT);
-                            case LEVEL_2 -> ec.setSpellToCast(Normal.LEVEL_2_ENCHANT);
-                            case LEVEL_3 -> ec.setSpellToCast(Normal.LEVEL_3_ENCHANT);
-                            case LEVEL_4 -> ec.setSpellToCast(Normal.LEVEL_4_ENCHANT);
-                            case LEVEL_5 -> ec.setSpellToCast(Normal.LEVEL_5_ENCHANT);
-                            case LEVEL_6 -> ec.setSpellToCast(Normal.LEVEL_6_ENCHANT);
-                            case LEVEL_7 -> ec.setSpellToCast(Normal.LEVEL_7_ENCHANT);
-                            default -> throw new IllegalStateException("Unexpected value: " + enchantSpell);
-                        }
-                    }
-                });
+                if (enchantSpell == EnchantSpell.LEVEL_1) {
+                    ec.setSpellToCast(Normal.LEVEL_1_ENCHANT);
+                } else if (enchantSpell == EnchantSpell.LEVEL_2) {
+                    ec.setSpellToCast(Normal.LEVEL_2_ENCHANT);
+                } else if (enchantSpell == EnchantSpell.LEVEL_3) {
+                    ec.setSpellToCast(Normal.LEVEL_3_ENCHANT);
+                } else if (enchantSpell == EnchantSpell.LEVEL_4) {
+                    ec.setSpellToCast(Normal.LEVEL_4_ENCHANT);
+                } else if (enchantSpell == EnchantSpell.LEVEL_5) {
+                    ec.setSpellToCast(Normal.LEVEL_5_ENCHANT);
+                } else if (enchantSpell == EnchantSpell.LEVEL_6) {
+                    ec.setSpellToCast(Normal.LEVEL_6_ENCHANT);
+                } else if (enchantSpell == EnchantSpell.LEVEL_7) {
+                    ec.setSpellToCast(Normal.LEVEL_7_ENCHANT);
+                } else {
+                    throw new IllegalStateException("Unexpected value: " + enchantSpell);
+                }
+            }
+        });
         spellPanel.add(spellBox);
 
         // Item Selection
@@ -115,22 +123,23 @@ public class EnchanterGUI extends JFrame {
             ec.setSpellToCast(getEnchantSpell().getSpell());
             ec.setItemToEnchant(getEnchantable().getRegularName());
             ec.setEnchantedItem(getEnchantable().getEnchantedName());
-            log("spell :: " + ec.getSpellToCast());
-            log("item to enchant :: " + ec.getItemToEnchant());
-            log("producing item :: " + ec.getEnchantedItem());
+            ec.pricedItem = new PricedItem(ec.getEnchantedItem(), true);
             selectedBranch = ActivityBranch.ENCHANT_ITEM;
             startLoop = true;
+            log("casting spell: " + ec.getSpellToCast());
+            log("enchanting item: " + ec.getItemToEnchant());
+            log("producing item: " + ec.getEnchantedItem());
             log("starting script");
             dispose();
-            });
+        });
 
-            /*if (stopAtLevelCheckbox.isSelected()) {
-                ec.setStopAtLevel(Integer.parseInt(stopAtLevelInput.getText()));
-                log("stopping at Magic level: " + ec.getStopAtLevel());
-            } else if (stopAtTimeCheckbox.isSelected()) {
-                ec.setStopAtMinutesRan(Integer.parseInt(stopAtTimeInput.getText()));
-                log("running for: " + ec.getStopAtMinutesRan() + " minutes");
-            }*/
+        if (stopAtLevelCheckbox.isSelected()) {
+            ec.setStopAtLevel(Integer.parseInt(stopAtLevelInput.getText()));
+            log("stopping at Magic level: " + ec.getStopAtLevel());
+        } else if (stopAtTimeCheckbox.isSelected()) {
+            ec.setStopAtMinutesRan(Integer.parseInt(stopAtTimeInput.getText()));
+            log("running for: " + ec.getStopAtMinutesRan() + " minutes");
+        }
 
 
         getContentPane().add(spellPanel);
@@ -235,4 +244,4 @@ public class EnchanterGUI extends JFrame {
         getContentPane().add(stopPanel);
     }*/
 }
-    ;
+;

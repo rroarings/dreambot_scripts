@@ -5,11 +5,9 @@ import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.dialogues.Dialogues;
 import org.dreambot.api.methods.interactive.GameObjects;
 import org.dreambot.api.methods.interactive.Players;
-import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.GameObject;
-import pMiner.src.PMiner;
-import pMiner.src.data.Config;
+
 import pfminer.src.data.MinerConfig;
 import pfminer.src.framework.Leaf;
 

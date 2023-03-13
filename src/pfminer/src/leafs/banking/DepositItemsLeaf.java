@@ -23,6 +23,7 @@ public class DepositItemsLeaf extends Leaf {
             Bank.close();
         }
 
+        //todo fix 2nd bank open after deposit
         if (!Bank.isOpen()) {
             Bank.open();
             MinerConfig.status = "Open bank";

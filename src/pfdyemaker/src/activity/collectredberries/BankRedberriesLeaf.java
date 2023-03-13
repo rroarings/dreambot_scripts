@@ -4,9 +4,9 @@ import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.Bank;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.interactive.Players;
+import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Sleep;
 import pfdyemaker.src.data.DyeMakerConfig;
-import pfdyemaker.src.framework.Leaf;
 
 public class BankRedberriesLeaf extends Leaf {
 

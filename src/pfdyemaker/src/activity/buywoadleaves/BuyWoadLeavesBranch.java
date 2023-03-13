@@ -1,6 +1,6 @@
 package pfdyemaker.src.activity.buywoadleaves;
 
-import pfdyemaker.src.framework.Branch;
+import org.dreambot.api.script.frameworks.treebranch.Branch;
 
 public class BuyWoadLeavesBranch extends Branch {
 

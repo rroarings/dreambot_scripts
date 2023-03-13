@@ -1,6 +1,6 @@
 package pfdyemaker.src.activity.collectredberries;
 
-import pfdyemaker.src.framework.Branch;
+import org.dreambot.api.script.frameworks.treebranch.Branch;
 
 public class CollectRedberriesBranch extends Branch {
 

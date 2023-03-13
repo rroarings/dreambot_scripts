@@ -3,10 +3,10 @@ package pfdyemaker.src.activity.collectonions;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.interactive.GameObjects;
 import org.dreambot.api.methods.interactive.Players;
+import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.GameObject;
 import pfdyemaker.src.data.DyeMakerConfig;
-import pfdyemaker.src.framework.Leaf;
 
 public class CollectOnionsLeaf extends Leaf {
 

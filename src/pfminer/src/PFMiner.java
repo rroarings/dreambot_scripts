@@ -23,7 +23,7 @@ import pfminer.src.util.API;
 
 import java.awt.*;
 
-@ScriptManifest(name = "TreeFrame Test", author = "pharaoh", version = 0.1, category = Category.MISC)
+@ScriptManifest(name = "PF TreeMiner", author = "pharaoh", version = 0.1, category = Category.MISC)
 public class PFMiner extends AbstractScript implements PaintInfo {
 
     public static Tree tree = new Tree();
@@ -51,6 +51,7 @@ public class PFMiner extends AbstractScript implements PaintInfo {
         return tree.onLoop();
     }
 
+    //todo update paint design
     // Our paint info
     // Add new lines to the paint here
     @Override

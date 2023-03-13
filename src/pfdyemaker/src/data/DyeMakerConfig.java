@@ -84,4 +84,5 @@ public class DyeMakerConfig {
     public void setStatus(String status) {
         DyeMakerConfig.status = status;
     }
+
 }

@@ -1,5 +1,7 @@
+
 package pfdyemaker.src.util;
 
+import org.dreambot.api.script.frameworks.treebranch.Branch;
 import pfdyemaker.src.activity.buywoadleaves.WalkToWysonLeaf;
 import pfdyemaker.src.activity.buywoadleaves.BuyWoadLeavesBranch;
 import pfdyemaker.src.activity.collectonions.WalkToOnionsLeaf;
@@ -11,7 +13,7 @@ import pfdyemaker.src.activity.collectonions.CollectOnionsBranch;
 import pfdyemaker.src.activity.makebluedye.MakeBlueDyeBranch;
 import pfdyemaker.src.activity.makereddye.MakeRedDyeBranch;
 import pfdyemaker.src.activity.makeyellowdye.MakeYellowDyeBranch;
-import pfdyemaker.src.framework.Branch;
+
 import pfdyemaker.src.activity.collectonions.BankOnionsLeaf;
 import pfdyemaker.src.activity.makeyellowdye.BankYellowDyeLeaf;
 import pfdyemaker.src.activity.makereddye.BankRedDyeLeaf;
@@ -27,7 +29,7 @@ public enum ActivityBranch {
 
     BUY_WOAD_LEAFS(() -> {
         Branch activityBranch = new BuyWoadLeavesBranch();
-        activityBranch.addLeafs(
+        activityBranch.addLeaves(
                 new WalkToWysonLeaf(),
                 new BuyWoadLeavesLeaf()
         );
@@ -36,7 +38,7 @@ public enum ActivityBranch {
 
     COLLECT_ONIONS(() -> {
         Branch activityBranch = new CollectOnionsBranch();
-        activityBranch.addLeafs(
+        activityBranch.addLeaves(
                 new WalkToOnionsLeaf(),
                 new CollectOnionsLeaf(),
                 new WalkToDraynorBankLeaf(),
@@ -47,7 +49,7 @@ public enum ActivityBranch {
 
     COLLECT_REDBERRIES(() -> {
         Branch activityBranch = new CollectRedberriesBranch();
-        activityBranch.addLeafs(
+        activityBranch.addLeaves(
                 new WalkToRedberriesLeaf(),
                 new CollectRedberriesLeaf(),
                 new WalkToVarrockBankLeaf(),
@@ -58,7 +60,7 @@ public enum ActivityBranch {
 
     MAKE_BLUE_DYE(() -> {
         Branch activityBranch = new MakeBlueDyeBranch();
-        activityBranch.addLeafs(
+        activityBranch.addLeaves(
                 new WalkToAggieLeaf(),
                 new MakeBlueDyeLeaf(),
                 new WalkToDraynorBankLeaf(),
@@ -69,7 +71,7 @@ public enum ActivityBranch {
 
     MAKE_RED_DYE(() -> {
         Branch activityBranch = new MakeRedDyeBranch();
-        activityBranch.addLeafs(
+        activityBranch.addLeaves(
                 new WalkToAggieLeaf(),
                 new MakeRedDyeLeaf(),
                 new WalkToDraynorBankLeaf(),
@@ -80,7 +82,7 @@ public enum ActivityBranch {
 
     MAKE_YELLOW_DYE(() -> {
         Branch activityBranch = new MakeYellowDyeBranch();
-        activityBranch.addLeafs(
+        activityBranch.addLeaves(
                 new WalkToAggieLeaf(),
                 new MakeYellowDyeLeaf(),
                 new WalkToDraynorBankLeaf(),
@@ -99,3 +101,4 @@ public enum ActivityBranch {
         return activityBranchSupplier.get();
     }
 }
+

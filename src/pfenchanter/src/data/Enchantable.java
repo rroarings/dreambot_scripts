@@ -67,8 +67,8 @@ public enum Enchantable {
     public static Set<String> getAllItemsFor(EnchantSpell spell) {
         Set<String> result = null;
         switch (spell) {
-            case LEVEL_1 -> {
-                result = ImmutableSet.of(
+            case LEVEL_1:
+                result = Set.of(
                         SAPPHIRE_RING.regularName,
                         SAPPHIRE_NECKLACE.regularName,
                         SAPPHIRE_BRACELET.regularName,
@@ -78,9 +78,8 @@ public enum Enchantable {
                         OPAL_NECKLACE.regularName,
                         OPAL_AMULET.regularName);
                 break;
-            }
-            case LEVEL_2 -> {
-                result = ImmutableSet.of(
+            case LEVEL_2:
+                result = Set.of(
                         EMERALD_RING.regularName,
                         EMERALD_NECKLACE.regularName,
                         EMERALD_BRACELET.regularName,
@@ -91,9 +90,8 @@ public enum Enchantable {
                         JADE_BRACELET.regularName,
                         JADE_AMULET.regularName);
                 break;
-            }
-            case LEVEL_3 -> {
-                result = ImmutableSet.of(
+            case LEVEL_3:
+                result = Set.of(
                         RUBY_RING.regularName,
                         RUBY_BRACELET.regularName,
                         RUBY_AMULET.regularName,
@@ -103,32 +101,43 @@ public enum Enchantable {
                         TOPAZ_NECKLACE.regularName,
                         TOPAZ_AMULET.regularName);
                 break;
-            }
-            case LEVEL_4 -> {
-                result = ImmutableSet.of(
-                        DIAMOND_RING.regularName, DIAMOND_NECKLACE.regularName, DIAMOND_BRACELET.regularName, DIAMOND_AMULET.regularName);
+            case LEVEL_4:
+                result = Set.of(
+                        DIAMOND_RING.regularName,
+                        DIAMOND_NECKLACE.regularName,
+                        DIAMOND_BRACELET.regularName,
+                        DIAMOND_AMULET.regularName);
                 break;
-            }
-            case LEVEL_5 -> {
-                result = ImmutableSet.of(
+            case LEVEL_5:
+                result = Set.of(
                         DRAGONSTONE_RING.regularName,
                         DRAGONSTONE_NECKLACE.regularName,
                         DRAGONSTONE_BRACELET.regularName,
                         DRAGONSTONE_AMULET.regularName);
                 break;
-            }
-            case LEVEL_6 -> {
-                result = ImmutableSet.of(ONYX_RING.regularName, ONYX_NECKLACE.regularName, ONYX_BRACELET.regularName, ONYX_AMULET.regularName);
+            case LEVEL_6:
+                result = Set.of(
+                        ONYX_RING.regularName,
+                        ONYX_NECKLACE.regularName,
+                        ONYX_BRACELET.regularName,
+                        ONYX_AMULET.regularName);
+                break;
+
+            case LEVEL_7:
+                result = Set.of(
+                        ZENYTE_RING.regularName,
+                        ZENYTE_NECKLACE.regularName,
+                        ZENYTE_BRACELET.regularName,
+                        ZENYTE_AMULET.regularName);
+                break;
+            default:
+
                 break;
             }
-            case LEVEL_7 -> {
-                result = ImmutableSet.of(
-                        ZENYTE_RING.regularName, ZENYTE_NECKLACE.regularName, ZENYTE_BRACELET.regularName, ZENYTE_AMULET.regularName);
-                break;
-            }
-            default -> {
-            }
-        }
+
+                // Do nothing
+
+
         return result;
     }
 }

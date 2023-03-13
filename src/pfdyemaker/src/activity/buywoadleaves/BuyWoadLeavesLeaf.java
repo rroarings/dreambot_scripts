@@ -3,10 +3,10 @@ package pfdyemaker.src.activity.buywoadleaves;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.dialogues.Dialogues;
 import org.dreambot.api.methods.interactive.NPCs;
+import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 import pfdyemaker.src.data.DyeMakerConfig;
-import pfdyemaker.src.framework.Leaf;
 
 public class BuyWoadLeavesLeaf extends Leaf {
 

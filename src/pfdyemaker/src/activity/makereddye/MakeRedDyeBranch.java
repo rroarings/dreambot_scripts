@@ -1,6 +1,6 @@
 package pfdyemaker.src.activity.makereddye;
 
-import pfdyemaker.src.framework.Branch;
+import org.dreambot.api.script.frameworks.treebranch.Branch;
 
 public class MakeRedDyeBranch extends Branch {
 

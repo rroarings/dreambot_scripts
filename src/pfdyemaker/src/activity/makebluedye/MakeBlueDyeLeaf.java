@@ -7,11 +7,11 @@ import org.dreambot.api.methods.interactive.NPCs;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.ScriptManager;
+import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
 import pfdyemaker.src.data.DyeMakerConfig;
-import pfdyemaker.src.framework.Leaf;
 
 public class MakeBlueDyeLeaf extends Leaf {
 

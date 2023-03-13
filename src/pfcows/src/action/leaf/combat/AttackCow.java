@@ -26,7 +26,7 @@ public class AttackCow extends Leaf {
     @Override
     public boolean isValid() {
         Player player = Players.getLocal();
-        if (Location.EAST.getArea().contains(player) && Skills.getBoostedLevel(Skill.HITPOINTS) >= 5 && !player.isInCombat()) {
+        if (Skills.getBoostedLevel(Skill.HITPOINTS) >= 5 && !player.isInCombat()) {
             return true;
         }
         return false;
@@ -34,7 +34,7 @@ public class AttackCow extends Leaf {
 
     @Override
     public int onLoop() {
-        NPC mob = NPCs.closest(npc -> npc.getName().contains("Cow") && npc.distance() <= 10 && !npc.isInCombat() && Location.EAST.getArea().contains(npc));
+        NPC mob = NPCs.closest(npc -> npc.getName().contains("Cow") && npc.distance() <= 10 && !npc.isInCombat() && Location.FALADOR.getArea().contains(npc));
 
         eat();
         Logger.log("eat 0");
@@ -63,12 +63,12 @@ public class AttackCow extends Leaf {
 
             if (mob != null && mob.interact("Attack")) {
                 cowsConfig.setStatus("Attacking " + mob.getName());
-                Sleep.sleepUntil(() -> phatLoot != null, 4000);
+                Sleep.sleepUntil(() -> phatLoot != null, 4000, 500);
                 return 800;
             }
             eat();
             Logger.log("eating 1");
-            return 1000;
+            return 600;
         }
         eat();
         Logger.log("eating 2");
@@ -83,7 +83,7 @@ public class AttackCow extends Leaf {
                     if (Inventory.interact(i)) {
                         cowsConfig.setStatus("Eating " + i.getName());
                         Logger.log("eating");
-                        Sleep.sleepTicks(2);
+                        Sleep.sleepTicks(1);
                     }
                 }
             }

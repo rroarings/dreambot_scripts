@@ -3,7 +3,6 @@ package pfenchanter.src.data;
 import org.dreambot.api.methods.magic.Spell;
 import pfenchanter.src.util.PricedItem;
 
-
 public class EnchanterConfig {
 
     private static EnchanterConfig instance;

@@ -8,15 +8,16 @@ import org.dreambot.api.script.ScriptManifest;
 import org.dreambot.api.script.frameworks.treebranch.TreeScript;
 import org.dreambot.api.utilities.Timer;
 import org.dreambot.api.wrappers.interactive.Model;
-import pfcows.src.action.branch.combat.EatFood;
 import pfcows.src.action.branch.combat.EnterCombat;
+import pfcows.src.action.branch.traversal.WalkFaladorCows;
 import pfcows.src.action.leaf.combat.AttackCow;
+import pfcows.src.action.leaf.combat.LootCow;
+import pfcows.src.action.leaf.traversal.DoWalkFaladorCows;
 import pfcows.src.data.CowsConfig;
 import pfcows.src.util.PaintUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @ScriptManifest(category = Category.COMBAT, name = "PF AIO Cows", author = "pharaoh", version = 1.1)
@@ -32,12 +33,14 @@ public class PFCows extends TreeScript {
     private Timer timer;
 
     // Define the bounds and position of the progress bar
-    private static final Rectangle PROGRESS_BAR_BOUNDS = new Rectangle(10, 10, 150, 15);
+    private static final Rectangle PROGRESS_BAR_BOUNDS = new Rectangle(10, 10, 150, 10);
 
     @Override
     public void onStart() {
         startTime = System.currentTimeMillis();
-        //addBranches(new EnterCombat().addLeaves(new EatFood(), new AttackCow()));
+        addBranches(
+                new WalkFaladorCows().addLeaves(new DoWalkFaladorCows()),
+                new EnterCombat().addLeaves(new AttackCow(), new LootCow()));
         SkillTracker.start(Skill.ATTACK, Skill.HITPOINTS, Skill.STRENGTH, Skill.DEFENCE, Skill.RANGED, Skill.MAGIC);
 
     }
@@ -63,8 +66,7 @@ public class PFCows extends TreeScript {
         Color opaqueRed = new Color(248, 42, 42, 191);
         Color opaqueBlue = new Color(29, 135, 255, 191);
 
-        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        graphics2D.setRenderingHints(aa);
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 12));
 
         //if (getCurrentBranchName() != null) {
@@ -79,7 +81,7 @@ public class PFCows extends TreeScript {
             } else log("no tile to paint");
         }
 
-        // Chatbox background
+        // Chat box background
         graphics2D.setColor(opaqueBlack);
         graphics2D.fillRoundRect(5, 342, 510, 134, 2, 2);
 
@@ -152,14 +154,11 @@ public class PFCows extends TreeScript {
         textList3.add("");
         textList3.add("Hitpoints");
 
-        // Draw line
-
-
-        g.setColor(Color.WHITE);
         // Call the custom method to draw the list of strings
         PaintUtils.drawTextList(g, x, 360, textList);
         PaintUtils.drawTextList(g, col2x, 360, textList2);
         PaintUtils.drawTextList(g, col3x, 360, textList3);
+
 
         // Draw the progress of the attack bar
         g.setColor(opaqueRed);
@@ -197,7 +196,5 @@ public class PFCows extends TreeScript {
         g.setColor(Color.WHITE);
         g.drawLine(col3x, 437, col3x + 100, 437);
 
-
     }
-
 }

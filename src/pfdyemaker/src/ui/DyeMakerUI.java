@@ -34,10 +34,7 @@ public class DyeMakerUI extends JFrame {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get(config.WOAD_LEAVES));
-            config.pricedItem = new PricedItem(config.WOAD_LEAVES, true);
-            Logger.log("config: ingredient price: " + config.getIngredientPrice());
-            Logger.log("config: dye ingredient: " + config.getDyeIngredient());
-            Logger.log("config: priced item: " + config.getPricedItem().getName());
+            config.pricedItem = new PricedItem("Woad leaf", true);
         } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_BLUE_DYE)) {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake("Blue dye");

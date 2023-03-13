@@ -1,6 +1,6 @@
 package pfdyemaker.src.activity.collectonions;
 
-import pfdyemaker.src.framework.Branch;
+import org.dreambot.api.script.frameworks.treebranch.Branch;
 
 public class CollectOnionsBranch extends Branch {
 

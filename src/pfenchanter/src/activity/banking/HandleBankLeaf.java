@@ -12,7 +12,6 @@ public class HandleBankLeaf extends Leaf {
 
     EnchanterConfig ec = EnchanterConfig.getInstance();
 
-
     @Override
     public boolean isValid() {
         if (Inventory.onlyContains("Cosmic rune")) return true;
@@ -24,27 +23,27 @@ public class HandleBankLeaf extends Leaf {
     public int onLoop() {
         if (!Bank.isOpen()) {
             Bank.open();
-            Sleep.sleepUntil(Bank::isOpen, 1000, 50);
+            Sleep.sleepUntil(Bank::isOpen, 4000, 50);
         }
 
         if (Bank.isOpen() && Inventory.contains(item -> item.getName().contains(ec.getEnchantedItem()))) {
             ec.setStatus("Depositing " + ec.getEnchantedItem());
             if (Bank.depositAllExcept(item -> item.getName().equals("Cosmic rune"))) {
-                Sleep.sleepUntil(() -> Inventory.contains(item -> item.getName().contains(ec.getEnchantedItem())), 2000, 50);
+                Sleep.sleepUntil(() -> Inventory.contains(item -> item.getName().contains(ec.getEnchantedItem())), 4000, 50);
             }
         }
 
         if (Bank.isOpen() && Bank.contains(ec.getItemToEnchant())) {
             ec.setStatus("Withdrawing items");
             if (Bank.withdrawAll(ec.getItemToEnchant())) {
-                Sleep.sleepUntil(() -> Inventory.contains(item -> item.getName().contains(ec.getEnchantedItem())), 2000, 50);
+                Sleep.sleepUntil(() -> Inventory.contains(item -> item.getName().contains(ec.getEnchantedItem())), 4000, 50);
                 Bank.close();
             }
         }
 
         if (!Inventory.contains(ec.getItemToEnchant()) && !Bank.contains(ec.getItemToEnchant())) {
             if(Bank.close()) {
-                Sleep.sleepUntil(() -> !Bank.isOpen(), 1000, 50);
+                Sleep.sleepUntil(() -> !Bank.isOpen(), 4000, 50);
                 Logger.log("Stopping script - out of supplies");
                 ScriptManager.getScriptManager().stop();
             }
