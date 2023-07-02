@@ -7,6 +7,9 @@ import pfdyemaker.src.util.PricedItem;
 public class DyeMakerConfig {
 
     private static final DyeMakerConfig dyeMakerConfig = new DyeMakerConfig();
+    public static DyeMakerConfig getDyeMakerConfig() {
+        return dyeMakerConfig;
+    }
 
     private DyeMakerConfig() {}
 
@@ -37,10 +40,6 @@ public class DyeMakerConfig {
     public int profit = 0;
     public int ingredientPrice;
 
-    public int getDyesMade() {
-        return dyesMade;
-    }
-
     public int getProfit() {
         return profit;
     }
@@ -55,14 +54,6 @@ public class DyeMakerConfig {
 
     public void setIngredientPrice(int ingredientPrice) {
         this.ingredientPrice = ingredientPrice;
-    }
-
-    public int getIngredientsCollected() {
-        return ingredientsCollected;
-    }
-
-    public static DyeMakerConfig getDyeMakerConfig() {
-        return dyeMakerConfig;
     }
 
     public void setDyeToMake(String dyeToMake) {

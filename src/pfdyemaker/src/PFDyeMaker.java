@@ -28,7 +28,7 @@ public class PFDyeMaker extends TreeScript implements MouseListener {
     private final DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
 
     private void initTree() {
-        addBranches(DyeMakerUI.getSelectedItem().getActivityBranch());
+        addBranches(DyeMakerUI.getSelectedItem().getActionBranch());
     }
 
     @Override

@@ -5,9 +5,10 @@
 package pfdyemaker.src.ui;
 
 import org.dreambot.api.methods.grandexchange.LivePrices;
+import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.utilities.Logger;
 import pfdyemaker.src.data.DyeMakerConfig;
-import pfdyemaker.src.util.ActivityBranch;
+import pfdyemaker.src.util.ActionBranch;
 import pfdyemaker.src.util.PricedItem;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ public class DyeMakerUI extends JFrame {
 
     DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
 
-    private static ActivityBranch selectedBranch;
+    private static ActionBranch selectedBranch;
     private static boolean startLoop = false;
 
     public DyeMakerUI() {
@@ -30,39 +31,39 @@ public class DyeMakerUI extends JFrame {
     }
 
     private void startBtn(ActionEvent e) {
-        if (comboBox1.getSelectedItem().equals(ActivityBranch.BUY_WOAD_LEAFS)) {
+        if (comboBox1.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAFS)) {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get(config.WOAD_LEAVES));
             config.pricedItem = new PricedItem("Woad leaf", true);
-        } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_BLUE_DYE)) {
+        } else if (comboBox1.getSelectedItem().equals(ActionBranch.MAKE_BLUE_DYE)) {
             config.setDyeIngredient(config.WOAD_LEAVES);
             config.setDyeToMake("Blue dye");
             config.setIngredientPrice(LivePrices.get(config.WOAD_LEAVES));
             config.pricedItem = new PricedItem("Blue dye", true);
-        } else if (comboBox1.getSelectedItem().equals(ActivityBranch.COLLECT_REDBERRIES)) {
+        } else if (comboBox1.getSelectedItem().equals(ActionBranch.COLLECT_REDBERRIES)) {
             config.setDyeIngredient(config.REDBERRIES);
             config.setDyeToMake(null);
             config.setIngredientPrice(LivePrices.get(config.REDBERRIES));
             config.pricedItem = new PricedItem(config.REDBERRIES, true);
-        } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_RED_DYE)) {
+        } else if (comboBox1.getSelectedItem().equals(ActionBranch.MAKE_RED_DYE)) {
             config.setDyeIngredient(config.REDBERRIES);
             config.setIngredientPrice(LivePrices.get(config.REDBERRIES));
             config.setDyeToMake("Red dye");
             config.pricedItem = new PricedItem("Red dye", true);
-        } else if (comboBox1.getSelectedItem().equals(ActivityBranch.COLLECT_ONIONS)) {
+        } else if (comboBox1.getSelectedItem().equals(ActionBranch.COLLECT_ONIONS)) {
             config.setDyeIngredient(config.ONION);
             config.setIngredientPrice(LivePrices.get(config.ONION));
             config.setDyeToMake(null);
             config.pricedItem = new PricedItem(config.ONION, true);
-        } else if (comboBox1.getSelectedItem().equals(ActivityBranch.MAKE_YELLOW_DYE)) {
+        } else if (comboBox1.getSelectedItem().equals(ActionBranch.MAKE_YELLOW_DYE)) {
             config.setDyeIngredient(config.ONION);
             config.setIngredientPrice(LivePrices.get(config.ONION));
             config.setDyeToMake("Yellow dye");
             config.pricedItem = new PricedItem("Yellow dye", true);
         }
 
-        selectedBranch = (ActivityBranch) comboBox1.getSelectedItem();
+        selectedBranch = (ActionBranch) comboBox1.getSelectedItem();
         startLoop = true;
         Logger.log("selected activity: " + selectedBranch);
         Logger.log("script started: " + startLoop);
@@ -80,7 +81,7 @@ public class DyeMakerUI extends JFrame {
         energyPotCheckBox = new JCheckBox();
 
         //======== this ========
-        setTitle("PF Dye Maker");
+        setTitle("PF Dye Maker " + ScriptManager.getScriptManager().getCurrentScript().getVersion());
         setName("this");
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -103,8 +104,8 @@ public class DyeMakerUI extends JFrame {
                 label1.setBounds(new Rectangle(new Point(0, 15), label1.getPreferredSize()));
 
                 //---- comboBox1 ----
-               for (ActivityBranch activityBranch : ActivityBranch.values()) {
-                   comboBox1.addItem(activityBranch);
+               for (ActionBranch actionBranch : ActionBranch.values()) {
+                   comboBox1.addItem(actionBranch);
                }
                 comboBox1.setName("comboBox1");
                 contentPanel.add(comboBox1);
@@ -113,7 +114,7 @@ public class DyeMakerUI extends JFrame {
                 //---- startButton ----
                 startButton.setText("Start");
                 startButton.setName("startButton");
-                startButton.addActionListener(e -> startBtn(e));
+                startButton.addActionListener(this::startBtn);
                 contentPanel.add(startButton);
                 startButton.setBounds(new Rectangle(new Point(160, 145), startButton.getPreferredSize()));
 
@@ -168,7 +169,7 @@ public class DyeMakerUI extends JFrame {
         return startLoop;
     }
 
-    public static ActivityBranch getSelectedItem() {
+    public static ActionBranch getSelectedItem() {
         return selectedBranch;
     }
 }
