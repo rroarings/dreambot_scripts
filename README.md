@@ -1,5 +1,5 @@
 # DreamBot Scripts
-In this repository you will find various RuneScape scripts to automate the processes with the use of DreamBot and their API.
+In this repository you will find various RuneScape scripts to automate the processes with the use of DreamBot and their API. This is for educational purpuroses to expand my Java and programming experience.
 
 ## PFMiner
 
@@ -10,8 +10,7 @@ Features:
 * Banking
 * Powermining
 
-
-## PF Dye Maker  v 1.2
+## PF Dye Maker  v1.3
 
 Creates three types of colored dye or collects the ingredients to create each one. 
 
@@ -22,16 +21,16 @@ Features:
   * Redberries (Collected in South Varrock next to the southern mine)
   * Onions (Picked in the patch between Draynor and Lumbridge)
 * Making the dye with Aggie
-  * Blue ( 2 x Woad leaf 2.png )
-  * Red ( 3 x Redberries.png )
-  * Yellow ( 2 x Onion.png )
+  * Blue ( 2 x Woad leaf)
+  * Red ( 3 x Redberries )
+  * Yellow ( 2 x Onion )
 
 Requirements:
 
 * If you are **MAKING DYES**, please start with Coins in your inventory, start in Draynor 
-* If you are **COLLECTING INGREDIENTS**, please start with an empty inventory, script can walk to Falador Park (easier and better if starting in Falador)
+* If you are **COLLECTING INGREDIENTS**, please start with an empty inventory, script can walk to Falador Park (better if starting in Falador for woad leafs)
 
-## PF Enchanter v 1.0
+## PF Enchanter v1.0
 
 Enchants all varities of jewellery within the game. Start at a bank location with supplies in the bank and Cosmic runes in the inventory.
 
