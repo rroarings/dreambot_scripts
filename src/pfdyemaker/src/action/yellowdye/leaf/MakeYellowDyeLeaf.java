@@ -53,16 +53,14 @@ public class MakeYellowDyeLeaf extends Leaf {
         }
 
         if (Inventory.contains(config.ONION)) {
-            Item[] redberryItems = Inventory.all(item -> item.getName().equals(config.ONION) && isValid()).toArray(new Item[0]);
-            for (int i = 0; i < redberryItems.length; i++) {
+            Item[] onion = Inventory.all(item -> item.getName().equals(config.ONION) && isValid()).toArray(new Item[0]);
+            for (int i = 0; i < onion.length; i++) {
                 if ((i + 1) % 3 == 0) {
-                    Mouse.move(redberryItems[i].getDestination());
+                    Mouse.move(onion[i].getDestination());
                     break;
                 }
             }
         }
-
-
         return 800;
     }
 }
