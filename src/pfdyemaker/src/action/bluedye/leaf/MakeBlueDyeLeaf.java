@@ -1,5 +1,6 @@
 package pfdyemaker.src.action.bluedye.leaf;
 
+import org.dreambot.api.input.Mouse;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.dialogues.Dialogues;
@@ -11,6 +12,7 @@ import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
+import org.dreambot.api.wrappers.items.Item;
 import pfdyemaker.src.data.DyeMakerConfig;
 
 public class MakeBlueDyeLeaf extends Leaf {
@@ -51,13 +53,10 @@ public class MakeBlueDyeLeaf extends Leaf {
             }
         }
 
-        if (!Inventory.contains(config.WOAD_LEAVES)) {
-            Walking.walk(BankLocation.getNearest());
-            Sleep.sleepUntil(() -> BankLocation.getNearest().getArea(1).contains(Players.getLocal()), 4000, 800);
-            Logger.log("Exiting script - Out of woad leafs");
-            ScriptManager.getScriptManager().stop();
+        if (Dialogues.inDialogue() && Inventory.contains(config.WOAD_LEAVES)) {
+            Item woad_leaves = Inventory.get(item -> item.getName().equals(config.WOAD_LEAVES) && isValid());
+            Mouse.move(woad_leaves.getDestination());
         }
-
         return 1000;
     }
 }

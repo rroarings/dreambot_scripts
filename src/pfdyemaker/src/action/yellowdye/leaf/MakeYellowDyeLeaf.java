@@ -52,7 +52,7 @@ public class MakeYellowDyeLeaf extends Leaf {
             }
         }
 
-        if (Inventory.contains(config.ONION)) {
+        if (Dialogues.inDialogue() && Inventory.contains(config.ONION)) {
             Item[] onion = Inventory.all(item -> item.getName().equals(config.ONION) && isValid()).toArray(new Item[0]);
             for (int i = 0; i < onion.length; i++) {
                 if ((i + 1) % 3 == 0) {

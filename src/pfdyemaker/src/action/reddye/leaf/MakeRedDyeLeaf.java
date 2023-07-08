@@ -52,8 +52,7 @@ public class MakeRedDyeLeaf extends Leaf {
                 }
             }
 
-            if (!redberry.isValid()) return 600;
-            if (Inventory.contains(redberry)) {
+            if (Dialogues.inDialogue() && Inventory.contains(redberry)) {
                 Item[] redberryItems = Inventory.all(item -> item.getName().equals("Redberries") && isValid()).toArray(new Item[0]);
                 for (int i = 0; i < redberryItems.length; i++) {
                     if ((i + 1) % 4 == 0) {
