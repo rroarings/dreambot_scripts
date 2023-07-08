@@ -37,10 +37,10 @@ public class CollectRedberriesLeaf extends Leaf {
             Sleep.sleepUntil(Client::isLoggedIn, 8000, 100);
         }
 
-        if (REDBERRY_BUSH != null) {
+        if (REDBERRY_BUSH != null && REDBERRY_BUSH.getID() != 23630) {
             if (REDBERRY_BUSH.interact("Pick-from")) {
                 config.setStatus("Picking redberry bush");
-                Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 5000, 100);
+                Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 5000, 1000);
             }
         }
         return 800;
