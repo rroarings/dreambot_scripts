@@ -1,5 +1,6 @@
 package pfdyemaker.src.action.yellowdye.leaf;
 
+import org.dreambot.api.input.Mouse;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.dialogues.Dialogues;
@@ -11,6 +12,7 @@ import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.NPC;
+import org.dreambot.api.wrappers.items.Item;
 import pfdyemaker.src.data.DyeMakerConfig;
 
 public class MakeYellowDyeLeaf extends Leaf {
@@ -50,12 +52,16 @@ public class MakeYellowDyeLeaf extends Leaf {
             }
         }
 
-        if (!Inventory.contains(config.ONION)) {
-            Walking.walk(BankLocation.getNearest());
-            Sleep.sleepUntil(() -> BankLocation.getNearest().getArea(1).contains(Players.getLocal()), 4000, 800);
-            Logger.log("Exiting script - Out of onion");
-            ScriptManager.getScriptManager().stop();
+        if (Inventory.contains(config.ONION)) {
+            Item[] redberryItems = Inventory.all(item -> item.getName().equals(config.ONION) && isValid()).toArray(new Item[0]);
+            for (int i = 0; i < redberryItems.length; i++) {
+                if ((i + 1) % 3 == 0) {
+                    Mouse.move(redberryItems[i].getDestination());
+                    break;
+                }
+            }
         }
+
 
         return 800;
     }
