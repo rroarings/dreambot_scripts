@@ -24,13 +24,13 @@ public class CollectOnionsLeaf extends Leaf {
         if (ONION == null) return 600;
 
         if (ONION.interact("Pick")) {
-            config.setStatus("Picking onions");
-            Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 900);
+            config.setStatus("Picking onion");
+            Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 900, 1000);
             config.pricedItem.update();
         }
 
         if (Inventory.contains("Onion seed")) {
-            config.setStatus("Drop onion seed");
+            config.setStatus("Dropping onion seed");
             Inventory.interact("Onion seed", "Drop");
             Sleep.sleepUntil(() -> !Inventory.contains("Onion seed"), 600);
         }
