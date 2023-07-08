@@ -16,7 +16,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URL;
 
-@ScriptManifest(category = Category.MONEYMAKING, name = "PF Dye Maker", author = "pharaoh", version = 1.2, image = "https://i.imgur.com/zQ1Vwvt.png")
+@ScriptManifest(category = Category.MONEYMAKING, name = "PF Dye Maker", author = "pharaoh", version = 1.3, image = "https://i.imgur.com/zQ1Vwvt.png")
 public class PFDyeMaker extends TreeScript implements MouseListener {
 
     private boolean hidePaint = false;
@@ -82,7 +82,7 @@ public class PFDyeMaker extends TreeScript implements MouseListener {
                     graphics2D.setColor(Color.WHITE);
                     graphics2D.drawString("Time: " + Timer.formatTime(runTime), x, 360);
                     graphics2D.drawString("Status: " + config.getStatus(), x, 380);
-                    graphics2D.drawString("v 1.2", 480, 473);
+                    graphics2D.drawString("v" + getVersion(), 480+4, 473);
 
                     if (config.getPricedItem() != null) {
                         String text = config.getDyeToMake() != null ? "Dyes" : "Items";
