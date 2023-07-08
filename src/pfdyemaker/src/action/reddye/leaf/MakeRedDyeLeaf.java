@@ -62,7 +62,6 @@ public class MakeRedDyeLeaf extends Leaf {
                     }
                 }
             }
-
         }
         return 1000;
     }
