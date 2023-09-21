@@ -6,6 +6,7 @@ import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Sleep;
+import pfdyemaker.src.action.util.QuickMethods;
 import pfdyemaker.src.data.DyeMakerConfig;
 
 public class WalkToVarrockBankLeaf extends Leaf {
@@ -22,7 +23,7 @@ public class WalkToVarrockBankLeaf extends Leaf {
         if (Walking.shouldWalk()) {
             config.setStatus("Walking to bank");
             Walking.walk(BankLocation.VARROCK_EAST.getArea(1).getCenter());
-            Sleep.sleepUntil(() -> BankLocation.VARROCK_EAST.getArea(3).contains(Players.getLocal()), 1000);
+            QuickMethods.drinkEnergyPotion();
         }
         return 600;
     }
