@@ -2,6 +2,7 @@ package pfdyemaker.src.data;
 
 import org.dreambot.api.methods.map.Area;
 import org.dreambot.api.methods.map.Tile;
+import pfdyemaker.src.ui.Frame;
 import pfdyemaker.src.util.PricedItem;
 
 public class DyeMakerConfig {
@@ -11,22 +12,12 @@ public class DyeMakerConfig {
         return dyeMakerConfig;
     }
 
-    private DyeMakerConfig() {}
+    public DyeMakerConfig() {}
 
     public Area AGGIES_HOUSE = new Area(3083, 3261, 3089, 3256);
     public Area REDBERRY_AREA = new Area(3278, 3375, 3267, 3367);
     public Area ONION_AREA = new Area(3186, 3269, 3192, 3265);
     public Tile FALADOR_PARK_TILE = new Tile(3025, 3379, 0);
-
-    public PricedItem getPricedItem() {
-        return pricedItem;
-    }
-
-    public PricedItem pricedItem;
-
-    public String getDyeToMake() {
-        return dyeToMake;
-    }
 
     public String dyeToMake;
     public String dyeIngredient;
@@ -35,8 +26,35 @@ public class DyeMakerConfig {
     public String WOAD_LEAVES = "Woad leaf";
     public String ONION = "Onion";
 
-    public int dyesMade = 0;
-    public int ingredientsCollected = 0;
+    public static boolean isUseEnergyPotions() {
+        if (Frame.isEnergyPotions()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static int worldHopDelayMin;
+    private static int worldHopDelayMax;
+
+    public static int getWorldHopDelayMin() {
+        return worldHopDelayMin;
+    }
+
+    public static void setWorldHopDelayMin(int worldHopDelayMin) {
+        DyeMakerConfig.worldHopDelayMin = worldHopDelayMin;
+    }
+
+    public static int getWorldHopDelayMax() {
+        return worldHopDelayMax;
+    }
+
+    public static void setWorldHopDelayMax(int worldHopDelayMax) {
+        DyeMakerConfig.worldHopDelayMax = worldHopDelayMax;
+    }
+
+    public PricedItem getPricedItem() { return pricedItem; }
+    public PricedItem pricedItem;
+
     public int profit = 0;
     public int ingredientPrice;
 
@@ -75,5 +93,4 @@ public class DyeMakerConfig {
     public void setStatus(String status) {
         DyeMakerConfig.status = status;
     }
-
 }
