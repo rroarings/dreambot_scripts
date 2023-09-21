@@ -6,6 +6,7 @@ import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Sleep;
+import pfdyemaker.src.action.util.QuickMethods;
 import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BankRedberriesLeaf extends Leaf {
@@ -26,11 +27,13 @@ public class BankRedberriesLeaf extends Leaf {
         }
 
         if (Bank.isOpen()) {
-            config.setStatus("Deposit redberries");
+            config.setStatus("Deposit inventory");
             Bank.depositAllItems();
             Sleep.sleepUntil(Inventory::isEmpty, 2000);
-            Bank.close();
+            QuickMethods.withdrawEnergyPotions();
         }
         return 1000;
     }
+
+
 }
