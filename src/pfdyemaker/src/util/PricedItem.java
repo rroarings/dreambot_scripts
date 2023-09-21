@@ -8,8 +8,15 @@ package pfdyemaker.src.util;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.grandexchange.LivePrices;
 import org.dreambot.api.utilities.Logger;
+import pfdyemaker.src.data.DyeMakerConfig;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PricedItem {
+
+    private static final Map<String, Integer> itemPriceCache = new HashMap<>();
+    private static final long PRICE_CACHE_DURATION = 180000; // Cache price for 3 minutes
 
     private String name;
     private int lastCount = 0;
@@ -23,13 +30,27 @@ public class PricedItem {
             lastCount = Inventory.count(name);
         }
         if (getPrice) {
-            String tempName = name;
-            if (name.contains("arrow"))
-                tempName += "s";
-            price = LivePrices.get(tempName);
-            Logger.log("PI: " + name + " |  price: " + price);
+            updatePrice();
         } else
             price = 0;
+    }
+
+    private void updatePrice() {
+        if (itemPriceCache.containsKey(name)) {
+            long cachedTime = itemPriceCache.get(name + "_time");
+            if (System.currentTimeMillis() - cachedTime <= PRICE_CACHE_DURATION) {
+                price = itemPriceCache.get(name);
+                return;
+            }
+        }
+
+        String tempName = name;
+        if (name.contains("arrow"))
+            tempName += "s";
+        price = LivePrices.get(tempName);
+        itemPriceCache.put(name, price);
+        itemPriceCache.put(name + "_time", (int) System.currentTimeMillis());
+        Logger.log("PI: " + name + " |  price: " + price);
     }
 
     public void update() {
@@ -45,6 +66,8 @@ public class PricedItem {
             lastCount = Inventory.count(name);
         else
             lastCount = Inventory.count(id);
+
+        DyeMakerConfig.getDyeMakerConfig().setProfit(amount * price);
     }
 
     public void setName(String name) {
