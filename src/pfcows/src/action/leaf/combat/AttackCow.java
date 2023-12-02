@@ -3,7 +3,6 @@ package pfcows.src.action.leaf.combat;
 import org.dreambot.api.input.Mouse;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.dialogues.Dialogues;
-import org.dreambot.api.methods.filter.Filter;
 import org.dreambot.api.methods.interactive.NPCs;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.methods.item.GroundItems;
@@ -21,8 +20,6 @@ import pfcows.src.data.Location;
 
 public class AttackCow extends Leaf {
 
-    CowsConfig cowsConfig = CowsConfig.getInstance();
-
     @Override
     public boolean isValid() {
         Player player = Players.getLocal();
@@ -34,7 +31,7 @@ public class AttackCow extends Leaf {
 
     @Override
     public int onLoop() {
-        NPC mob = NPCs.closest(npc -> npc.getName().contains("Cow") && npc.distance() <= 10 && !npc.isInCombat() && Location.FALADOR.getArea().contains(npc));
+        NPC mob = NPCs.closest(npc -> npc.getName().contains("Cow") && npc.distance() <= 10 && !npc.isInCombat() && Location.FALADOR_COWS.getArea().contains(npc));
 
         eat();
         Logger.log("eat 0");
@@ -53,7 +50,7 @@ public class AttackCow extends Leaf {
             GroundItem phatLoot = GroundItems.closest(groundItem -> groundItem.getName().contains("Cowhide") && groundItem.isOnScreen() && groundItem.distance() <= 3);
             if (phatLoot != null && !Inventory.isFull()) {
                 if (phatLoot.interact("Take")) {
-                    cowsConfig.setStatus("Taking " + phatLoot);
+                    CowsConfig.getCowsConfig().setStatus("Taking " + phatLoot);
                     Logger.log("loot interaction - take item");
                     Sleep.sleepUntil(() -> !phatLoot.exists(), 4000);
                     Logger.log("loot interaction - item picked up or stolen");
@@ -62,7 +59,7 @@ public class AttackCow extends Leaf {
             } else Logger.log("loot interaction fail - item gone or inventory full");
 
             if (mob != null && mob.interact("Attack")) {
-                cowsConfig.setStatus("Attacking " + mob.getName());
+                CowsConfig.getCowsConfig().setStatus("Attacking " + mob.getName());
                 Sleep.sleepUntil(() -> phatLoot != null, 4000, 500);
                 return 800;
             }
@@ -81,7 +78,7 @@ public class AttackCow extends Leaf {
             if (i != null) {
                 if (Inventory.contains(i)) {
                     if (Inventory.interact(i)) {
-                        cowsConfig.setStatus("Eating " + i.getName());
+                        CowsConfig.getCowsConfig().setStatus("Eating " + i.getName());
                         Logger.log("eating");
                         Sleep.sleepTicks(1);
                     }

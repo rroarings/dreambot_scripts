@@ -10,7 +10,6 @@ import pfcows.src.data.Location;
 
 public class EnterCombat extends Branch {
 
-    CowsConfig cc = CowsConfig.getInstance();
 
     @Override
     public boolean isValid() {

@@ -4,20 +4,19 @@ import pfcows.src.util.PricedItem;
 
 public class CowsConfig {
 
-    private static CowsConfig instance;
-
-    private CowsConfig() {
+    private static final CowsConfig cowsConfig = new CowsConfig();
+    public static CowsConfig getCowsConfig() {
+        return cowsConfig;
     }
-
-    public static CowsConfig getInstance() {
-        if (instance == null) {
-            instance = new CowsConfig();
-        }
-        return instance;
-    }
+    private CowsConfig() {}
 
     public int profit = 0;
     private String status;
+
+    public void setPricedItem(PricedItem pricedItem) {
+        this.pricedItem = pricedItem;
+    }
+
     public PricedItem pricedItem;
 
     public int getProfit() {

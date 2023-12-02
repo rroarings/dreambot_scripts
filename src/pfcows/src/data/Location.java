@@ -10,14 +10,14 @@ public enum Location {
             new Tile(3156, 3347, 0),
             new Tile(3155, 3315, 0),
             new Tile(3169, 3319, 0))),
-    EAST(new Area(
+    EAST_COWS(new Area(
             new Tile(3253, 3255, 0),
             new Tile(3265, 3255, 0),
             new Tile(3265, 3296, 0),
             new Tile(3242, 3298, 0),
             new Tile(3244, 3280, 0),
             new Tile(3253, 3277, 0))),
-    FALADOR(new Area(
+    FALADOR_COWS(new Area(
             new Tile(3043, 3311, 0),
             new Tile(3043, 3299, 0),
             new Tile(3039, 3298, 0),

@@ -12,7 +12,6 @@ import pfcows.src.data.CowsConfig;
 
 public class EatFood extends Leaf {
 
-    CowsConfig cowsConfig = CowsConfig.getInstance();
 
     @Override
     public boolean isValid() {
@@ -28,7 +27,7 @@ public class EatFood extends Leaf {
         if (i != null) {
             if (Inventory.contains(i) && Skills.getBoostedLevel(Skill.HITPOINTS) <= 4) {
                 if (Inventory.interact(i)) {
-                    cowsConfig.setStatus("Eating " + i.getName());
+                    CowsConfig.getCowsConfig().setStatus("Eating " + i.getName());
                     Sleep.sleepTicks(2);
                     return 300;
                 }

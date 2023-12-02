@@ -9,11 +9,9 @@ import pfcows.src.data.Location;
 
 public class DoWalkFaladorCows extends Leaf {
 
-    CowsConfig cc = CowsConfig.getInstance();
-
     @Override
     public boolean isValid() {
-        if (!Location.FALADOR.getArea().contains(Players.getLocal())) {
+        if (!Location.FALADOR_COWS.getArea().contains(Players.getLocal())) {
             return true;
         }
         return false;
@@ -21,11 +19,11 @@ public class DoWalkFaladorCows extends Leaf {
 
     @Override
     public int onLoop() {
-        if (!Location.FALADOR.getArea().contains(Players.getLocal())) {
+        if (!Location.FALADOR_COWS.getArea().contains(Players.getLocal())) {
             if (Walking.shouldWalk()) {
-                cc.setStatus("Walking to Falador cows");
-                Walking.walk(Location.FALADOR.getArea().getRandomTile());
-                Sleep.sleepUntil(() -> Location.FALADOR.getArea().contains(Players.getLocal()), 4000, 200);
+                CowsConfig.getCowsConfig().setStatus("Walking to Falador cows");
+                Walking.walk(Location.FALADOR_COWS.getArea().getRandomTile());
+                Sleep.sleepUntil(() -> Location.FALADOR_COWS.getArea().contains(Players.getLocal()), 4000, 200);
             }
         }
         return 600;

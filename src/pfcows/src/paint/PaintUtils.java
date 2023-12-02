@@ -1,4 +1,4 @@
-package pfcows.src.util;
+package pfcows.src.paint;
 
 import java.awt.*;
 import java.util.List;
@@ -63,6 +63,19 @@ public class PaintUtils {
     }
 
     /**
+     * Draws a string of text using the specified color, x, and y values.
+     *
+     * @param g the Graphics object
+     * @param text the text to draw
+     * @param x the x-coordinate to start drawing at
+     * @param y the y-coordinate to start drawing at
+     */
+    public static void drawText(Graphics g, String text, int x, int y) {
+        g.setFont(DEFAULT_FONT);
+        g.drawString(text, x, y);
+    }
+
+    /**
      * Draws a list of strings using the specified x and y values.
      * Each string in the list is drawn on a separate line.
      *
@@ -93,4 +106,19 @@ public class PaintUtils {
         g.fillRect(x, y, (int) width, height);
     }
 
+    /**
+     * Draws a progress bar using the specified x, y, width, height, color, and progress values.
+     *
+     * @param g the Graphics object
+     * @param x the x-coordinate to start drawing at
+     * @param y the y-coordinate to start drawing at
+     * @param width the width of the progress bar
+     * @param height the height of the progress bar
+     * @param progress the progress value (between 0 and 100)
+     * @param color the color of the progress bar
+     */
+    public static void drawProgressBar(Graphics g, int x, int y, int width, int height, long progress, Color color) {
+        g.setColor(color);
+        g.fillRect(x, y, (int) (width * (progress / 100.0)), height);
+    }
 }
