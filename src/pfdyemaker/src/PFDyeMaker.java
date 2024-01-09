@@ -12,7 +12,7 @@ import pfdyemaker.src.ui.Frame;
 import javax.swing.*;
 import java.awt.*;
 
-@ScriptManifest(category = Category.MONEYMAKING, name = "PF Dye Maker", author = "pharaoh", version = 1.5, image = "https://i.imgur.com/zQ1Vwvt.png")
+@ScriptManifest(category = Category.MONEYMAKING, name = "PF Dye Maker", author = "pharaoh", version = 1.6, image = "https://i.imgur.com/zQ1Vwvt.png")
 public class PFDyeMaker extends TreeScript {
 
     private long startTime;
