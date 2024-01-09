@@ -31,6 +31,8 @@ public class BankRedberriesLeaf extends Leaf {
             Bank.depositAllItems();
             Sleep.sleepUntil(Inventory::isEmpty, 2000);
             QuickMethods.withdrawEnergyPotions();
+            QuickMethods.drinkEnergyPotion();
+
         }
         return 1000;
     }
