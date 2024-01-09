@@ -10,7 +10,7 @@ Features:
 * Banking
 * Powermining
 
-## PF Dye Maker  v1.5
+## PF Dye Maker  v1.6
 
 Creates three types of colored dye or collects the ingredients to create each one. 
 
