@@ -13,25 +13,12 @@ import pfdyemaker.src.data.DyeMakerConfig;
 public class BankOnionsLeaf extends Leaf {
 
     DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
-    private final BankLocation draynor = BankLocation.DRAYNOR;
-    private final BankLocation lumbridge = BankLocation.LUMBRIDGE;
 
 
     @Override
     public boolean isValid() {
-        BankLocation bankToUse = null;
-        if (Combat.getCombatLevel() <= 15) {
-            bankToUse = lumbridge;
-        } else {
-            bankToUse = draynor;
-        }
-        // Check if the player is near the bank location
-        boolean isNearBank = draynor.getArea(3).contains(Players.getLocal());
-
-        // Check if the bank is open or the player is near the bank
-        return Bank.isOpen() || isNearBank;
+        return Inventory.isFull();
     }
-
 
     @Override
     public int onLoop() {
