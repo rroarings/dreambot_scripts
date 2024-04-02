@@ -8,9 +8,9 @@ import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
-import pfdyemaker.src.data.ActionBranch;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.ui.Frame;
+import pfdyemaker.src.util.ActionBranch;
 
 public class YellowDyeStartLeaf extends Leaf {
 
