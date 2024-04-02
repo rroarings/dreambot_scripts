@@ -22,7 +22,6 @@ public class MakeYellowDyeLeaf extends Leaf {
     @Override
     public boolean isValid() {
         return Inventory.contains("Coins")
-                && Inventory.count("Coins") > 100
                 && Inventory.contains(config.ONION)
                 && Inventory.count(config.ONION) >= 2
                 && config.AGGIES_HOUSE.contains(Players.getLocal());
@@ -35,18 +34,20 @@ public class MakeYellowDyeLeaf extends Leaf {
         if (Dialogues.inDialogue()) {
             config.setStatus("Skipping dialogue");
             Dialogues.spaceToContinue();
-            return 600;
+            return 1;
         }
 
         if (config.AGGIES_HOUSE.contains(Players.getLocal())) {
             if (!Dialogues.inDialogue()) {
                 if (Inventory.interact(config.ONION, "Use")) {
                     config.setStatus("Selecting item");
-                    Sleep.sleepUntil(Inventory::isItemSelected, 4000, 800);
+                    Sleep.sleepUntil(Inventory::isItemSelected, 2000, 600);
+                    Logger.log("(yellowdye) item selected: index " + Inventory.getSelectedItemIndex());
                 }
                 if (Inventory.isItemSelected()) {
                     if (AGGIE.interact("Use")) {
-                        Sleep.sleepUntil(Dialogues::inDialogue, 4000, 200);
+                        Logger.log("(yellowdye) use onion on aggie");
+                        Sleep.sleepUntil(Dialogues::inDialogue, 2000, 600);
                     }
                 }
             }
@@ -60,6 +61,7 @@ public class MakeYellowDyeLeaf extends Leaf {
                     break;
                 }
             }
+            return 1;
         }
         return 800;
     }
