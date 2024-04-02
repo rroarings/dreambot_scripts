@@ -15,20 +15,18 @@ public class WithdrawOnionLeaf extends Leaf {
 
     @Override
     public boolean isValid() {
-        return Bank.isOpen() && Bank.contains(config.getDyeIngredient()) && !Inventory.contains(config.getDyeIngredient());
+        return Bank.isOpen() && Bank.contains(config.ONION) && !Inventory.contains(config.ONION);
     }
 
     @Override
     public int onLoop() {
-        if (Frame.isEnergyPotions()) {
-            PotionHandler.handleEnergyPotion();
+        if (Bank.isOpen()) {
+            config.setStatus("Withdrawing " + config.getDyeIngredient());
+            if (Bank.withdrawAll(config.ONION)) {
+                Logger.log("(yellowdye) withdrew onion");
+                Sleep.sleepUntil(() -> Inventory.contains(config.ONION), 6000, 600);
+            }
         }
-
-        config.setStatus("Withdrawing " + config.getDyeIngredient());
-        Bank.withdrawAll(config.getDyeIngredient());
-        Logger.log("(yellowdye) withdrew onion");
-        // Wait until inventory contains the dye ingredient or timeout after 8 seconds
-        Sleep.sleepUntil(() -> Inventory.contains(config.getDyeIngredient()), 6000, 600);
-        return 1000; // Return sleep time until next loop
+        return 1000;
     }
 }
