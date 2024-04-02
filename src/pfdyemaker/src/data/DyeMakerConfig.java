@@ -33,6 +33,16 @@ public class DyeMakerConfig {
         return false;
     }
 
+    public int getGoldToWithdraw() {
+        return goldToWithdraw;
+    }
+
+    public void setGoldToWithdraw(int goldToWithdraw) {
+        this.goldToWithdraw = goldToWithdraw;
+    }
+
+    public int goldToWithdraw = 0;
+
     private static int worldHopDelayMin;
     private static int worldHopDelayMax;
 
@@ -93,4 +103,5 @@ public class DyeMakerConfig {
     public void setStatus(String status) {
         DyeMakerConfig.status = status;
     }
+
 }
