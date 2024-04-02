@@ -11,7 +11,6 @@ public class BankOnionsLeaf extends Leaf {
 
     DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
 
-
     @Override
     public boolean isValid() {
         return Inventory.isFull();
