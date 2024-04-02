@@ -1,5 +1,6 @@
 package pfdyemaker.src.action.onions.leaf;
 
+import org.dreambot.api.methods.combat.Combat;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.Bank;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
@@ -36,15 +37,16 @@ public class BankOnionsLeaf extends Leaf {
     public int onLoop() {
         if (!Bank.isOpen()) {
             config.setStatus("Opening bank");
+            Logger.log("(onions) opening bank");
             Bank.open();
-            Sleep.sleepUntil(Bank::isOpen, 2000);
+            Sleep.sleepUntil(Bank::isOpen, 3000, 600);
         }
 
         if (Bank.isOpen()) {
-            config.setStatus("Depositing onions");
+            config.setStatus("Depositing inventory");
+            Logger.log("(onions) depositing inventory");
             Bank.depositAllItems();
-            Logger.log("deposited onions");
-            Sleep.sleepUntil(Inventory::isEmpty, 2000);
+            Sleep.sleepUntil(Inventory::isEmpty, 3000, 600);
         }
         return 1000;
     }
