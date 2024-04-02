@@ -19,7 +19,6 @@ import pfdyemaker.src.action.reddye.branch.MakeRedDyeBranch;
 import pfdyemaker.src.action.yellowdye.branch.MakeYellowDyeBranch;
 
 import pfdyemaker.src.action.onions.leaf.BankOnionsLeaf;
-import pfdyemaker.src.action.yellowdye.leaf.BankYellowDyeLeaf;
 import pfdyemaker.src.action.reddye.leaf.BankRedDyeLeaf;
 import pfdyemaker.src.action.woadleaves.leaf.BuyWoadLeavesLeaf;
 import pfdyemaker.src.action.onions.leaf.CollectOnionsLeaf;
@@ -89,8 +88,7 @@ public enum ActionBranch {
         actionBranch.addLeaves(
                 new WalkToAggieLeaf(),
                 new MakeYellowDyeLeaf(),
-                new WalkToDraynorBankLeaf(),
-                new BankYellowDyeLeaf()
+                new WalkToDraynorBankLeaf()
         );
         return actionBranch;
     });
@@ -105,4 +103,3 @@ public enum ActionBranch {
         return actionBranchSupplier.get();
     }
 }
-
