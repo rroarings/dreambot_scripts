@@ -50,7 +50,7 @@ public class Frame extends JFrame {
     }
 
     private void startBtn(ActionEvent e) {
-        if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAFS)) {
+        if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAVES)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES);
             DyeMakerConfig.getDyeMakerConfig().setDyeToMake(null);
             DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES));
