@@ -127,14 +127,33 @@ public class Frame extends JFrame {
         contentPane.add(actionLbl);
         /* end Action */
 
-        JLabel potionsLbl = new JLabel("Use Energy potions:");
-        potionsLbl.setBounds(29, 71, 119, 16);
-        contentPane.add(potionsLbl);
+        /* Optionals  */
+        JLabel energyPotionLbl = new JLabel("Use Energy potions");
+        energyPotionLbl.setBounds(250, 25, 119, 16);
+        //contentPane.add(energyPotionLbl);
 
-        nrgPotionCheckBox = new JCheckBox("Energy potions");
-        nrgPotionCheckBox.setBounds(190, 67, 151, 23);
+        JLabel worldHopLbl = new JLabel("Enable World Hop");
+        worldHopLbl.setBounds(250, 80, 119, 16);
+        //contentPane.add(worldHopLbl);
+
+        nrgPotionCheckBox = new JCheckBox("Enable Energy potion(*)");
+        nrgPotionCheckBox.setToolTipText("Click to enable using any available Energy potion(*)s");
+        nrgPotionCheckBox.setBounds(230, 35, 180, 23);
         contentPane.add(nrgPotionCheckBox);
 
+        worldHopCheckBox = new JCheckBox("Enable world hopping");
+        worldHopCheckBox.setToolTipText("Click to enable world hopping");
+        worldHopCheckBox.setBounds(230, 60, 151, 23);
+        contentPane.add(worldHopCheckBox);
+
+        JLabel optionalChecksLbl = new JLabel((String) null);
+        optionalChecksLbl.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " Optional Checks ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        optionalChecksLbl.setBounds(219, 14, 200, 80);
+        optionalChecksLbl.setToolTipText("Optional checks");
+        contentPane.add(optionalChecksLbl);
+        /* end Optionals */
+
+        /* World Hop Delays */
         JLabel minDelayLbl = new JLabel("Min delay");
         minDelayLbl.setBounds(49, 130, 60, 14);
         contentPane.add(minDelayLbl);
