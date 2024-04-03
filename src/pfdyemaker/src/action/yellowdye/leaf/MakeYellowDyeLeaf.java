@@ -1,6 +1,7 @@
 package pfdyemaker.src.action.yellowdye.leaf;
 
 import org.dreambot.api.input.Mouse;
+import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.dialogues.Dialogues;
@@ -34,7 +35,7 @@ public class MakeYellowDyeLeaf extends Leaf {
         if (Dialogues.inDialogue()) {
             config.setStatus("Skipping dialogue");
             Dialogues.spaceToContinue();
-            return 1;
+            return Calculations.random(0,3);
         }
 
         if (config.AGGIES_HOUSE.contains(Players.getLocal())) {
@@ -61,7 +62,7 @@ public class MakeYellowDyeLeaf extends Leaf {
                     break;
                 }
             }
-            return 1;
+            return Calculations.random(0,5);
         }
         return 800;
     }
