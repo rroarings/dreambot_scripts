@@ -244,7 +244,4 @@ public class Frame extends JFrame {
         return startLoop;
     }
 
-    public static ActionBranch getSelectedItem() {
-        return selectedBranch;
-    }
 }
