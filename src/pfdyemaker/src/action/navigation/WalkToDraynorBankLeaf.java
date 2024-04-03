@@ -4,6 +4,7 @@ import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.methods.map.Tile;
 import org.dreambot.api.methods.walking.impl.Walking;
+import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
 import pfdyemaker.src.data.DyeMakerConfig;
 
@@ -22,9 +23,10 @@ public class WalkToDraynorBankLeaf extends Leaf {
     @Override
     public int onLoop() {
         if (Walking.shouldWalk()) {
-            config.setStatus("Walking to bank");
+            config.setStatus("Walking to Draynor bank");
+            Logger.log("(navigation) walking to Draynor bank");
             Walking.walk(BankLocation.DRAYNOR.getTile());
-            Sleep.sleepUntil(() -> bankTile.distance() <= 5, 600);
+            Sleep.sleepUntil(() -> bankTile.distance() <= 15, 6000, 600);
         }
         return 600;
     }
