@@ -224,13 +224,13 @@ public class Frame extends JFrame {
 
     private void adjustMaxHopDelay() {
         int minValue = (int) minHopDelaySpinner.getValue();
-        int maxValue = (int) maxDelaySpinner.getValue();
+        int maxValue = (int) maxHopDelaySpinner.getValue();
 
         if (minValue == 1 && maxValue < 2) {
-            maxDelaySpinner.setValue(2);
+            maxHopDelaySpinner.setValue(2);
         }
         if (minValue >= maxValue) {
-            maxDelaySpinner.setValue(minValue + 1);
+            maxHopDelaySpinner.setValue(minValue + 1);
         }
     }
 
