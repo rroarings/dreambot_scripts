@@ -112,16 +112,20 @@ public class Frame extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("Choose activity:");
-        lblNewLabel.setBounds(29, 31, 95, 16);
-        contentPane.add(lblNewLabel);
-
-        comboBox = new JComboBox<>();
+        /* Action */
+        actionBranchComboBox = new JComboBox<>();
         for (ActionBranch actionBranch : ActionBranch.values()) {
-            comboBox.addItem(actionBranch);
+            actionBranchComboBox.addItem(actionBranch);
         }
-        comboBox.setBounds(190, 27, 199, 22);
-        contentPane.add(comboBox);
+        actionBranchComboBox.setBounds(42, 37, 148, 24);
+        contentPane.add(actionBranchComboBox);
+
+        JLabel actionLbl = new JLabel((String) null);
+        actionLbl.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " Choose Action ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        actionLbl.setBounds(29, 15, 175, 60);
+        actionLbl.setToolTipText("Minimum and maximum gold amount to take for making dyes");
+        contentPane.add(actionLbl);
+        /* end Action */
 
         JLabel potionsLbl = new JLabel("Use Energy potions:");
         potionsLbl.setBounds(29, 71, 119, 16);
