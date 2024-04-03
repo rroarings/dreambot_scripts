@@ -7,8 +7,8 @@ import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Sleep;
 import org.dreambot.api.wrappers.interactive.GameObject;
-import pfdyemaker.src.action.util.QuickMethods;
 import pfdyemaker.src.data.DyeMakerConfig;
+import pfdyemaker.src.util.PotionHandler;
 
 public class CollectRedberriesLeaf extends Leaf {
 
@@ -27,10 +27,9 @@ public class CollectRedberriesLeaf extends Leaf {
     @Override
     public int onLoop() {
         REDBERRY_BUSH = GameObjects.closest(BerryBush -> BerryBush.getID() == REDBERRY_BUSH_ID || BerryBush.getID() == REDBERRY_BUSH_ID2);
-        QuickMethods.drinkEnergyPotion();
 
         if (!worldHopped && REDBERRY_BUSH == null) {
-            QuickMethods.worldHop();
+            PotionHandler.worldHop();
             worldHopped = true;
         } else {
             worldHopped = false;
