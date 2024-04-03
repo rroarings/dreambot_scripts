@@ -21,7 +21,7 @@ public class WithdrawOnionLeaf extends Leaf {
     @Override
     public int onLoop() {
         if (Bank.isOpen()) {
-            config.setStatus("Withdrawing " + config.getDyeIngredient());
+            config.setStatus("Withdrawing " + config.ONION);
             if (Bank.withdrawAll(config.ONION)) {
                 Logger.log("(yellowdye) withdrew onion");
                 Sleep.sleepUntil(() -> Inventory.contains(config.ONION), 6000, 600);
