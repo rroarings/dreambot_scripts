@@ -15,11 +15,12 @@ import pfdyemaker.src.util.ActionBranch;
 public class YellowDyeStartLeaf extends Leaf {
 
     DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
+    Frame gui;
     private boolean checksComplete = false;
 
     @Override
     public boolean isValid() {
-        ActionBranch branch = Frame.getSelectedItem();
+        ActionBranch branch = gui.getSelectedBranch();
         return branch == ActionBranch.MAKE_YELLOW_DYE && !checksComplete;
     }
 
@@ -38,26 +39,27 @@ public class YellowDyeStartLeaf extends Leaf {
                 config.setStatus("Opening Draynor bank");
                 Logger.log("(yellowdye) opening draynor bank");
                 Sleep.sleepUntil(Bank::isOpen, 3000, 600);
-                if (Bank.isOpen()) {
-
-                    if (!Inventory.isEmpty() && Bank.depositAllItems()) {
-                        config.setStatus("Depositing inventory");
-                        Logger.log("(yellowdye) items in inventory - depositing inventory ");
-                        Sleep.sleepUntil(Inventory::isEmpty, 3000, 600);
-                    }
-
-                    if (Inventory.isEmpty() && Bank.withdraw(item -> item.getName().equals("Coins"), config.getGoldToWithdraw())) {
-                        config.setStatus("Withdrawing coins");
-                        Logger.log("(yellowdye) inventory empty - withdrawing coins");
-                        Sleep.sleepUntil(() -> Inventory.contains("Coins"), 3000, 600);
-                        checksComplete = true;
-                        Logger.log("(yellowdye) checks complete 1");
-                    }
-                }
             }
         } else if (Inventory.contains(item -> item.getName().contains("Coins"))) {
             checksComplete = true;
-            Logger.log("(yellowdye) checks complete 2");
+            Logger.log("(yellowdye) checks complete 2B");
+        }
+
+        if (Bank.isOpen()) {
+            if (!Inventory.isEmpty() && Bank.depositAllItems()) {
+                config.setStatus("Depositing inventory");
+                Logger.log("(yellowdye) items in inventory - depositing inventory ");
+                Sleep.sleepUntil(Inventory::isEmpty, 3000, 600);
+            }
+
+            // todo re-implement config.goldToWithdraw
+            if (Inventory.isEmpty() && Bank.withdraw(item -> item.getName().equals("Coins"), 200000)) {
+                config.setStatus("Withdrawing coins");
+                Logger.log("(yellowdye) inventory empty - withdrawing coins");
+                Sleep.sleepUntil(() -> Inventory.contains("Coins"), 4000, 600);
+                checksComplete = true;
+                Logger.log("(yellowdye) checks complete 1A");
+            }
         }
         return 600;
     }
