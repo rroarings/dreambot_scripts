@@ -148,6 +148,9 @@ public class Frame extends JFrame {
         maxDelaySpinner.setBounds(176, 164, 55, 20);
         contentPane.add(maxDelaySpinner);
 
+        minHopDelaySpinner.addChangeListener(e -> adjustMaxHopDelay());
+        adjustMaxHopDelay();
+
         JLabel worldhopLabel = new JLabel((String) null);
         worldhopLabel.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " World Hopping Delay ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         worldhopLabel.setBounds(29, 110, 180, 97);
