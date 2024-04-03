@@ -39,6 +39,11 @@ public class Frame extends JFrame {
         return nrgPotionCheckBox.isSelected();
     }
 
+    private void exitBtn(ActionEvent e) {
+        dispose();
+        ScriptManager.getScriptManager().stop();
+    }
+
     private void startBtn(ActionEvent e) {
         if (comboBox.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAFS)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES);
