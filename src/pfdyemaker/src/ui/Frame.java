@@ -145,7 +145,7 @@ public class Frame extends JFrame {
 
         maxDelaySpinner = new JSpinner();
         maxDelaySpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
-        maxDelaySpinner.setBounds(176, 164, 55, 20);
+        maxDelaySpinner.setBounds(minHopDelaySpinner.getX() + 76, 160, 55, 20);
         contentPane.add(maxDelaySpinner);
 
         minHopDelaySpinner.addChangeListener(e -> adjustMaxHopDelay());
