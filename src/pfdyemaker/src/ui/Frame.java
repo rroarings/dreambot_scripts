@@ -180,14 +180,16 @@ public class Frame extends JFrame {
         worldhopLabel.setBounds(29, 110, 180, 97);
         worldhopLabel.setToolTipText("Time to sleep before hopping worlds");
         contentPane.add(worldhopLabel);
+        /* end World Hop Delays */
 
+        /* Gold Amount */
         JLabel minGoldDelayLbl = new JLabel("Min gold");
-        minGoldDelayLbl.setBounds(241, 135, 60, 16);
+        minGoldDelayLbl.setBounds(238, 135, 60, 16);
         contentPane.add(minGoldDelayLbl);
 
         minGoldDelaySpinner = new JSpinner();
         minGoldDelaySpinner.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        minGoldDelaySpinner.setBounds(241, 160, 70, 20);
+        minGoldDelaySpinner.setBounds(238, 160, 70, 20);
         contentPane.add(minGoldDelaySpinner);
 
         JLabel maxGoldDelayLbl = new JLabel("Max gold");
