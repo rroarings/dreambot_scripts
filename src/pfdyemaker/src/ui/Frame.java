@@ -206,16 +206,19 @@ public class Frame extends JFrame {
         goldAmountLabel.setBounds(219, 110, 200, 97);
         goldAmountLabel.setToolTipText("Minimum and maximum gold amount to take for making dyes");
         contentPane.add(goldAmountLabel);
+        /* end Gold Amount */
 
+        /* Exit button */
         JButton exitBtn = new JButton("Exit");
         exitBtn.addActionListener(this::exitBtn);
         exitBtn.setBackground(Color.GRAY);
         exitBtn.setBounds(worldhopLabel.getX(), 219, worldhopLabel.getWidth(), 22);
         contentPane.add(exitBtn);
 
+        /* Start button */
         JButton startBtn = new JButton("Start");
         startBtn.addActionListener(this::startBtn);
-        startBtn.setBounds(300, 219, 89, 23);
+        startBtn.setBounds(goldAmountLabel.getX(), 219, goldAmountLabel.getWidth(), 22);
         contentPane.add(startBtn);
     }
 
