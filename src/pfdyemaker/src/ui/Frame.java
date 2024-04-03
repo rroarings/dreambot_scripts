@@ -48,32 +48,32 @@ public class Frame extends JFrame {
     }
 
     private void startBtn(ActionEvent e) {
-        if (comboBox.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAFS)) {
+        if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAFS)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES);
             DyeMakerConfig.getDyeMakerConfig().setDyeToMake(null);
             DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES));
             DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem("Woad leaf", true);
-        } else if (comboBox.getSelectedItem().equals(ActionBranch.MAKE_BLUE_DYE)) {
+        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.MAKE_BLUE_DYE)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES);
             DyeMakerConfig.getDyeMakerConfig().setDyeToMake("Blue dye");
             DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES));
             DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem("Blue dye", true);
-        } else if (comboBox.getSelectedItem().equals(ActionBranch.COLLECT_REDBERRIES)) {
+        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.COLLECT_REDBERRIES)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().REDBERRIES);
             DyeMakerConfig.getDyeMakerConfig().setDyeToMake(null);
             DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().REDBERRIES));
             DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem(DyeMakerConfig.getDyeMakerConfig().REDBERRIES, true);
-        } else if (comboBox.getSelectedItem().equals(ActionBranch.MAKE_RED_DYE)) {
+        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.MAKE_RED_DYE)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().REDBERRIES);
             DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().REDBERRIES));
             DyeMakerConfig.getDyeMakerConfig().setDyeToMake("Red dye");
             DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem("Red dye", true);
-        } else if (comboBox.getSelectedItem().equals(ActionBranch.COLLECT_ONIONS)) {
+        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.COLLECT_ONIONS)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().ONION);
             DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().ONION));
             DyeMakerConfig.getDyeMakerConfig().setDyeToMake(null);
             DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem(DyeMakerConfig.getDyeMakerConfig().ONION, true);
-        } else if (comboBox.getSelectedItem().equals(ActionBranch.MAKE_YELLOW_DYE)) {
+        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.MAKE_YELLOW_DYE)) {
             DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().ONION);
             DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().ONION));
             DyeMakerConfig.getDyeMakerConfig().setDyeToMake("Yellow dye");
@@ -84,11 +84,11 @@ public class Frame extends JFrame {
         if (isChecked) {
             DyeMakerConfig.isUseEnergyPotions();
         }
-        int minValue = (int) minDelaySpinner.getValue();
-        int maxValue = (int) maxDelaySpinner.getValue();
+        int minValue = (int) minHopDelaySpinner.getValue();
+        int maxValue = (int) maxHopDelaySpinner.getValue();
         DyeMakerConfig.setWorldHopDelayMin(minValue);
         DyeMakerConfig.setWorldHopDelayMax(maxValue);
-        selectedBranch = (ActionBranch) comboBox.getSelectedItem();
+        selectedBranch = (ActionBranch) actionBranchComboBox.getSelectedItem();
         startLoop = true;
         if (DyeMakerConfig.isUseEnergyPotions()) {
             Walking.setRunThreshold(20);
