@@ -101,9 +101,10 @@ public class Frame extends JFrame {
     }
 
     public Frame() {
-        setTitle("PF Dye Maker");
+        PFDyeMaker dyeMaker = new PFDyeMaker();
+        setTitle("PF Dye Maker " + dyeMaker.getVersion());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo(null);
         setBounds(100, 100, 450, 300);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
