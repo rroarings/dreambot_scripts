@@ -153,6 +153,36 @@ public class Frame extends JFrame {
         worldhopLabel.setBounds(29, 113, 360, 95);
         contentPane.add(worldhopLabel);
 
+        JLabel minGoldDelayLbl = new JLabel("Min gold");
+        minGoldDelayLbl.setBounds(241, 135, 60, 16);
+        contentPane.add(minGoldDelayLbl);
+
+        minGoldDelaySpinner = new JSpinner();
+        minGoldDelaySpinner.setModel(new SpinnerNumberModel(0, 0, null, 1));
+        minGoldDelaySpinner.setBounds(241, 160, 70, 20);
+        contentPane.add(minGoldDelaySpinner);
+
+        JLabel maxGoldDelayLbl = new JLabel("Max gold");
+        maxGoldDelayLbl.setBounds(minGoldDelayLbl.getX() + 90, 135, 67, 16);
+        contentPane.add(maxGoldDelayLbl);
+
+        maxGoldDelaySpinner = new JSpinner();
+        maxGoldDelaySpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
+        maxGoldDelaySpinner.setBounds(minGoldDelaySpinner.getX() + 90, 160, 70, 20);
+        contentPane.add(maxGoldDelaySpinner);
+
+        JLabel goldAmountLabel = new JLabel((String) null);
+        goldAmountLabel.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " Gold Amount ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        goldAmountLabel.setBounds(219, 110, 200, 97);
+        goldAmountLabel.setToolTipText("Minimum and maximum gold amount to take for making dyes");
+        contentPane.add(goldAmountLabel);
+
+        JButton exitBtn = new JButton("Exit");
+        exitBtn.addActionListener(this::exitBtn);
+        exitBtn.setBackground(Color.GRAY);
+        exitBtn.setBounds(worldhopLabel.getX(), 219, worldhopLabel.getWidth(), 22);
+        contentPane.add(exitBtn);
+
         JButton startBtn = new JButton("Start");
         startBtn.addActionListener(this::startBtn);
         startBtn.setBounds(300, 219, 89, 23);
