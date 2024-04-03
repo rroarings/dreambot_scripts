@@ -2,7 +2,9 @@ package pfdyemaker.src.ui;
 
 import org.dreambot.api.methods.grandexchange.LivePrices;
 import org.dreambot.api.methods.walking.impl.Walking;
+import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.utilities.Logger;
+import pfdyemaker.src.PFDyeMaker;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.util.ActionBranch;
 import pfdyemaker.src.util.PricedItem;
