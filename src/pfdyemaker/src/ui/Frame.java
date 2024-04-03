@@ -114,7 +114,7 @@ public class Frame extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        /* Action */
+        /* Action Box */
         actionBranchComboBox = new JComboBox<>();
         for (ActionBranch actionBranch : ActionBranch.values()) {
             actionBranchComboBox.addItem(actionBranch);
@@ -129,7 +129,7 @@ public class Frame extends JFrame {
         contentPane.add(actionLbl);
         /* end Action */
 
-        /* Optionals  */
+        /* Optionals Box */
         JLabel energyPotionLbl = new JLabel("Use Energy potions");
         energyPotionLbl.setBounds(250, 25, 119, 16);
         //contentPane.add(energyPotionLbl);
