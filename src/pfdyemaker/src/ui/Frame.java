@@ -21,8 +21,11 @@ public class Frame extends JFrame {
 
     private final JSpinner minDelaySpinner;
     private final JSpinner maxDelaySpinner;
-    public static JComboBox<ActionBranch> comboBox;
-    public static JCheckBox nrgPotionCheckBox;
+    private final JSpinner minGoldDelaySpinner;
+    private final JSpinner maxGoldDelaySpinner;
+    public JComboBox<ActionBranch> actionBranchComboBox;
+    public JCheckBox nrgPotionCheckBox;
+    public JCheckBox worldHopCheckBox;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
