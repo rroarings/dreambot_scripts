@@ -2,7 +2,6 @@
 In this repository you will find various RuneScape scripts to automate the processes with the use of DreamBot and their API. This is for educational purpuroses to expand my Java and programming experience.
 
 ## Maintained
-___
 ### PF Dye Maker  v1.7
 
 Creates three types of colored dye or collects the ingredients to create each one. 
@@ -34,9 +33,5 @@ Creates three types of colored dye or collects the ingredients to create each on
    * Start with an empty inventory
    * Best to start near desired ingredient
 
-## Archived
-___
-* PF Miner
-* PF Chaos Druids
-* PF Thiever
-* PF Runecrafter
+## Not Maintained
+* PF Cows
