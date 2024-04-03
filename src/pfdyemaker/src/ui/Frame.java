@@ -19,7 +19,7 @@ public class Frame extends JFrame {
     private ActionBranch selectedBranch;
     private boolean startLoop = false;
 
-    private final JSpinner minDelaySpinner;
+    private final JSpinner minHopDelaySpinner;
     private final JSpinner maxDelaySpinner;
     private final JSpinner minGoldDelaySpinner;
     private final JSpinner maxGoldDelaySpinner;
