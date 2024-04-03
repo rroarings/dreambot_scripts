@@ -20,7 +20,7 @@ public class Frame extends JFrame {
     private boolean startLoop = false;
 
     private final JSpinner minHopDelaySpinner;
-    private final JSpinner maxDelaySpinner;
+    private final JSpinner maxHopDelaySpinner;
     private final JSpinner minGoldDelaySpinner;
     private final JSpinner maxGoldDelaySpinner;
     public JComboBox<ActionBranch> actionBranchComboBox;
