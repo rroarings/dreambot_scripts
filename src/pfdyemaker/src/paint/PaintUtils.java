@@ -7,6 +7,9 @@ public class PaintUtils {
 
     private static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 12);
     private static final Color DEFAULT_COLOR = Color.WHITE;
+    public static final Color OFF_WHITE = new Color(245, 245, 245);
+    public static final Color YELLOW_LIGHT = new Color(255, 241, 118);
+    public static final Color BLUE_LIGHT = new Color(100, 181, 246);
     private static final int DEFAULT_X = 5;
     private static final int DEFAULT_Y = 20;
     private static final RenderingHints ANTI_ALIASING = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
