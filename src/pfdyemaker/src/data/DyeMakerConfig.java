@@ -27,10 +27,7 @@ public class DyeMakerConfig {
     public String ONION = "Onion";
 
     public static boolean isUseEnergyPotions() {
-        if (Frame.isEnergyPotions()) {
-            return true;
-        }
-        return false;
+      return false;
     }
 
     public int getGoldToWithdraw() {
