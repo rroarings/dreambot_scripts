@@ -38,7 +38,7 @@ public class Frame extends JFrame {
         });
     }
 
-    public static boolean isEnergyPotions() {
+    public boolean isEnergyPotions() {
         return nrgPotionCheckBox.isSelected();
     }
 
