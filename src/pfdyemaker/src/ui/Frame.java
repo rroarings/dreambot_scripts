@@ -149,8 +149,9 @@ public class Frame extends JFrame {
         contentPane.add(maxDelaySpinner);
 
         JLabel worldhopLabel = new JLabel((String) null);
-        worldhopLabel.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), "World Hopping", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        worldhopLabel.setBounds(29, 113, 360, 95);
+        worldhopLabel.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " World Hopping Delay ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        worldhopLabel.setBounds(29, 110, 180, 97);
+        worldhopLabel.setToolTipText("Time to sleep before hopping worlds");
         contentPane.add(worldhopLabel);
 
         JLabel minGoldDelayLbl = new JLabel("Min gold");
