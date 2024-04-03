@@ -159,7 +159,23 @@ public class Frame extends JFrame {
         contentPane.add(startBtn);
     }
 
-    public static boolean isStartLoop() {
+    private void adjustMaxHopDelay() {
+        int minValue = (int) minHopDelaySpinner.getValue();
+        int maxValue = (int) maxDelaySpinner.getValue();
+
+        if (minValue == 1 && maxValue < 2) {
+            maxDelaySpinner.setValue(2);
+        }
+        if (minValue >= maxValue) {
+            maxDelaySpinner.setValue(minValue + 1);
+        }
+    }
+
+    public ActionBranch getSelectedBranch() {
+        return selectedBranch;
+    }
+
+    public boolean isStartLoop() {
         return startLoop;
     }
 
