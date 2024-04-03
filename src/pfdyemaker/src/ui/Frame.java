@@ -16,8 +16,8 @@ import java.awt.event.ActionEvent;
 
 public class Frame extends JFrame {
 
-    private static ActionBranch selectedBranch;
-    private static boolean startLoop = false;
+    private ActionBranch selectedBranch;
+    private boolean startLoop = false;
 
     private final JSpinner minDelaySpinner;
     private final JSpinner maxDelaySpinner;
