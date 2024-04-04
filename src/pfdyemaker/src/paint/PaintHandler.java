@@ -48,8 +48,22 @@ public class PaintHandler implements MouseListener {
         g2d.draw(PAINT_BUTTON);
     }
 
-    private void drawMainInfo(Graphics2D g2d) {
-        g2d.setColor(Color.WHITE);
+    private void drawDebugPaintButton(Graphics2D g2d) {
+        if (debugPaint) {
+            g2d.setColor(PaintUtils.BLUE_LIGHT);
+            g2d.fill(DEBUG_PAINT_BUTTON);
+            g2d.setColor(Color.BLACK);
+            g2d.drawString("Show Debug", DEBUG_PAINT_BUTTON.x + 5, DEBUG_PAINT_BUTTON.y + 13);
+        } else {
+            g2d.setColor(Color.WHITE);
+            g2d.drawString("Hide Debug", DEBUG_PAINT_BUTTON.x + 7, DEBUG_PAINT_BUTTON.y + 13);
+        }
+        g2d.setColor(Color.YELLOW);
+        g2d.setStroke(new BasicStroke(1));
+        g2d.draw(DEBUG_PAINT_BUTTON);
+    }
+
+    private void drawMainPaint(Graphics2D g2d) {
         java.util.List<String> textList = new ArrayList<>();
         textList.add(Timer.formatTime(System.currentTimeMillis() - script.getStartTime()));
         textList.add("Status: " + (DyeMakerConfig.getDyeMakerConfig().getStatus() == null ? "Idle" : DyeMakerConfig.getDyeMakerConfig().getStatus()));
