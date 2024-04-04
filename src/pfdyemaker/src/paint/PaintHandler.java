@@ -3,7 +3,6 @@ package pfdyemaker.src.paint;
 import org.dreambot.api.utilities.Timer;
 import pfdyemaker.src.PFDyeMaker;
 import pfdyemaker.src.data.DyeMakerConfig;
-import pfdyemaker.src.util.PricedItem;
 import pfdyemaker.src.util.QuantityFormatter;
 
 import java.awt.*;
