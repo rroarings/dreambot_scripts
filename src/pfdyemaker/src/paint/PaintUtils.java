@@ -61,7 +61,6 @@ public class PaintUtils {
      */
     public static void drawText(Graphics g, Color color, String text, int x, int y) {
         g.setColor(color);
-        g.setFont(DEFAULT_FONT);
         g.drawString(text, x, y);
     }
 
