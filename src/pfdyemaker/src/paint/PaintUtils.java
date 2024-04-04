@@ -46,7 +46,7 @@ public class PaintUtils {
      * @param text the text to draw
      * @param color the color to use
      */
-    public static void drawText(Graphics g, String text, Color color) {
+    public static void drawText(Graphics g, Color color, String text) {
         drawText(g, color, text, DEFAULT_X, DEFAULT_Y);
     }
 
