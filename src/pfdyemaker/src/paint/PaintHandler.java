@@ -109,15 +109,13 @@ public class PaintHandler implements MouseListener {
         g2d.drawString("Hide Paint", PAINT_BUTTON.x + 12, PAINT_BUTTON.y + 13);
     }
 
-    private void drawDebugInfo(Graphics2D g2d) {
+    private void drawDebugPaint(Graphics2D g2d) {
         g2d.setColor(Color.YELLOW);
         java.util.List<String> textList = new ArrayList<>();
         textList.add("Debug Paint Active");
         textList.add("Branch: " + script.getCurrentBranchName());
         textList.add("Leaf: " + script.getCurrentLeafName());
         textList.add("Status: " + (DyeMakerConfig.getDyeMakerConfig().getStatus() == null ? "Idle" : DyeMakerConfig.getDyeMakerConfig().getStatus()));
-
-        // Draw the text list on the graphics context
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
     }
 
