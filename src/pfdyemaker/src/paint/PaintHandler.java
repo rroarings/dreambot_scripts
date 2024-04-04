@@ -44,7 +44,17 @@ public class PaintHandler implements MouseListener {
     }
 
     private void drawHidePaintButton(Graphics2D g2d) {
+        if (hidePaint) {
+            g2d.setColor(Color.YELLOW);
+            g2d.fill(PAINT_BUTTON);
+            g2d.setColor(Color.BLACK);
+            g2d.drawString("Show Paint", PAINT_BUTTON.x + 9, PAINT_BUTTON.y + 13);
+        } else {
+            g2d.setColor(PaintUtils.OFF_WHITE);
+            g2d.drawString("Hide Paint", PAINT_BUTTON.x + 11, PAINT_BUTTON.y + 13);
+        }
         g2d.setColor(Color.YELLOW);
+        g2d.setStroke(new BasicStroke(1));
         g2d.draw(PAINT_BUTTON);
     }
 
