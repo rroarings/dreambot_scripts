@@ -48,7 +48,6 @@ public class PaintHandler implements MouseListener {
     private void drawChatBoxBackground(Graphics2D g2d) {
         g2d.setColor(TRANSPARENT_BLACK);
         g2d.fillRoundRect(5, 342, 506, 134, 2, 2);
-
         g2d.setColor(PaintUtils.YELLOW_LIGHT);
         g2d.setStroke(new BasicStroke(1));
         g2d.drawRoundRect(5, 342, 506, 134, 2, 2);
