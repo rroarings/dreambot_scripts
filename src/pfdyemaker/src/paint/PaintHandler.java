@@ -133,7 +133,11 @@ public class PaintHandler implements MouseListener {
         if (PAINT_BUTTON.contains(e.getPoint())) {
             hidePaint = !hidePaint;
         }
+        if (DEBUG_PAINT_BUTTON.contains(e.getPoint())) {
+            toggleDebugPaint();
+        }
     }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
