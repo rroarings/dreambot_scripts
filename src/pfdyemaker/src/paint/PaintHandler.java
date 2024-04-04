@@ -34,11 +34,11 @@ public class PaintHandler implements MouseListener {
         if (!hidePaint) {
             drawChatBoxBackground(graphics2D);
 
-            if (!debugPaint) { // Draw main paint only if debugPaint is false
+            if (!debugPaint) {
                 drawMainPaint(graphics2D);
                 drawScriptTitle(graphics2D);
             } else {
-                drawDebugPaint(graphics2D); // Draw debug paint if debugPaint is true
+                drawDebugPaint(graphics2D);
             }
         }
         drawHidePaintButton(graphics2D);
