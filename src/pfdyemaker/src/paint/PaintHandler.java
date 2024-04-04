@@ -102,10 +102,7 @@ public class PaintHandler implements MouseListener {
             textList.add("Item: " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getName() + ", " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount());
             textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.getDyeMakerConfig().getProfit()));
         }
-
-        // Draw the text list on the graphics context
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
-        g2d.drawString("Hide Paint", PAINT_BUTTON.x + 12, PAINT_BUTTON.y + 13);
     }
 
     private void drawDebugPaint(Graphics2D g2d) {
