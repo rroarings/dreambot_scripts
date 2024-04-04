@@ -119,7 +119,13 @@ public class PaintHandler implements MouseListener {
 
         // Draw the text list on the graphics context
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
-        g2d.drawString("Paint hidden", PAINT_BUTTON.x + 6, PAINT_BUTTON.y + 13);
+    }
+
+    public void toggleDebugPaint() {
+        debugPaint = !debugPaint;
+        if (!debugPaint) { // If debug paint is toggled off
+            hidePaint = false; // Show main paint when hiding debug paint
+        }
     }
 
     @Override
