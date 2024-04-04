@@ -104,5 +104,12 @@ public enum ActionBranch {
     public Branch getActionBranch() {
         return actionBranchSupplier.get();
     }
+
+    @Override
+    public String toString() {
+        String name = name().toLowerCase().replace("_", " ");
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        return name;
+    }
 }
 
