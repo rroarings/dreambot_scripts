@@ -15,9 +15,9 @@ public class PaintUtils {
     private static final RenderingHints ANTI_ALIASING = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
     /**
-     * Enables or disables anti-aliasing rendering hints for the given Graphics object.
+     * Enables or disables antialiasing rendering hints for the given Graphics object.
      *
-     * @param g          the Graphics object to enable or disable anti-aliasing for
+     * @param g          the Graphics object to enable or disable antialiasing for
      * @param enabled    true to enable anti-aliasing, false to disable it
      */
     public static void setAntiAliasingEnabled(Graphics g, boolean enabled) {
