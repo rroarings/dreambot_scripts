@@ -25,17 +25,23 @@ public class PaintHandler implements MouseListener {
 
     public void paint(Graphics g) {
         Graphics2D graphics2D = (Graphics2D) g;
-
         PaintUtils.setAntiAliasingEnabled(g, true);
+        graphics2D.setColor(PaintUtils.OFF_WHITE);
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 12));
-        graphics2D.setColor(Color.WHITE);
-        drawChatBoxBackground(graphics2D);
-        PaintUtils.drawText(g, Color.WHITE, script.getManifest().name() + " v" + script.getVersion(), PAINT_BUTTON.x - 115, PAINT_BUTTON.y + 13);
         drawHidePaintButton(graphics2D);
 
         if (!hidePaint) {
-            drawMainInfo(graphics2D);
-        } else { graphics2D.drawString("Show Paint", PAINT_BUTTON.x + 10, PAINT_BUTTON.y + 13); }
+            drawChatBoxBackground(graphics2D);
+
+            if (!debugPaint) { // Draw main paint only if debugPaint is false
+                drawMainPaint(graphics2D);
+                drawScriptTitle(graphics2D);
+            } else {
+                drawDebugPaint(graphics2D); // Draw debug paint if debugPaint is true
+            }
+        }
+        drawHidePaintButton(graphics2D);
+        drawDebugPaintButton(graphics2D);
     }
 
     private void drawChatBoxBackground(Graphics2D g2d) {
