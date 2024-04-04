@@ -81,10 +81,10 @@ public class PaintHandler implements MouseListener {
             g2d.setColor(PaintUtils.BLUE_LIGHT);
             g2d.fill(DEBUG_PAINT_BUTTON);
             g2d.setColor(Color.BLACK);
-            g2d.drawString("Show Debug", DEBUG_PAINT_BUTTON.x + 5, DEBUG_PAINT_BUTTON.y + 13);
+            g2d.drawString("Hide Debug", DEBUG_PAINT_BUTTON.x + 8, DEBUG_PAINT_BUTTON.y + 13);
         } else {
             g2d.setColor(Color.WHITE);
-            g2d.drawString("Hide Debug", DEBUG_PAINT_BUTTON.x + 7, DEBUG_PAINT_BUTTON.y + 13);
+            g2d.drawString("Show Debug", DEBUG_PAINT_BUTTON.x + 5, DEBUG_PAINT_BUTTON.y + 13);
         }
         g2d.setColor(Color.YELLOW);
         g2d.setStroke(new BasicStroke(1));
