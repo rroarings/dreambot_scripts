@@ -40,7 +40,19 @@ public class PaintHandler implements MouseListener {
 
     private void drawChatBoxBackground(Graphics2D g2d) {
         g2d.setColor(TRANSPARENT_BLACK);
-        g2d.fillRoundRect(5, 342, 510, 134, 2, 2);
+        g2d.fillRoundRect(5, 342, 506, 134, 2, 2);
+
+        g2d.setColor(PaintUtils.YELLOW_LIGHT);
+        g2d.setStroke(new BasicStroke(1));
+        g2d.drawRoundRect(5, 342, 506, 134, 2, 2);
+    }
+
+    private void drawScriptTitle(Graphics2D g2d) {
+        if (!hidePaint) {
+            g2d.setColor(new Color(66, 66, 66, 207));
+            g2d.fillRect(6, 459, 503, 17);
+            PaintUtils.drawText(g2d, PaintUtils.OFF_WHITE, script.getManifest().name() + " v"+script.getManifest().version(), X_OFFSET, 470);
+        }
     }
 
     private void drawHidePaintButton(Graphics2D g2d) {
