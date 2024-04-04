@@ -124,8 +124,8 @@ public class PaintHandler implements MouseListener {
 
     public void toggleDebugPaint() {
         debugPaint = !debugPaint;
-        if (!debugPaint) { // If debug paint is toggled off
-            hidePaint = false; // Show main paint when hiding debug paint
+        if (!debugPaint) {
+            hidePaint = false;
         }
     }
 
