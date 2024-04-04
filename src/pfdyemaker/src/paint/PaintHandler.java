@@ -108,9 +108,17 @@ public class PaintHandler implements MouseListener {
         g2d.setColor(Color.YELLOW);
         java.util.List<String> textList = new ArrayList<>();
         textList.add("Debug Paint Active");
+        textList.add(Timer.formatTime(System.currentTimeMillis() - script.getStartTime()));
         textList.add("Branch: " + script.getCurrentBranchName());
         textList.add("Leaf: " + script.getCurrentLeafName());
         textList.add("Status: " + (DyeMakerConfig.getDyeMakerConfig().getStatus() == null ? "Idle" : DyeMakerConfig.getDyeMakerConfig().getStatus()));
+        textList.add("Use Energy potions: " + DyeMakerConfig.isUseEnergyPotions());
+        if (DyeMakerConfig.getDyeMakerConfig().getPricedItem() != null) {
+            int profit = DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount() * DyeMakerConfig.getDyeMakerConfig().getPricedItem().getPrice();
+            DyeMakerConfig.getDyeMakerConfig().setProfit(profit);
+            textList.add("Item: " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getName() + ", " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount());
+            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.getDyeMakerConfig().getProfit()));
+        }
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
     }
 
