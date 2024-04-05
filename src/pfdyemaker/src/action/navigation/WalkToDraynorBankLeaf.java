@@ -11,7 +11,7 @@ import org.dreambot.api.script.frameworks.treebranch.Leaf;
 
 public class WalkToDraynorBankLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
+    DyeMakerConfig config = DyeMakerConfig.dyeConfig();
     private final Tile bankTile = new Tile(3092, 3245, 0);
 
     @Override
