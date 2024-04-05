@@ -55,7 +55,7 @@ public class PaintHandler implements MouseListener {
 
     private void drawScriptTitle(Graphics2D g2d) {
         if (!hidePaint) {
-            g2d.setColor(new Color(0, 0, 0, 200));
+            g2d.setColor(new Color(0, 0, 0, 130));
             g2d.fillRect(6, 459, 504, 17);
             PaintUtils.drawText(g2d, PaintUtils.OFF_WHITE, script.getManifest().name() + " v"+script.getManifest().version(), X_OFFSET, 472);
         }
@@ -95,12 +95,12 @@ public class PaintHandler implements MouseListener {
         g2d.setColor(PaintUtils.OFF_WHITE);
         java.util.List<String> textList = new ArrayList<>();
         textList.add(Timer.formatTime(System.currentTimeMillis() - script.getStartTime()));
-        textList.add("Status: " + (DyeMakerConfig.getDyeMakerConfig().getStatus() == null ? "Idle" : DyeMakerConfig.getDyeMakerConfig().getStatus()));
-        if (DyeMakerConfig.getDyeMakerConfig().getPricedItem() != null) {
-            int profit = DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount() * DyeMakerConfig.getDyeMakerConfig().getPricedItem().getPrice();
-            DyeMakerConfig.getDyeMakerConfig().setProfit(profit);
-            textList.add("Item: " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getName() + ", " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount());
-            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.getDyeMakerConfig().getProfit()));
+        textList.add("Status: " + (DyeMakerConfig.dyeConfig().getStatus() == null ? "Idle" : DyeMakerConfig.dyeConfig().getStatus()));
+        if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
+            int profit = DyeMakerConfig.dyeConfig().getPricedItem().getAmount() * DyeMakerConfig.dyeConfig().getPricedItem().getPrice();
+            DyeMakerConfig.dyeConfig().setProfit(profit);
+            textList.add("Item: " + DyeMakerConfig.dyeConfig().getPricedItem().getName() + ", " + DyeMakerConfig.dyeConfig().getPricedItem().getAmount());
+            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.dyeConfig().getProfit()));
         }
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
     }
@@ -112,13 +112,13 @@ public class PaintHandler implements MouseListener {
         textList.add(Timer.formatTime(System.currentTimeMillis() - script.getStartTime()));
         textList.add("Branch: " + script.getCurrentBranchName());
         textList.add("Leaf: " + script.getCurrentLeafName());
-        textList.add("Status: " + (DyeMakerConfig.getDyeMakerConfig().getStatus() == null ? "Idle" : DyeMakerConfig.getDyeMakerConfig().getStatus()));
+        textList.add("Status: " + (DyeMakerConfig.dyeConfig().getStatus() == null ? "Idle" : DyeMakerConfig.dyeConfig().getStatus()));
         textList.add("Use Energy potions: " + DyeMakerConfig.isUseEnergyPotions());
-        if (DyeMakerConfig.getDyeMakerConfig().getPricedItem() != null) {
-            int profit = DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount() * DyeMakerConfig.getDyeMakerConfig().getPricedItem().getPrice();
-            DyeMakerConfig.getDyeMakerConfig().setProfit(profit);
-            textList.add("Priced Item: " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getName() + ", " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount());
-            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.getDyeMakerConfig().getProfit()));
+        if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
+            int profit = DyeMakerConfig.dyeConfig().getPricedItem().getAmount() * DyeMakerConfig.dyeConfig().getPricedItem().getPrice();
+            DyeMakerConfig.dyeConfig().setProfit(profit);
+            textList.add("Priced Item: " + DyeMakerConfig.dyeConfig().getPricedItem().getName() + ", " + DyeMakerConfig.dyeConfig().getPricedItem().getAmount());
+            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.dyeConfig().getProfit()));
         }
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
     }
