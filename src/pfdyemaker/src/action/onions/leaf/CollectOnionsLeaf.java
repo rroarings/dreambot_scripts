@@ -21,12 +21,9 @@ public class CollectOnionsLeaf extends Leaf {
     public int onLoop() {
         GameObject ONION = GameObjects.closest(gameObject -> gameObject.getName().contains("Onion") && gameObject.hasAction("Pick"));
 
-        if (ONION == null) return 600;
-
-        if (ONION.interact("Pick")) {
-            config.setStatus("Picking onion");
-            Sleep.sleepUntil(() -> !Players.getLocal().isAnimating(), 900, 1000);
-            config.pricedItem.update();
+        if (ONION == null) {
+            config.setStatus("Waiting for onion to spawn");
+            return 600;
         }
 
         if (Inventory.contains("Onion seed")) {
