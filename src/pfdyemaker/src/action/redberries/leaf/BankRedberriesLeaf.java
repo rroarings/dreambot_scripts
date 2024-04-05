@@ -6,12 +6,9 @@ import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Sleep;
-import pfdyemaker.src.action.util.QuickMethods;
 import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BankRedberriesLeaf extends Leaf {
-
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
 
     @Override
     public boolean isValid() {
@@ -21,18 +18,15 @@ public class BankRedberriesLeaf extends Leaf {
     @Override
     public int onLoop() {
         if (!Bank.isOpen()) {
-            config.setStatus("Opening bank");
+            DyeMakerConfig.dyeConfig().setStatus("Opening bank");
             Bank.open();
-            Sleep.sleepUntil(Bank::isOpen, 2000);
+            Sleep.sleepUntil(Bank::isOpen, 4000, 600);
         }
 
         if (Bank.isOpen()) {
-            config.setStatus("Deposit inventory");
+            DyeMakerConfig.dyeConfig().setStatus("Deposit inventory");
             Bank.depositAllItems();
-            Sleep.sleepUntil(Inventory::isEmpty, 2000);
-            QuickMethods.withdrawEnergyPotions();
-            QuickMethods.drinkEnergyPotion();
-
+            Sleep.sleepUntil(Inventory::isEmpty, 4000, 600);
         }
         return 1000;
     }
