@@ -11,27 +11,28 @@ import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BankOnionsLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
-
     @Override
     public boolean isValid() {
-        return BankLocation.DRAYNOR.getArea(1).contains(Players.getLocal());
+        return BankLocation.DRAYNOR.getArea(5).contains(Players.getLocal());
     }
 
     @Override
     public int onLoop() {
         if (!Bank.isOpen()) {
-            config.setStatus("Opening bank");
-            Bank.open();
-            Sleep.sleepUntil(Bank::isOpen, 2000);
+            DyeMakerConfig.dyeConfig().setStatus("Opening bank");
+            if (Bank.open()) {
+                Sleep.sleepUntil(Bank::isOpen, 4000, 600);
+                Logger.log("(dyes) (bankOnion) opened bank");
+            }
         }
 
         if (Bank.isOpen()) {
-            config.setStatus("Depositing onions");
-            Bank.depositAllItems();
-            Logger.log("deposited onions");
-            Sleep.sleepUntil(Inventory::isEmpty, 2000);
+            DyeMakerConfig.dyeConfig().setStatus("Depositing onions");
+            if (Bank.depositAllItems()) {
+                Sleep.sleepUntil(Inventory::isEmpty, 4000, 600);
+                Logger.log("(dyes) (bankOnion) deposited onions");
+            }
         }
-        return 1000;
+        return 600;
     }
 }
