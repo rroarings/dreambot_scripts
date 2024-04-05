@@ -4,7 +4,6 @@ import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.Bank;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.interactive.Players;
-import org.dreambot.api.methods.login.LoginUtility;
 import org.dreambot.api.methods.tabs.Tabs;
 import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
@@ -14,7 +13,7 @@ import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BankRedDyeLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
+    DyeMakerConfig config = DyeMakerConfig.dyeConfig();
 
     @Override
     public boolean isValid() {
