@@ -92,6 +92,7 @@ public class PaintHandler implements MouseListener {
     }
 
     private void drawMainPaint(Graphics2D g2d) {
+        g2d.setColor(PaintUtils.OFF_WHITE);
         java.util.List<String> textList = new ArrayList<>();
         textList.add(Timer.formatTime(System.currentTimeMillis() - script.getStartTime()));
         textList.add("Status: " + (DyeMakerConfig.getDyeMakerConfig().getStatus() == null ? "Idle" : DyeMakerConfig.getDyeMakerConfig().getStatus()));
