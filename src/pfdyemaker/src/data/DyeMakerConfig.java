@@ -7,24 +7,44 @@ import pfdyemaker.src.util.PricedItem;
 
 public class DyeMakerConfig {
 
-    private static final DyeMakerConfig dyeMakerConfig = new DyeMakerConfig();
-    public static DyeMakerConfig getDyeMakerConfig() {
-        return dyeMakerConfig;
+    private static final DyeMakerConfig dyeConfig = new DyeMakerConfig();
+    private Area aggiesHouse;
+    private Area redberryArea;
+    private Area onionArea;
+    private Tile faladorParkTile;
+    private String dyeToMake;
+    private String dyeIngredient;
+    private String status;
+
+    public String getRedberries() {
+        return "Redberries";
     }
 
-    public DyeMakerConfig() {}
+    public String getWoadLeaves() {
+        return "Woad leaf";
+    }
 
-    public Area AGGIES_HOUSE = new Area(3083, 3261, 3089, 3256);
-    public Area REDBERRY_AREA = new Area(3278, 3375, 3267, 3367);
-    public Area ONION_AREA = new Area(3186, 3269, 3192, 3265);
-    public Tile FALADOR_PARK_TILE = new Tile(3025, 3379, 0);
+    public String getOnion() {
+        return "Onion";
+    }
 
-    public String dyeToMake;
-    public String dyeIngredient;
-    public static String status = "";
-    public String REDBERRIES = "Redberries";
-    public String WOAD_LEAVES = "Woad leaf";
-    public String ONION = "Onion";
+    private int worldHopDelayMin;
+    private int worldHopDelayMax;
+    private PricedItem pricedItem;
+    private int profit;
+    private int ingredientPrice;
+
+    public static DyeMakerConfig dyeConfig() {
+        return dyeConfig;
+    }
+
+    private DyeMakerConfig() {
+        aggiesHouse = new Area(3083, 3261, 3089, 3256);
+        redberryArea = new Area(3278, 3375, 3267, 3367);
+        onionArea = new Area(3186, 3269, 3192, 3265);
+        faladorParkTile = new Tile(3025, 3379, 0);
+        status = "";
+    }
 
     public static boolean isUseEnergyPotions() {
         if (Frame.isEnergyPotions()) {
@@ -33,30 +53,46 @@ public class DyeMakerConfig {
         return false;
     }
 
-    private static int worldHopDelayMin;
-    private static int worldHopDelayMax;
+    public Area getAggiesHouse() {
+        return aggiesHouse;
+    }
 
-    public static int getWorldHopDelayMin() {
+    public Area getRedberryArea() {
+        return redberryArea;
+    }
+
+    public Area getOnionArea() {
+        return onionArea;
+    }
+
+    public Tile getFaladorParkTile() {
+        return faladorParkTile;
+    }
+
+
+    public int getWorldHopDelayMin() {
         return worldHopDelayMin;
     }
 
-    public static void setWorldHopDelayMin(int worldHopDelayMin) {
-        DyeMakerConfig.worldHopDelayMin = worldHopDelayMin;
+    public void setWorldHopDelayMin(int worldHopDelayMin) {
+        this.worldHopDelayMin = worldHopDelayMin;
     }
 
-    public static int getWorldHopDelayMax() {
+    public int getWorldHopDelayMax() {
         return worldHopDelayMax;
     }
 
-    public static void setWorldHopDelayMax(int worldHopDelayMax) {
-        DyeMakerConfig.worldHopDelayMax = worldHopDelayMax;
+    public void setWorldHopDelayMax(int worldHopDelayMax) {
+        this.worldHopDelayMax = worldHopDelayMax;
     }
 
-    public PricedItem getPricedItem() { return pricedItem; }
-    public PricedItem pricedItem;
+    public PricedItem getPricedItem() {
+        return pricedItem;
+    }
 
-    public int profit = 0;
-    public int ingredientPrice;
+    public void setPricedItem(PricedItem pricedItem) {
+        this.pricedItem = pricedItem;
+    }
 
     public int getProfit() {
         return profit;
@@ -91,6 +127,6 @@ public class DyeMakerConfig {
     }
 
     public void setStatus(String status) {
-        DyeMakerConfig.status = status;
+        this.status = status;
     }
 }
