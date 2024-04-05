@@ -117,7 +117,7 @@ public class PaintHandler implements MouseListener {
         if (DyeMakerConfig.getDyeMakerConfig().getPricedItem() != null) {
             int profit = DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount() * DyeMakerConfig.getDyeMakerConfig().getPricedItem().getPrice();
             DyeMakerConfig.getDyeMakerConfig().setProfit(profit);
-            textList.add("Item: " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getName() + ", " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount());
+            textList.add("Priced Item: " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getName() + ", " + DyeMakerConfig.getDyeMakerConfig().getPricedItem().getAmount());
             textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.getDyeMakerConfig().getProfit()));
         }
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
