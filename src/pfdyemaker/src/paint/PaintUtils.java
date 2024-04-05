@@ -8,6 +8,8 @@ public class PaintUtils {
     private static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 12);
     private static final Color DEFAULT_COLOR = Color.WHITE;
     public static final Color OFF_WHITE = new Color(245, 245, 245);
+    public static final Color LIGHT_GRAY = new Color(158, 158 ,158);
+    public static final Color DARK_GRAY = new Color(66, 66, 66);
     public static final Color YELLOW_LIGHT = new Color(255, 241, 118);
     public static final Color BLUE_LIGHT = new Color(100, 181, 246);
     private static final int DEFAULT_X = 5;
