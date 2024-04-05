@@ -31,6 +31,13 @@ public class CollectOnionsLeaf extends Leaf {
             Inventory.interact("Onion seed", "Drop");
             Sleep.sleepUntil(() -> !Inventory.contains("Onion seed"), 600);
         }
+
+        int bCount = Inventory.count(config.ONION);
+        if (ONION.interact("Pick")) {
+            config.setStatus("Picking onion");
+            Sleep.sleepUntil(() -> Inventory.count(config.ONION) > bCount, 5000, 600);
+            config.pricedItem.update();
+        }
         return 600;
     }
 }
