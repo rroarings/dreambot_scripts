@@ -2,6 +2,8 @@ package pfdyemaker.src;
 
 import org.dreambot.api.Client;
 import org.dreambot.api.methods.walking.impl.Walking;
+import org.dreambot.api.methods.walking.pathfinding.impl.web.WebFinder;
+import org.dreambot.api.methods.walking.web.node.impl.teleports.MagicTeleport;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
 import org.dreambot.api.script.frameworks.treebranch.TreeScript;
@@ -12,7 +14,7 @@ import pfdyemaker.src.ui.Frame;
 import javax.swing.*;
 import java.awt.*;
 
-@ScriptManifest(category = Category.MONEYMAKING, name = "PF Dye Maker", author = "pharaoh", version = 1.6, image = "https://i.imgur.com/zQ1Vwvt.png")
+@ScriptManifest(category = Category.MONEYMAKING, name = "PF Dye Maker", author = "pharaoh", version = 1.7, image = "https://i.imgur.com/zQ1Vwvt.png")
 public class PFDyeMaker extends TreeScript {
 
     private long startTime;
@@ -32,6 +34,7 @@ public class PFDyeMaker extends TreeScript {
         Client.getCanvas().addMouseListener(paintHandler);
         SwingUtilities.invokeLater(() -> new Frame().setVisible(true));
         startTime = System.currentTimeMillis();
+        DyeMakerConfig.dyeConfig().setStatus("Waiting on script configuration");
     }
 
     @Override
@@ -42,8 +45,8 @@ public class PFDyeMaker extends TreeScript {
             }
             initTree();
         }
-        if (DyeMakerConfig.getDyeMakerConfig().getPricedItem() != null) {
-            DyeMakerConfig.getDyeMakerConfig().getPricedItem().update();
+        if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
+            DyeMakerConfig.dyeConfig().getPricedItem().update();
         }
         return this.getRoot().onLoop();
     }
