@@ -18,7 +18,7 @@ public class PaintHandler implements MouseListener {
     private static final int X_OFFSET = 12;
     private static final Rectangle PAINT_BUTTON = new Rectangle(320, 458, 80, 15);
     private static final Rectangle DEBUG_PAINT_BUTTON = new Rectangle(PAINT_BUTTON.x + 100, 458, 80, 15);
-    private static final Color TRANSPARENT_BLACK = new Color(0, 0, 0, 127);
+    private static final Color TRANSPARENT_BLACK = new Color(0, 0, 0, 172);
 
     public PaintHandler(PFDyeMaker script) {
         this.script = script;
