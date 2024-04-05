@@ -12,7 +12,7 @@ import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BankYellowDyeLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
+    DyeMakerConfig config = DyeMakerConfig.dyeConfig();
 
     @Override
     public boolean isValid() {
@@ -52,4 +52,22 @@ public class BankYellowDyeLeaf extends Leaf {
         }
         return 1000;
     }
+
+    private int calculateMinGoldToWithdraw() {
+        // Get the amount of woad leaves in the inventory
+        int onionCount = Inventory.count(item -> item.getName().equals(DyeMakerConfig.dyeConfig().getDyeIngredient()));
+
+        // Define the cost of making a blue dye (2 woad leaves and 5 coins)
+        int onionsPerDye = 2;
+        int coinsPerDye = 5;
+
+        // Calculate the number of dyes that can be made with the available woad leaves
+        int dyesCanBeMade = onionCount / onionsPerDye;
+
+        // Calculate the total gold required to make the dyes
+
+        // Return the total gold required
+        return dyesCanBeMade * coinsPerDye;
+    }
+
 }
