@@ -10,8 +10,6 @@ import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BuyWoadLeavesLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
-
     @Override
     public boolean isValid() {
         return Inventory.contains("Coins")
@@ -21,30 +19,28 @@ public class BuyWoadLeavesLeaf extends Leaf {
 
     @Override
     public int onLoop() {
-        NPC WYSON = NPCs.closest(npc -> npc.getName().contains("Wyson the gardener") && npc.isClickable());
-        final String[] DIALOGUE_OPTIONS = {"Yes please, I need woad leaves.", "How about 20 coins?"};
+        NPC wyson = NPCs.closest(npc -> npc.getName().contains("Wyson the gardener") && npc.isClickable());
+        final String[] dialogueOptions = {"Yes please, I need woad leaves.", "How about 20 coins?"};
 
         if (!Dialogues.inDialogue()) {
-            if (WYSON != null) {
-                if (WYSON.interact("Talk-to")) {
-                    config.setStatus("Talking to Wyson");
+            if (wyson != null) {
+                if (wyson.interact("Talk-to")) {
+                    DyeMakerConfig.dyeConfig().setStatus("Talking to Wyson");
                     Sleep.sleepUntil(Dialogues::inDialogue, 6000, 100);
                 }
             }
-
         }
 
         if (Dialogues.inDialogue()) {
             if (Dialogues.canContinue()) {
                 Dialogues.spaceToContinue();
             }
-
             if (Dialogues.getOptions() != null) {
-                Dialogues.chooseFirstOptionContaining(DIALOGUE_OPTIONS);
+                Dialogues.chooseFirstOptionContaining(dialogueOptions);
             }
         }
 
-        config.pricedItem.update();
+        DyeMakerConfig.dyeConfig().getPricedItem().update();
         return 300;
     }
 }
