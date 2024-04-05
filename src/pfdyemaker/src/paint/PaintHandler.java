@@ -55,9 +55,9 @@ public class PaintHandler implements MouseListener {
 
     private void drawScriptTitle(Graphics2D g2d) {
         if (!hidePaint) {
-            g2d.setColor(new Color(66, 66, 66, 198));
-            g2d.fillRect(6, 459, 503, 17);
-            PaintUtils.drawText(g2d, PaintUtils.OFF_WHITE, script.getManifest().name() + " v"+script.getManifest().version(), X_OFFSET, 470);
+            g2d.setColor(new Color(0, 0, 0, 200));
+            g2d.fillRect(6, 459, 504, 17);
+            PaintUtils.drawText(g2d, PaintUtils.OFF_WHITE, script.getManifest().name() + " v"+script.getManifest().version(), X_OFFSET, 472);
         }
     }
 
