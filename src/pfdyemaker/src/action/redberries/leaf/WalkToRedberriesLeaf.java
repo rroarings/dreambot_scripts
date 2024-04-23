@@ -19,9 +19,10 @@ public class WalkToRedberriesLeaf extends Leaf {
     @Override
     public int onLoop() {
         if (Walking.shouldWalk()) {
-            DyeMakerConfig.dyeConfig().setStatus("Walking to redberries");
-            Walking.walk(DyeMakerConfig.dyeConfig().getRedberryArea().getRandomTile());
-            Sleep.sleepUntil(() -> DyeMakerConfig.dyeConfig().getOnionArea().contains(Players.getLocal()), 4000, 600);
+            if (Walking.walk(DyeMakerConfig.dyeConfig().getRedberryArea().getRandomTile())) {
+                DyeMakerConfig.dyeConfig().setStatus("Walking to onion patch");
+                Sleep.sleepUntil(() -> DyeMakerConfig.dyeConfig().getRedberryArea().contains(Players.getLocal()), 5000, 600);
+            }
         }
         return 600;
     }
