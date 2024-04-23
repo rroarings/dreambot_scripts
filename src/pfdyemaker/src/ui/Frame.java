@@ -170,10 +170,12 @@ public class Frame extends JFrame {
         worldhopLabel.setBounds(BASE_X, 130, 205, 90);
         contentPane.add(worldhopLabel);
 
+        /*
         JLabel coinsAmountLabel = new JLabel((String) null);
         coinsAmountLabel.setBorder(new TitledBorder(new LineBorder(PaintUtils.LIGHT_GRAY), " Coin Amount ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         coinsAmountLabel.setBounds(worldhopLabel.getX() + 225, 130, 205, 90);
-        //contentPane.add(coinsAmountLabel);
+        contentPane.add(coinsAmountLabel);
+        */
 
         JButton startBtn = new JButton("Start");
         startBtn.addActionListener(this::startBtn);
