@@ -21,7 +21,7 @@ public class WalkToOnionsLeaf extends Leaf {
         if (Walking.shouldWalk()) {
             if (Walking.walk(DyeMakerConfig.dyeConfig().getOnionArea().getRandomTile())) {
                 DyeMakerConfig.dyeConfig().setStatus("Walking to onion patch");
-                Sleep.sleepUntil(() -> DyeMakerConfig.dyeConfig().getOnionArea().contains(Players.getLocal()), 4000, 600);
+                Sleep.sleepUntil(() -> DyeMakerConfig.dyeConfig().getOnionArea().contains(Players.getLocal()), 5000, 600);
             }
         }
         return 600;
