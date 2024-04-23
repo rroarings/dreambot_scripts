@@ -14,90 +14,57 @@ public class BankBlueDyeLeaf extends Leaf {
 
     @Override
     public boolean isValid() {
-        return BankLocation.DRAYNOR.getArea(1).contains(Players.getLocal());
+        return BankLocation.DRAYNOR.getArea(3).contains(Players.getLocal());
     }
 
     @Override
     public int onLoop() {
         if (!Bank.isOpen()) {
             if (Bank.open()) {
+                Logger.log("(dyemaker) (bankBlueDye) opening bank");
                 DyeMakerConfig.dyeConfig().setStatus("Opening bank");
-                Sleep.sleepUntil(Bank::isOpen, 4000, 600);
+                Sleep.sleepUntil(Bank::isOpen, 5000, 600);
             }
         }
 
         if (Bank.isOpen()) {
-            if (Bank.depositAllItems()) {
+            Logger.log("(dyemaker) (bankBlueDye) bank is open");
+            if (!Inventory.isEmpty()) {
                 DyeMakerConfig.dyeConfig().setStatus("Depositing all items");
-                Sleep.sleepUntil(Inventory::isEmpty, 4000, 600);
-            }
-            if (Inventory.isEmpty()) {
-                if (!Inventory.contains(item -> item.getName().equals("Coins"))) {
-                    withdrawCoins();
+                if (Bank.depositAllItems()) {
+                    Sleep.sleepUntil(Inventory::isEmpty, 5000, 600);
+                    Logger.log("(dyemaker) (bankBlueDye) deposit all");
                 }
             }
-        }
 
-
-
-        /*if (Bank.isOpen() && Bank.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()) && !Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
-            if (Bank.contains(item -> item.getName().equals("Coins")) && Bank.count(item -> item.getName().equals("Coins")) >= minGoldToWithdraw && Bank.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()) ) {
+            if (Bank.contains(item -> item.getName().equals("Coins")) && Bank.get(item -> item.getName().equals("Coins")).getAmount() >= goldToWithdraw()) {
                 DyeMakerConfig.dyeConfig().setStatus("Withdrawing coins");
-
-                Sleep.sleepUntil(() -> Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()), 4000, 800);
+                if (Bank.withdraw(item -> item.getName().equals("Coins"), goldToWithdraw())) {
+                    Sleep.sleepUntil(() -> Inventory.contains(item -> item.getName().equals("Coins")), 5000, 600);
+                    Logger.log("(dyemaker) (bankBlueDye) withdrew coins");
+                }
             }
-        }*/
 
-        if (Bank.isOpen() && !Bank.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
-            if (Bank.close()) {
-                Sleep.sleepUntil(() -> !Bank.isOpen(), 4000, 600);
+            if (Bank.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()) && !Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
+                DyeMakerConfig.dyeConfig().setStatus("Withdrawing " + DyeMakerConfig.dyeConfig().getDyeIngredient());
+                if (Bank.withdraw(DyeMakerConfig.dyeConfig().getDyeIngredient(), 54)) {
+                    Sleep.sleepUntil(() -> Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()), 5000, 600);
+                    Logger.log("(dyemaker) (bankBlueDye) withdrew woad leafs");
+                }
             }
-            if (!Bank.isOpen() && !Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
+
+            if (!Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
                 DyeMakerConfig.dyeConfig().setStatus("Logging out");
-                Logger.log("script manager -> stopping script");
-                Logger.log("stop reason -> Out of dye ingredient: "  + DyeMakerConfig.dyeConfig().getDyeIngredient());
+                Logger.log("(dyemaker) script manager: stopping script");
+                Logger.log("(dyemaker) [ stop 4 ] -> out of dye ingredient: " + DyeMakerConfig.dyeConfig().getDyeIngredient());
                 ScriptManager.getScriptManager().stop();
             }
         }
-
-        return 1000;
+        return 600;
     }
 
-    private int calculateMinGoldToWithdraw() {
-        // Get the amount of woad leaves in the inventory
-        int woadLeafCount = DyeMakerConfig.dyeConfig().getPricedItem().getAmount();
-
-        // Define the cost of making a blue dye (2 woad leaves and 5 coins)
-        int woadLeavesPerDye = 2;
-        int coinsPerDye = 5;
-
-        // Calculate the number of dyes that can be made with the available woad leaves
-        int dyesCanBeMade = woadLeafCount / woadLeavesPerDye;
-
-        // Calculate the total gold required to make the dyes
-        int totalGoldRequired = dyesCanBeMade * coinsPerDye;
-
-        // Return the total gold required
-        return totalGoldRequired;
-    }
-
-    private void withdrawCoins() {
-        int minGoldToWithdraw = calculateMinGoldToWithdraw();
-        if (Inventory.count(item -> item.getName().equals("Coins")) == minGoldToWithdraw) {
-            if (Bank.isOpen()) {
-                Logger.log("(dyes) (bankBlueDye) bank is open");
-                if (Bank.contains(item -> item.getName().equals("Coins")) && Bank.count(item -> item.getName().equals("Coins")) >= 30) {
-                    if (Bank.withdraw(item -> item.getName().equals("Coins"), minGoldToWithdraw)) {
-                        Sleep.sleepUntil(() -> Inventory.count(item -> item.getName().equals("Coins")) == minGoldToWithdraw, 4000, 600);
-                        Logger.log("(dyes) (bankBlueDye) withdrew " + minGoldToWithdraw + " gold");
-
-                    }
-                } else {
-                    Logger.log("(dyes) (bankBlueDye) not enough gold to continue [ stop2 - less than 30 gold remains ]");
-                    //ScriptManager.
-                }
-            } else Bank.open();
-        }
+    private int goldToWithdraw() {
+        return 135;
     }
 
 }
