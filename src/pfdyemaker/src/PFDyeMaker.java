@@ -17,11 +17,11 @@ import java.awt.*;
 @ScriptManifest(category = Category.MONEYMAKING, name = "PF Dye Maker", author = "pharaoh", version = 1.7, image = "https://i.imgur.com/zQ1Vwvt.png")
 public class PFDyeMaker extends TreeScript {
 
-    private long startTime;
+    private Timer timer;
     private PaintHandler paintHandler;
 
-    public long getStartTime() {
-        return startTime;
+    public Timer getTimer() {
+        return timer;
     }
 
     private void initTree() {
@@ -30,10 +30,11 @@ public class PFDyeMaker extends TreeScript {
 
     @Override
     public void onStart() {
+        timer = new Timer();
         paintHandler = new PaintHandler(this);
         Client.getCanvas().addMouseListener(paintHandler);
         SwingUtilities.invokeLater(() -> new Frame().setVisible(true));
-        startTime = System.currentTimeMillis();
+        timer.start();
         DyeMakerConfig.dyeConfig().setStatus("Waiting on script configuration");
     }
 
