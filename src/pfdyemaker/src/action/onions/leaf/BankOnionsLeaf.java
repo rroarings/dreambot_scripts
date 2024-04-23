@@ -2,6 +2,8 @@ package pfdyemaker.src.action.onions.leaf;
 
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.Bank;
+import org.dreambot.api.methods.container.impl.bank.BankLocation;
+import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
 import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
@@ -9,28 +11,28 @@ import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BankOnionsLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
-
     @Override
     public boolean isValid() {
-        return Inventory.isFull();
+        return BankLocation.DRAYNOR.getArea(5).contains(Players.getLocal());
     }
 
     @Override
     public int onLoop() {
         if (!Bank.isOpen()) {
-            config.setStatus("Opening bank");
-            Logger.log("(onions) opening bank");
-            Bank.open();
-            Sleep.sleepUntil(Bank::isOpen, 3000, 600);
+            DyeMakerConfig.dyeConfig().setStatus("Opening bank");
+            if (Bank.open()) {
+                Sleep.sleepUntil(Bank::isOpen, 5000, 600);
+                Logger.log("(dyes) (bankOnion) opened bank");
+            }
         }
 
         if (Bank.isOpen()) {
-            config.setStatus("Depositing inventory");
-            Logger.log("(onions) depositing inventory");
-            Bank.depositAllItems();
-            Sleep.sleepUntil(Inventory::isEmpty, 3000, 600);
+            DyeMakerConfig.dyeConfig().setStatus("Depositing onions");
+            if (Bank.depositAllItems()) {
+                Sleep.sleepUntil(Inventory::isEmpty, 5000, 600);
+                Logger.log("(dyes) (bankOnion) deposited onions");
+            }
         }
-        return 1000;
+        return 600;
     }
 }

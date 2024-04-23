@@ -1,6 +1,7 @@
 package pfdyemaker.src;
 
 import org.dreambot.api.Client;
+import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.script.ScriptManifest;
@@ -17,16 +18,14 @@ import java.awt.*;
 public class PFDyeMaker extends TreeScript {
 
     private Timer timer;
-    private long startTime;
     private PaintHandler paintHandler;
-    private Frame gui;
 
     public Timer getTimer() {
         return timer;
     }
 
     private void initTree() {
-        addBranches(gui.getSelectedBranch().getActionBranch());
+        addBranches(Frame.getSelectedItem().getActionBranch());
     }
 
     @Override
@@ -34,41 +33,37 @@ public class PFDyeMaker extends TreeScript {
         timer = new Timer();
         paintHandler = new PaintHandler(this);
         Client.getCanvas().addMouseListener(paintHandler);
-        SwingUtilities.invokeLater(() -> {
-            gui = new Frame(); // Initialize the gui field
-            gui.setVisible(true);
-        });
-        startTime = System.currentTimeMillis();
+        SwingUtilities.invokeLater(() -> new Frame().setVisible(true));
         timer.start();
-    }
-
-    @Override
-    public void onExit() {
-        if (gui != null) {
-            if (gui.isVisible()) {
-                gui.dispose();
-            }
-        }
-    }
-
-    @Override
-    public void onPause() {
-        if (timer != null) {
-            timer.pause();
-        }
+        DyeMakerConfig.dyeConfig().setStatus("Waiting on script configuration");
     }
 
     @Override
     public int onLoop() {
-       if (gui != null) {
-           if (gui.isStartLoop()) {
-               initTree();
-           }
-       }
-        if (DyeMakerConfig.getDyeMakerConfig().getPricedItem() != null) {
-            DyeMakerConfig.getDyeMakerConfig().getPricedItem().update();
+        if (Frame.isStartLoop()) {
+            if (DyeMakerConfig.isUseEnergyPotions()) {
+                Walking.setRunThreshold(20);
+            }
+            initTree();
+            if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
+                DyeMakerConfig.dyeConfig().getPricedItem().update();
+            }
         }
         return this.getRoot().onLoop();
+    }
+
+    @Override
+    public void onPause() {
+        if (ScriptManager.getScriptManager().isPaused()) {
+            timer.pause();
+        } else if (!ScriptManager.getScriptManager().isPaused()) {
+            timer.resume();
+        }
+    }
+
+    @Override
+    public void onExit() {
+        Client.getCanvas().removeMouseListener(paintHandler);
     }
 
     @Override

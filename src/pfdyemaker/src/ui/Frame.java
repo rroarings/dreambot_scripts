@@ -4,8 +4,8 @@ import org.dreambot.api.methods.grandexchange.LivePrices;
 import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.utilities.Logger;
-import pfdyemaker.src.PFDyeMaker;
 import pfdyemaker.src.data.DyeMakerConfig;
+import pfdyemaker.src.paint.PaintUtils;
 import pfdyemaker.src.util.ActionBranch;
 import pfdyemaker.src.util.PricedItem;
 
@@ -18,16 +18,14 @@ import java.awt.event.ActionEvent;
 
 public class Frame extends JFrame {
 
-    private ActionBranch selectedBranch;
-    private boolean startLoop = false;
+    private static ActionBranch selectedBranch;
+    private static boolean startLoop = false;
 
     private final JSpinner minHopDelaySpinner;
     private final JSpinner maxHopDelaySpinner;
-    private final JSpinner minGoldDelaySpinner;
-    private final JSpinner maxGoldDelaySpinner;
-    public JComboBox<ActionBranch> actionBranchComboBox;
-    public JCheckBox nrgPotionCheckBox;
-    public JCheckBox worldHopCheckBox;
+    public static JComboBox<ActionBranch> comboBox;
+    public static JCheckBox nrgPotionCheckBox;
+    public static JCheckBox worldHopCheckBox;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -40,46 +38,52 @@ public class Frame extends JFrame {
         });
     }
 
-    public boolean isEnergyPotions() {
+    public static boolean isEnergyPotions() {
         return nrgPotionCheckBox.isSelected();
     }
 
     private void exitBtn(ActionEvent e) {
         dispose();
         ScriptManager.getScriptManager().stop();
+        Logger.log("(dyemaker) GUI exit button clicked - stopping script");
     }
 
     private void startBtn(ActionEvent e) {
-        if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAVES)) {
-            DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES);
-            DyeMakerConfig.getDyeMakerConfig().setDyeToMake(null);
-            DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES));
-            DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem("Woad leaf", true);
-        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.MAKE_BLUE_DYE)) {
-            DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES);
-            DyeMakerConfig.getDyeMakerConfig().setDyeToMake("Blue dye");
-            DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().WOAD_LEAVES));
-            DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem("Blue dye", true);
-        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.COLLECT_REDBERRIES)) {
-            DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().REDBERRIES);
-            DyeMakerConfig.getDyeMakerConfig().setDyeToMake(null);
-            DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().REDBERRIES));
-            DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem(DyeMakerConfig.getDyeMakerConfig().REDBERRIES, true);
-        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.MAKE_RED_DYE)) {
-            DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().REDBERRIES);
-            DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().REDBERRIES));
-            DyeMakerConfig.getDyeMakerConfig().setDyeToMake("Red dye");
-            DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem("Red dye", true);
-        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.COLLECT_ONIONS)) {
-            DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().ONION);
-            DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().ONION));
-            DyeMakerConfig.getDyeMakerConfig().setDyeToMake(null);
-            DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem(DyeMakerConfig.getDyeMakerConfig().ONION, true);
-        } else if (actionBranchComboBox.getSelectedItem().equals(ActionBranch.MAKE_YELLOW_DYE)) {
-            DyeMakerConfig.getDyeMakerConfig().setDyeIngredient(DyeMakerConfig.getDyeMakerConfig().ONION);
-            DyeMakerConfig.getDyeMakerConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.getDyeMakerConfig().ONION));
-            DyeMakerConfig.getDyeMakerConfig().setDyeToMake("Yellow dye");
-            DyeMakerConfig.getDyeMakerConfig().pricedItem = new PricedItem("Yellow dye", true);
+        if (comboBox.getSelectedItem() != null) {
+            if (comboBox.getSelectedItem().equals(ActionBranch.BUY_WOAD_LEAFS)) {
+                DyeMakerConfig.dyeConfig().setDyeIngredient(DyeMakerConfig.dyeConfig().getWoadLeaves());
+                DyeMakerConfig.dyeConfig().setDyeToMake(null);
+                DyeMakerConfig.dyeConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.dyeConfig().getWoadLeaves()));
+                DyeMakerConfig.dyeConfig().setPricedItem(new PricedItem("Woad leaf", true));
+            } else if (comboBox.getSelectedItem().equals(ActionBranch.MAKE_BLUE_DYE)) {
+                DyeMakerConfig.dyeConfig().setDyeIngredient(DyeMakerConfig.dyeConfig().getWoadLeaves());
+                DyeMakerConfig.dyeConfig().setDyeToMake("Blue dye");
+                DyeMakerConfig.dyeConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.dyeConfig().getWoadLeaves()));
+                DyeMakerConfig.dyeConfig().setPricedItem(new PricedItem("Blue dye", true));
+            } else if (comboBox.getSelectedItem().equals(ActionBranch.COLLECT_REDBERRIES)) {
+                DyeMakerConfig.dyeConfig().setDyeIngredient(DyeMakerConfig.dyeConfig().getRedberries());
+                DyeMakerConfig.dyeConfig().setDyeToMake(null);
+                DyeMakerConfig.dyeConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.dyeConfig().getRedberries()));
+                DyeMakerConfig.dyeConfig().setPricedItem(new PricedItem("Redberries", true));
+            } else if (comboBox.getSelectedItem().equals(ActionBranch.MAKE_RED_DYE)) {
+                DyeMakerConfig.dyeConfig().setDyeIngredient(DyeMakerConfig.dyeConfig().getRedberries());
+                DyeMakerConfig.dyeConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.dyeConfig().getRedberries()));
+                DyeMakerConfig.dyeConfig().setDyeToMake("Red dye");
+                DyeMakerConfig.dyeConfig().setPricedItem(new PricedItem("Red dye", true));
+            } else if (comboBox.getSelectedItem().equals(ActionBranch.COLLECT_ONIONS)) {
+                DyeMakerConfig.dyeConfig().setDyeIngredient(DyeMakerConfig.dyeConfig().getOnion());
+                DyeMakerConfig.dyeConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.dyeConfig().getOnion()));
+                DyeMakerConfig.dyeConfig().setDyeToMake(null);
+                DyeMakerConfig.dyeConfig().setPricedItem(new PricedItem(DyeMakerConfig.dyeConfig().getOnion(), true));
+            } else if (comboBox.getSelectedItem().equals(ActionBranch.MAKE_YELLOW_DYE)) {
+                DyeMakerConfig.dyeConfig().setDyeIngredient(DyeMakerConfig.dyeConfig().getOnion());
+                DyeMakerConfig.dyeConfig().setIngredientPrice(LivePrices.get(DyeMakerConfig.dyeConfig().getOnion()));
+                DyeMakerConfig.dyeConfig().setDyeToMake("Yellow dye");
+                DyeMakerConfig.dyeConfig().setPricedItem(new PricedItem("Yellow dye", true));
+            }
+        } else {
+            Logger.log("Uh oh, the action selection was null! Shutting down.");
+            Logger.log("(dyemaker) [ stop3 ] action selection was null");
         }
 
         boolean isChecked = nrgPotionCheckBox.isSelected();
@@ -88,160 +92,107 @@ public class Frame extends JFrame {
         }
         int minValue = (int) minHopDelaySpinner.getValue();
         int maxValue = (int) maxHopDelaySpinner.getValue();
-        DyeMakerConfig.setWorldHopDelayMin(minValue);
-        DyeMakerConfig.setWorldHopDelayMax(maxValue);
-        selectedBranch = (ActionBranch) actionBranchComboBox.getSelectedItem();
+        DyeMakerConfig.dyeConfig().setWorldHopDelayMin(minValue);
+        DyeMakerConfig.dyeConfig().setWorldHopDelayMax(maxValue);
+        selectedBranch = (ActionBranch) comboBox.getSelectedItem();
         startLoop = true;
         if (DyeMakerConfig.isUseEnergyPotions()) {
-            Walking.setRunThreshold(20);
+            Walking.setRunThreshold(50);
         }
-        Logger.log("energy potions: " + isChecked);
-        Logger.log("world hop delays: " + DyeMakerConfig.getWorldHopDelayMin() + ", " + DyeMakerConfig.getWorldHopDelayMax());
-        Logger.log("selected activity: " + selectedBranch);
-        Logger.log("script started: " + startLoop);
-        this.dispose();
+        Logger.log("Dye ingredient: " + DyeMakerConfig.dyeConfig().getDyeIngredient());
+        Logger.log("Use energy potions: " + isChecked);
+        Logger.log("World hop delays: " + DyeMakerConfig.dyeConfig().getWorldHopDelayMin() + ", " + DyeMakerConfig.dyeConfig().getWorldHopDelayMax());
+        Logger.log("Selected action: " + selectedBranch);
+        Logger.log("Script loop: " + startLoop);
+        dispose();
     }
 
     public Frame() {
-        PFDyeMaker dyeMaker = new PFDyeMaker();
-        setTitle("PF Dye Maker " + dyeMaker.getVersion());
+        int BASE_X = 20;
+        int BASE_Y = 20;
+        setTitle("PF Dye Maker" + " v"+ScriptManager.getScriptManager().getCurrentScript().getVersion());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 475, 300);
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        /* Action Box */
-        actionBranchComboBox = new JComboBox<>();
+        comboBox = new JComboBox<>();
         for (ActionBranch actionBranch : ActionBranch.values()) {
-            actionBranchComboBox.addItem(actionBranch);
+            comboBox.addItem(actionBranch);
         }
-        actionBranchComboBox.setBounds(42, 37, 148, 24);
-        contentPane.add(actionBranchComboBox);
 
-        JLabel actionLbl = new JLabel((String) null);
-        actionLbl.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " Choose Action ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        actionLbl.setBounds(29, 15, 175, 60);
-        actionLbl.setToolTipText("Minimum and maximum gold amount to take for making dyes");
-        contentPane.add(actionLbl);
-        /* end Action */
+        comboBox.setBounds(BASE_X + 14, BASE_Y + 25, 150, 25);
+        contentPane.add(comboBox);
 
-        /* Optionals Box */
-        JLabel energyPotionLbl = new JLabel("Use Energy potions");
-        energyPotionLbl.setBounds(250, 25, 119, 16);
-        //contentPane.add(energyPotionLbl);
+        JLabel chooseActionLbl = new JLabel((String) null);
+        chooseActionLbl.setBorder(new TitledBorder(new LineBorder(PaintUtils.LIGHT_GRAY), " Choose Action ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        chooseActionLbl.setBounds(BASE_X, BASE_Y, 205, 70);
+        contentPane.add(chooseActionLbl);
 
-        JLabel worldHopLbl = new JLabel("Enable World Hop");
-        worldHopLbl.setBounds(250, 80, 119, 16);
-        //contentPane.add(worldHopLbl);
+        nrgPotionCheckBox = new JCheckBox("Use Energy potions");
+        nrgPotionCheckBox.setBounds(BASE_X + 235, BASE_Y + 20, 160, 25);
+        // contentPane.add(nrgPotionCheckBox);
 
-        nrgPotionCheckBox = new JCheckBox("Enable Energy potion(*)");
-        nrgPotionCheckBox.setToolTipText("Click to enable using any available Energy potion(*)s");
-        nrgPotionCheckBox.setBounds(230, 35, 180, 23);
-        contentPane.add(nrgPotionCheckBox);
-
-        worldHopCheckBox = new JCheckBox("Enable world hopping");
-        worldHopCheckBox.setToolTipText("Click to enable world hopping");
-        worldHopCheckBox.setBounds(230, 60, 151, 23);
+        worldHopCheckBox = new JCheckBox("World hop");
+        worldHopCheckBox.setBounds(BASE_X + 235, nrgPotionCheckBox.getY() + 30, 160, 25);
         contentPane.add(worldHopCheckBox);
 
         JLabel optionalChecksLbl = new JLabel((String) null);
-        optionalChecksLbl.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " Optional Checks ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        optionalChecksLbl.setBounds(219, 14, 200, 80);
-        optionalChecksLbl.setToolTipText("Optional checks");
+        optionalChecksLbl.setBorder(new TitledBorder(new LineBorder(PaintUtils.LIGHT_GRAY), " Optional Checks ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        optionalChecksLbl.setBounds(BASE_X + 225, BASE_Y, 205, 90);
         contentPane.add(optionalChecksLbl);
-        /* end Optionals */
 
-        /* World Hop Delays */
-        JLabel minDelayLbl = new JLabel("Min delay");
-        minDelayLbl.setBounds(54, 135, 60, 14);
-        contentPane.add(minDelayLbl);
+        JLabel minHopDelayLbl = new JLabel("Min delay");
+        minHopDelayLbl.setBounds(BASE_X + 20, 155, 60, 14);
+        contentPane.add(minHopDelayLbl);
 
         minHopDelaySpinner = new JSpinner();
         minHopDelaySpinner.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        minHopDelaySpinner.setBounds(54, 160, 55, 20);
+        minHopDelaySpinner.setBounds(BASE_X + 20, 180, 60, 20);
         contentPane.add(minHopDelaySpinner);
 
         JLabel maxHopDelayLbl = new JLabel("Max delay");
-        maxHopDelayLbl.setBounds(minDelayLbl.getX() + 76, 135, 67, 14);
+        maxHopDelayLbl.setBounds(minHopDelayLbl.getX() + 90, 155, 67, 14);
         contentPane.add(maxHopDelayLbl);
 
         maxHopDelaySpinner = new JSpinner();
         maxHopDelaySpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
-        maxHopDelaySpinner.setBounds(minHopDelaySpinner.getX() + 76, 160, 55, 20);
+        maxHopDelaySpinner.setBounds(minHopDelaySpinner.getX() + 90, 180, 60, 20);
         contentPane.add(maxHopDelaySpinner);
 
-        minHopDelaySpinner.addChangeListener(e -> adjustMaxHopDelay());
-        adjustMaxHopDelay();
-
         JLabel worldhopLabel = new JLabel((String) null);
-        worldhopLabel.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " World Hopping Delay ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        worldhopLabel.setBounds(29, 110, 180, 97);
-        worldhopLabel.setToolTipText("Time to sleep before hopping worlds");
+        worldhopLabel.setBorder(new TitledBorder(new LineBorder(PaintUtils.LIGHT_GRAY), " World Hopping ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        worldhopLabel.setBounds(BASE_X, 130, 205, 90);
         contentPane.add(worldhopLabel);
-        /* end World Hop Delays */
 
-        /* Gold Amount */
-        JLabel minGoldDelayLbl = new JLabel("Min gold");
-        minGoldDelayLbl.setBounds(238, 135, 60, 16);
-        contentPane.add(minGoldDelayLbl);
+        /*
+        JLabel coinsAmountLabel = new JLabel((String) null);
+        coinsAmountLabel.setBorder(new TitledBorder(new LineBorder(PaintUtils.LIGHT_GRAY), " Coin Amount ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        coinsAmountLabel.setBounds(worldhopLabel.getX() + 225, 130, 205, 90);
+        contentPane.add(coinsAmountLabel);
+        */
 
-        minGoldDelaySpinner = new JSpinner();
-        minGoldDelaySpinner.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        minGoldDelaySpinner.setBounds(238, 160, 70, 20);
-        contentPane.add(minGoldDelaySpinner);
-
-        JLabel maxGoldDelayLbl = new JLabel("Max gold");
-        maxGoldDelayLbl.setBounds(minGoldDelayLbl.getX() + 90, 135, 67, 16);
-        contentPane.add(maxGoldDelayLbl);
-
-        maxGoldDelaySpinner = new JSpinner();
-        maxGoldDelaySpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
-        maxGoldDelaySpinner.setBounds(minGoldDelaySpinner.getX() + 90, 160, 70, 20);
-        contentPane.add(maxGoldDelaySpinner);
-
-        JLabel goldAmountLabel = new JLabel((String) null);
-        goldAmountLabel.setBorder(new TitledBorder(new LineBorder(new Color(255, 255, 255)), " Gold Amount ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        goldAmountLabel.setBounds(219, 110, 200, 97);
-        goldAmountLabel.setToolTipText("Minimum and maximum gold amount to take for making dyes");
-        contentPane.add(goldAmountLabel);
-        /* end Gold Amount */
-
-        /* Exit button */
-        JButton exitBtn = new JButton("Exit");
-        exitBtn.addActionListener(this::exitBtn);
-        exitBtn.setBackground(Color.GRAY);
-        exitBtn.setBounds(worldhopLabel.getX(), 219, worldhopLabel.getWidth(), 22);
-        contentPane.add(exitBtn);
-
-        /* Start button */
         JButton startBtn = new JButton("Start");
         startBtn.addActionListener(this::startBtn);
-        startBtn.setBounds(goldAmountLabel.getX(), 219, goldAmountLabel.getWidth(), 22);
+        startBtn.setBounds(245, 230, 205, 25);
         contentPane.add(startBtn);
+
+        JButton exitBtn = new JButton("Exit");
+        exitBtn.addActionListener(this::exitBtn);
+        exitBtn.setBackground(PaintUtils.GRAY);
+        exitBtn.setBounds(BASE_X, 230, 205, 25);
+        contentPane.add(exitBtn);
     }
 
-    private void adjustMaxHopDelay() {
-        int minValue = (int) minHopDelaySpinner.getValue();
-        int maxValue = (int) maxHopDelaySpinner.getValue();
-
-        if (minValue == 1 && maxValue < 2) {
-            maxHopDelaySpinner.setValue(2);
-        }
-        if (minValue >= maxValue) {
-            maxHopDelaySpinner.setValue(minValue + 1);
-        }
-    }
-
-    public ActionBranch getSelectedBranch() {
-        return selectedBranch;
-    }
-
-    public boolean isStartLoop() {
+    public static boolean isStartLoop() {
         return startLoop;
     }
 
+    public static ActionBranch getSelectedItem() {
+        return selectedBranch;
+    }
 }

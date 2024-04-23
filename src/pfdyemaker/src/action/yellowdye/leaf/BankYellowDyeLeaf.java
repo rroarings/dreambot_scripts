@@ -1,4 +1,4 @@
-package pfdyemaker.src.action.bluedye.leaf;
+package pfdyemaker.src.action.yellowdye.leaf;
 
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.Bank;
@@ -10,7 +10,7 @@ import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
 import pfdyemaker.src.data.DyeMakerConfig;
 
-public class BankBlueDyeLeaf extends Leaf {
+public class BankYellowDyeLeaf extends Leaf {
 
     @Override
     public boolean isValid() {
@@ -21,35 +21,35 @@ public class BankBlueDyeLeaf extends Leaf {
     public int onLoop() {
         if (!Bank.isOpen()) {
             if (Bank.open()) {
-                Logger.log("(dyemaker) (bankBlueDye) opening bank");
+                Logger.log("(dyemaker) (bankYellowDye) opening bank");
                 DyeMakerConfig.dyeConfig().setStatus("Opening bank");
                 Sleep.sleepUntil(Bank::isOpen, 5000, 600);
             }
         }
 
         if (Bank.isOpen()) {
-            Logger.log("(dyemaker) (bankBlueDye) bank is open");
+            Logger.log("(dyes) (bankYellowDye) bank is open");
             if (!Inventory.isEmpty()) {
                 DyeMakerConfig.dyeConfig().setStatus("Depositing all items");
                 if (Bank.depositAllItems()) {
                     Sleep.sleepUntil(Inventory::isEmpty, 5000, 600);
-                    Logger.log("(dyemaker) (bankBlueDye) deposit all");
+                    Logger.log("(dyemaker) (bankYellowDye) deposit all");
                 }
             }
 
-            if (Bank.contains(item -> item.getName().equals("Coins")) && Bank.get(item -> item.getName().equals("Coins")).getAmount() >= goldToWithdraw()) {
+            if (Bank.contains(item -> item.getName().equals("Coins")) && Bank.get(item -> item.getName().equals("Coins")).getAmount() >= 135) {
                 DyeMakerConfig.dyeConfig().setStatus("Withdrawing coins");
                 if (Bank.withdraw(item -> item.getName().equals("Coins"), goldToWithdraw())) {
                     Sleep.sleepUntil(() -> Inventory.contains(item -> item.getName().equals("Coins")), 5000, 600);
-                    Logger.log("(dyemaker) (bankBlueDye) withdrew coins");
+                    Logger.log("(dyemaker) (bankYellowDye) withdrew coins");
                 }
             }
 
             if (Bank.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()) && !Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
                 DyeMakerConfig.dyeConfig().setStatus("Withdrawing " + DyeMakerConfig.dyeConfig().getDyeIngredient());
-                if (Bank.withdraw(DyeMakerConfig.dyeConfig().getDyeIngredient(), 54)) {
+                if (Bank.withdrawAll(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
                     Sleep.sleepUntil(() -> Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()), 5000, 600);
-                    Logger.log("(dyemaker) (bankBlueDye) withdrew woad leafs");
+                    Logger.log("(dyemaker) (bankYellowDye) withdrew onions");
                 }
             }
 
@@ -64,7 +64,7 @@ public class BankBlueDyeLeaf extends Leaf {
     }
 
     private int goldToWithdraw() {
-        return 135;
+        return 65;
     }
 
 }

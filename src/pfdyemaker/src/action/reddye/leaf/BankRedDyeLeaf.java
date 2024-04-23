@@ -4,7 +4,6 @@ import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.Bank;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.interactive.Players;
-import org.dreambot.api.methods.login.LoginUtility;
 import org.dreambot.api.methods.tabs.Tabs;
 import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
@@ -14,47 +13,59 @@ import pfdyemaker.src.data.DyeMakerConfig;
 
 public class BankRedDyeLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.getDyeMakerConfig();
-
     @Override
     public boolean isValid() {
-        return BankLocation.DRAYNOR.getArea(1).contains(Players.getLocal());
+        return BankLocation.DRAYNOR.getArea(3).contains(Players.getLocal());
     }
 
     @Override
     public int onLoop() {
         if (!Bank.isOpen()) {
-            config.setStatus("Opening bank");
-            Bank.open();
-            Sleep.sleepUntil(Bank::isOpen, 2000, 800);
+            if (Bank.open()) {
+                Logger.log("(dyemaker) (bankRedDye) opening bank");
+                DyeMakerConfig.dyeConfig().setStatus("Opening bank");
+                Sleep.sleepUntil(Bank::isOpen, 5000, 600);
+            }
         }
 
         if (Bank.isOpen()) {
-            config.setStatus("Depositing dye");
-            if (Inventory.contains(item -> item.getName().equals("Red dye"))) {
-                Bank.depositAllExcept(item -> item.getName().equals("Coins") && item.isValid());
-                Sleep.sleepUntil(() -> Inventory.onlyContains(item -> item.getName().equals("Coins") && item.isValid()), 2000, 800);
+            Logger.log("(dyemaker) (bankRedDye) bank is open");
+            if (!Inventory.isEmpty()) {
+                DyeMakerConfig.dyeConfig().setStatus("Depositing all items");
+                if (Bank.depositAllItems()) {
+                    Sleep.sleepUntil(Inventory::isEmpty, 5000, 600);
+                    Logger.log("(dyemaker) (bankRedDye) deposit all");
+                }
             }
 
-        }
+            if (Bank.contains(item -> item.getName().equals("Coins")) && Bank.get(item -> item.getName().equals("Coins")).getAmount() >= goldToWithdraw()) {
+                DyeMakerConfig.dyeConfig().setStatus("Withdrawing coins");
+                if (Bank.withdraw(item -> item.getName().equals("Coins"), goldToWithdraw())) {
+                    Sleep.sleepUntil(() -> Inventory.contains(item -> item.getName().equals("Coins")), 5000, 600);
+                    Logger.log("(dyemaker) (bankRedDye) withdrew coins");
+                }
+            }
 
-        if (Bank.isOpen() && Bank.contains(config.getDyeIngredient()) && !Inventory.contains(config.getDyeIngredient())) {
-            if (Bank.count(config.getDyeIngredient()) >= 3 && Inventory.contains("Coins") && Inventory.count("Coins") >= 100) {
-                config.setStatus("Withdrawing " + config.getDyeIngredient());
-                Bank.withdrawAll(config.getDyeIngredient());
-                Sleep.sleepUntil(() -> Inventory.contains(config.getDyeIngredient()), 4000, 800);
-            } else {
-               if (safeToLog()) {
-                   Tabs.logout();
-                   Logger.log("script manager -> out of " + config.getDyeIngredient() + " or Coins. - stopping script");
-                   ScriptManager.getScriptManager().stop();
-               }
+            if (Bank.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()) && !Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
+                DyeMakerConfig.dyeConfig().setStatus("Withdrawing " + DyeMakerConfig.dyeConfig().getDyeIngredient());
+                if (Bank.withdrawAll(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
+                    Sleep.sleepUntil(() -> Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient()), 5000, 600);
+                    Logger.log("(dyemaker) (bankRedDye) withdrew redberries");
+                }
+            }
+
+            if (!Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())) {
+                DyeMakerConfig.dyeConfig().setStatus("Logging out");
+                Logger.log("(dyemaker) script manager: stopping script");
+                Logger.log("(dyemaker) [ stop 4 ] -> out of dye ingredient: " + DyeMakerConfig.dyeConfig().getDyeIngredient());
+                ScriptManager.getScriptManager().stop();
             }
         }
         return 600;
     }
 
-    private boolean safeToLog() {
-        return !Players.getLocal().isInCombat();
+    private int goldToWithdraw() {
+        return 45;
     }
+
 }

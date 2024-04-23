@@ -7,7 +7,9 @@ public class PaintUtils {
 
     private static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 12);
     private static final Color DEFAULT_COLOR = Color.WHITE;
-    public static final Color OFF_WHITE = new Color(245, 245, 245);
+    public static final Color OFF_WHITE = new Color(232,232,232);
+    public static final Color LIGHT_GRAY = new Color(187, 187, 187);
+    public static final Color GRAY = new Color(84, 84, 84);
     public static final Color YELLOW_LIGHT = new Color(255, 241, 118);
     public static final Color BLUE_LIGHT = new Color(100, 181, 246);
     private static final int DEFAULT_X = 5;
@@ -15,9 +17,9 @@ public class PaintUtils {
     private static final RenderingHints ANTI_ALIASING = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
     /**
-     * Enables or disables anti-aliasing rendering hints for the given Graphics object.
+     * Enables or disables antialiasing rendering hints for the given Graphics object.
      *
-     * @param g          the Graphics object to enable or disable anti-aliasing for
+     * @param g          the Graphics object to enable or disable antialiasing for
      * @param enabled    true to enable anti-aliasing, false to disable it
      */
     public static void setAntiAliasingEnabled(Graphics g, boolean enabled) {
@@ -46,7 +48,7 @@ public class PaintUtils {
      * @param text the text to draw
      * @param color the color to use
      */
-    public static void drawText(Graphics g, String text, Color color) {
+    public static void drawText(Graphics g, Color color, String text) {
         drawText(g, color, text, DEFAULT_X, DEFAULT_Y);
     }
 
@@ -61,7 +63,6 @@ public class PaintUtils {
      */
     public static void drawText(Graphics g, Color color, String text, int x, int y) {
         g.setColor(color);
-        g.setFont(DEFAULT_FONT);
         g.drawString(text, x, y);
     }
 

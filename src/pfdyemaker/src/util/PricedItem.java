@@ -67,7 +67,7 @@ public class PricedItem {
         else
             lastCount = Inventory.count(id);
 
-        DyeMakerConfig.getDyeMakerConfig().setProfit(amount * price);
+        DyeMakerConfig.dyeConfig().setProfit(amount * price);
     }
 
     public void setName(String name) {

@@ -5,7 +5,7 @@ import org.dreambot.api.script.frameworks.treebranch.Branch;
 import pfdyemaker.src.action.redberries.branch.CollectRedberriesBranch;
 import pfdyemaker.src.action.redberries.leaf.BankRedberriesLeaf;
 import pfdyemaker.src.action.redberries.leaf.WalkToRedberriesLeaf;
-import pfdyemaker.src.action.redberries.leaf.WalkToVarrockBankLeaf;
+import pfdyemaker.src.action.navigation.WalkToVarrockBankLeaf;
 import pfdyemaker.src.action.woadleaves.leaf.WalkToWysonLeaf;
 import pfdyemaker.src.action.woadleaves.branch.BuyWoadLeavesBranch;
 import pfdyemaker.src.action.onions.leaf.WalkToOnionsLeaf;
@@ -19,21 +19,19 @@ import pfdyemaker.src.action.reddye.branch.MakeRedDyeBranch;
 import pfdyemaker.src.action.yellowdye.branch.MakeYellowDyeBranch;
 
 import pfdyemaker.src.action.onions.leaf.BankOnionsLeaf;
+import pfdyemaker.src.action.yellowdye.leaf.BankYellowDyeLeaf;
 import pfdyemaker.src.action.reddye.leaf.BankRedDyeLeaf;
 import pfdyemaker.src.action.woadleaves.leaf.BuyWoadLeavesLeaf;
 import pfdyemaker.src.action.onions.leaf.CollectOnionsLeaf;
 import pfdyemaker.src.action.bluedye.leaf.MakeBlueDyeLeaf;
 import pfdyemaker.src.action.reddye.leaf.MakeRedDyeLeaf;
-import pfdyemaker.src.action.yellowdye.leaf.DepositYellowDyeLeaf;
 import pfdyemaker.src.action.yellowdye.leaf.MakeYellowDyeLeaf;
-import pfdyemaker.src.action.yellowdye.leaf.WithdrawOnionLeaf;
-import pfdyemaker.src.action.yellowdye.leaf.YellowDyeStartLeaf;
 
 import java.util.function.Supplier;
 
 public enum ActionBranch {
 
-    BUY_WOAD_LEAVES("Buy woad leaves", () -> {
+    BUY_WOAD_LEAFS(() -> {
         Branch actionBranch = new BuyWoadLeavesBranch();
         actionBranch.addLeaves(
                 new WalkToWysonLeaf(),
@@ -42,7 +40,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    COLLECT_ONIONS("Collect onions", () -> {
+    COLLECT_ONIONS(() -> {
         Branch actionBranch = new CollectOnionsBranch();
         actionBranch.addLeaves(
                 new WalkToOnionsLeaf(),
@@ -53,7 +51,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    COLLECT_REDBERRIES("Collect redberries", () -> {
+    COLLECT_REDBERRIES(() -> {
         Branch actionBranch = new CollectRedberriesBranch();
         actionBranch.addLeaves(
                 new WalkToRedberriesLeaf(),
@@ -64,7 +62,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    MAKE_BLUE_DYE("Make blue dye", () -> {
+    MAKE_BLUE_DYE(() -> {
         Branch actionBranch = new MakeBlueDyeBranch();
         actionBranch.addLeaves(
                 new WalkToAggieLeaf(),
@@ -75,7 +73,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    MAKE_RED_DYE("Make red dye", () -> {
+    MAKE_RED_DYE(() -> {
         Branch actionBranch = new MakeRedDyeBranch();
         actionBranch.addLeaves(
                 new WalkToAggieLeaf(),
@@ -86,27 +84,21 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    MAKE_YELLOW_DYE("Make yellow dye", () -> {
+    MAKE_YELLOW_DYE(() -> {
         Branch actionBranch = new MakeYellowDyeBranch();
         actionBranch.addLeaves(
-                new YellowDyeStartLeaf(),
-                new WithdrawOnionLeaf(),
                 new WalkToAggieLeaf(),
                 new MakeYellowDyeLeaf(),
                 new WalkToDraynorBankLeaf(),
-                new DepositYellowDyeLeaf()
+                new BankYellowDyeLeaf()
         );
         return actionBranch;
-
-
     });
 
-    private final String displayName;
     private final Supplier<Branch> actionBranchSupplier;
 
-    ActionBranch(String displayName, Supplier<Branch> actionBranchSupplier) {
-        this.displayName = displayName;
-        this.actionBranchSupplier = actionBranchSupplier;
+    ActionBranch(Supplier<Branch> questBranchSupplier) {
+        this.actionBranchSupplier = questBranchSupplier;
     }
 
     public Branch getActionBranch() {
@@ -115,6 +107,9 @@ public enum ActionBranch {
 
     @Override
     public String toString() {
-        return displayName;
+        String name = name().toLowerCase().replace("_", " ");
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        return name;
     }
 }
+
