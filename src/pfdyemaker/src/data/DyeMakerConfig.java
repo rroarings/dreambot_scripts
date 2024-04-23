@@ -72,7 +72,6 @@ public class DyeMakerConfig {
         return faladorParkTile;
     }
 
-
     public int getWorldHopDelayMin() {
         return worldHopDelayMin;
     }
