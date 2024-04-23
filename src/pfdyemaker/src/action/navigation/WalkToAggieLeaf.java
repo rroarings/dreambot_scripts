@@ -22,9 +22,10 @@ public class WalkToAggieLeaf extends Leaf {
     @Override
     public int onLoop() {
         if (Walking.shouldWalk()) {
-            DyeMakerConfig.dyeConfig().setStatus("Walking to Aggie");
-            Walking.walk(DyeMakerConfig.dyeConfig().getAggiesHouse().getCenter());
-            Sleep.sleepUntil(() -> DyeMakerConfig.dyeConfig().getAggiesHouse().contains(Players.getLocal()), 4000, 600);
+            if (Walking.walk(DyeMakerConfig.dyeConfig().getAggiesHouse().getRandomTile())) {
+                DyeMakerConfig.dyeConfig().setStatus("Walking to Aggie");
+                Sleep.sleepUntil(() -> DyeMakerConfig.dyeConfig().getAggiesHouse().contains(Players.getLocal()), 5000, 600);
+            }
         }
         return 600;
     }
