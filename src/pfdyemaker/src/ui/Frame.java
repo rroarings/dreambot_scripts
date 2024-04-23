@@ -21,8 +21,8 @@ public class Frame extends JFrame {
     private static ActionBranch selectedBranch;
     private static boolean startLoop = false;
 
-    private final JSpinner minDelaySpinner;
-    private final JSpinner maxDelaySpinner;
+    private final JSpinner minHopDelaySpinner;
+    private final JSpinner maxHopDelaySpinner;
     public static JComboBox<ActionBranch> comboBox;
     public static JCheckBox nrgPotionCheckBox;
     public static JCheckBox worldHopCheckBox;
