@@ -39,7 +39,13 @@ public class DyeMakerConfig {
     }
 
     private DyeMakerConfig() {
-        aggiesHouse = new Area(3083, 3261, 3089, 3256);
+        aggiesHouse =  new Area(
+                new Tile(3095, 3264, 0),
+                new Tile(3089, 3264, 0),
+                new Tile(3089, 3261, 0),
+                new Tile(3083, 3261, 0),
+                new Tile(3083, 3256, 0),
+                new Tile(3095, 3256, 0));
         redberryArea = new Area(3278, 3375, 3267, 3367);
         onionArea = new Area(3186, 3269, 3192, 3265);
         faladorParkTile = new Tile(3025, 3379, 0);
