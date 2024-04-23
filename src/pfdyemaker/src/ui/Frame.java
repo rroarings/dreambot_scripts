@@ -84,6 +84,7 @@ public class Frame extends JFrame {
         } else {
             Logger.log("Uh oh, the action selection was null! Shutting down.");
             Logger.log("[ stop3 ] action selection was null");
+            Logger.log("(dyemaker) [ stop3 ] action selection was null");
         }
 
         boolean isChecked = nrgPotionCheckBox.isSelected();
