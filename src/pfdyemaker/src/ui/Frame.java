@@ -136,7 +136,7 @@ public class Frame extends JFrame {
 
         nrgPotionCheckBox = new JCheckBox("Use Energy potions");
         nrgPotionCheckBox.setBounds(BASE_X + 235, BASE_Y + 20, 160, 25);
-        contentPane.add(nrgPotionCheckBox);
+        // contentPane.add(nrgPotionCheckBox);
 
         worldHopCheckBox = new JCheckBox("World hop");
         worldHopCheckBox.setBounds(BASE_X + 235, nrgPotionCheckBox.getY() + 30, 160, 25);
