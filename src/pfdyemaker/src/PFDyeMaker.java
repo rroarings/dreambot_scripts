@@ -53,6 +53,20 @@ public class PFDyeMaker extends TreeScript {
     }
 
     @Override
+    public void onPause() {
+        if (ScriptManager.getScriptManager().isPaused()) {
+            timer.pause();
+        } else if (!ScriptManager.getScriptManager().isPaused()) {
+            timer.resume();
+        }
+    }
+
+    @Override
+    public void onExit() {
+        Client.getCanvas().removeMouseListener(paintHandler);
+    }
+
+    @Override
     public void onPaint(Graphics g) {
         paintHandler.paint(g);
     }
