@@ -90,8 +90,8 @@ public class Frame extends JFrame {
         if (isChecked) {
             DyeMakerConfig.isUseEnergyPotions();
         }
-        int minValue = (int) minDelaySpinner.getValue();
-        int maxValue = (int) maxDelaySpinner.getValue();
+        int minValue = (int) minHopDelaySpinner.getValue();
+        int maxValue = (int) maxHopDelaySpinner.getValue();
         DyeMakerConfig.dyeConfig().setWorldHopDelayMin(minValue);
         DyeMakerConfig.dyeConfig().setWorldHopDelayMax(maxValue);
         selectedBranch = (ActionBranch) comboBox.getSelectedItem();
