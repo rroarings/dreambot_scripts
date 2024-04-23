@@ -147,23 +147,23 @@ public class Frame extends JFrame {
         optionalChecksLbl.setBounds(BASE_X + 225, BASE_Y, 205, 90);
         contentPane.add(optionalChecksLbl);
 
-        JLabel minDelayLbl = new JLabel("Min delay");
-        minDelayLbl.setBounds(BASE_X + 20, 155, 60, 14);
-        contentPane.add(minDelayLbl);
+        JLabel minHopDelayLbl = new JLabel("Min delay");
+        minHopDelayLbl.setBounds(BASE_X + 20, 155, 60, 14);
+        contentPane.add(minHopDelayLbl);
 
-        minDelaySpinner = new JSpinner();
-        minDelaySpinner.setModel(new SpinnerNumberModel(0, 0, null, 1));
-        minDelaySpinner.setBounds(BASE_X + 20, 180, 60, 20);
-        contentPane.add(minDelaySpinner);
+        minHopDelaySpinner = new JSpinner();
+        minHopDelaySpinner.setModel(new SpinnerNumberModel(0, 0, null, 1));
+        minHopDelaySpinner.setBounds(BASE_X + 20, 180, 60, 20);
+        contentPane.add(minHopDelaySpinner);
 
-        JLabel maxDelayLbl = new JLabel("Max delay");
-        maxDelayLbl.setBounds(minDelayLbl.getX() + 90, 155, 67, 14);
-        contentPane.add(maxDelayLbl);
+        JLabel maxHopDelayLbl = new JLabel("Max delay");
+        maxHopDelayLbl.setBounds(minHopDelayLbl.getX() + 90, 155, 67, 14);
+        contentPane.add(maxHopDelayLbl);
 
-        maxDelaySpinner = new JSpinner();
-        maxDelaySpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
-        maxDelaySpinner.setBounds(minDelaySpinner.getX() + 90, 180, 60, 20);
-        contentPane.add(maxDelaySpinner);
+        maxHopDelaySpinner = new JSpinner();
+        maxHopDelaySpinner.setModel(new SpinnerNumberModel(1, 1, null, 1));
+        maxHopDelaySpinner.setBounds(minHopDelaySpinner.getX() + 90, 180, 60, 20);
+        contentPane.add(maxHopDelaySpinner);
 
         JLabel worldhopLabel = new JLabel((String) null);
         worldhopLabel.setBorder(new TitledBorder(new LineBorder(PaintUtils.LIGHT_GRAY), " World Hopping ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
