@@ -40,7 +40,6 @@ public class CollectRedberriesLeaf extends Leaf {
                 Sleep.sleep(Calculations.random(900, 1200));
                 Sleep.sleepUntil(this::isPlayerNotAnimating, 8000, 3000);
                 worldHopped = false;
-                return 600;
             }
         }
         return 600;
