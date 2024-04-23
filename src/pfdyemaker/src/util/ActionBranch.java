@@ -5,7 +5,7 @@ import org.dreambot.api.script.frameworks.treebranch.Branch;
 import pfdyemaker.src.action.redberries.branch.CollectRedberriesBranch;
 import pfdyemaker.src.action.redberries.leaf.BankRedberriesLeaf;
 import pfdyemaker.src.action.redberries.leaf.WalkToRedberriesLeaf;
-import pfdyemaker.src.action.redberries.leaf.WalkToVarrockBankLeaf;
+import pfdyemaker.src.action.navigation.WalkToVarrockBankLeaf;
 import pfdyemaker.src.action.woadleaves.leaf.WalkToWysonLeaf;
 import pfdyemaker.src.action.woadleaves.branch.BuyWoadLeavesBranch;
 import pfdyemaker.src.action.onions.leaf.WalkToOnionsLeaf;
