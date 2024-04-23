@@ -45,9 +45,9 @@ public class PFDyeMaker extends TreeScript {
                 Walking.setRunThreshold(20);
             }
             initTree();
-        }
-        if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
-            DyeMakerConfig.dyeConfig().getPricedItem().update();
+            if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
+                DyeMakerConfig.dyeConfig().getPricedItem().update();
+            }
         }
         return this.getRoot().onLoop();
     }
