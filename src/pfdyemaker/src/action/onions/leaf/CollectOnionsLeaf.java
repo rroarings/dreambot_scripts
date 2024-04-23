@@ -27,7 +27,7 @@ public class CollectOnionsLeaf extends Leaf {
         if (Inventory.contains("Onion seed")) {
             DyeMakerConfig.dyeConfig().setStatus("Dropping onion seed");
             Inventory.interact("Onion seed", "Drop");
-            Sleep.sleepUntil(() -> !Inventory.contains("Onion seed"), 600);
+            Sleep.sleepUntil(() -> !Inventory.contains("Onion seed"), 5000, 600);
         }
 
         int bCount = Inventory.count(DyeMakerConfig.dyeConfig().getOnion());
