@@ -99,8 +99,8 @@ public class PaintHandler implements MouseListener {
         if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
             int profit = DyeMakerConfig.dyeConfig().getPricedItem().getAmount() * DyeMakerConfig.dyeConfig().getPricedItem().getPrice();
             DyeMakerConfig.dyeConfig().setProfit(profit);
-            textList.add("Item: " + DyeMakerConfig.dyeConfig().getPricedItem().getName() + ", " + DyeMakerConfig.dyeConfig().getPricedItem().getAmount());
-            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.dyeConfig().getProfit()));
+            textList.add("Item: " + DyeMakerConfig.dyeConfig().getPricedItem().getName() + ", " + DyeMakerConfig.dyeConfig().getPricedItem().getAmount() + " ("+QuantityFormatter.formatNumber(script.getTimer().getHourlyRate(DyeMakerConfig.dyeConfig().getPricedItem().getAmount()))+")");
+            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.dyeConfig().getProfit()) + " ("+QuantityFormatter.formatNumber(script.getTimer().getHourlyRate(DyeMakerConfig.dyeConfig().getProfit()))+")");
         }
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
     }
@@ -117,8 +117,8 @@ public class PaintHandler implements MouseListener {
         if (DyeMakerConfig.dyeConfig().getPricedItem() != null) {
             int profit = DyeMakerConfig.dyeConfig().getPricedItem().getAmount() * DyeMakerConfig.dyeConfig().getPricedItem().getPrice();
             DyeMakerConfig.dyeConfig().setProfit(profit);
-            textList.add("Priced Item: " + DyeMakerConfig.dyeConfig().getPricedItem().getName() + ", " + DyeMakerConfig.dyeConfig().getPricedItem().getAmount());
-            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.dyeConfig().getProfit()));
+            textList.add("Item: " + DyeMakerConfig.dyeConfig().getPricedItem().getName() + ", " + DyeMakerConfig.dyeConfig().getPricedItem().getAmount() + " ("+QuantityFormatter.formatNumber(script.getTimer().getHourlyRate(DyeMakerConfig.dyeConfig().getPricedItem().getAmount()))+")");
+            textList.add("Gold: " + QuantityFormatter.formatNumber(DyeMakerConfig.dyeConfig().getProfit()) + " ("+QuantityFormatter.formatNumber(script.getTimer().getHourlyRate(DyeMakerConfig.dyeConfig().getProfit()))+")");
         }
         PaintUtils.drawTextList(g2d, X_OFFSET, 360, textList);
     }
