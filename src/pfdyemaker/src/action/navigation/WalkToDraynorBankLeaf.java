@@ -1,5 +1,6 @@
 package pfdyemaker.src.action.navigation;
 
+import org.dreambot.api.methods.container.impl.bank.Bank;
 import org.dreambot.api.methods.container.impl.bank.BankLocation;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.methods.map.Tile;
@@ -11,9 +12,6 @@ import org.dreambot.api.script.frameworks.treebranch.Leaf;
 
 public class WalkToDraynorBankLeaf extends Leaf {
 
-    DyeMakerConfig config = DyeMakerConfig.dyeConfig();
-    private final Tile bankTile = new Tile(3092, 3245, 0);
-
     @Override
     public boolean isValid() {
         return !BankLocation.DRAYNOR.getArea(1).contains(Players.getLocal());
@@ -22,9 +20,10 @@ public class WalkToDraynorBankLeaf extends Leaf {
     @Override
     public int onLoop() {
         if (Walking.shouldWalk()) {
-            config.setStatus("Walking to bank");
-            Walking.walk(BankLocation.DRAYNOR.getTile());
-            Sleep.sleepUntil(() -> bankTile.distance() <= 5, 600);
+            if (Walking.walk(BankLocation.DRAYNOR.getCenter().getRandomized())) {
+                DyeMakerConfig.dyeConfig().setStatus("Walking to Draynor bank");
+                Sleep.sleepUntil(() -> BankLocation.DRAYNOR.getArea(3).contains(Players.getLocal()), 5000, 600);
+            }
         }
         return 600;
     }
