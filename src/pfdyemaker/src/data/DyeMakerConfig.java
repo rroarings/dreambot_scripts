@@ -30,9 +30,9 @@ public class DyeMakerConfig {
 
     private int worldHopDelayMin;
     private int worldHopDelayMax;
-    private PricedItem pricedItem;
     private int profit;
     private int ingredientPrice;
+    private PricedItem pricedItem;
 
     public static DyeMakerConfig dyeConfig() {
         return dyeConfig;
