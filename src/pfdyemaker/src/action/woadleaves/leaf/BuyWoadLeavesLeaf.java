@@ -13,7 +13,7 @@ public class BuyWoadLeavesLeaf extends Leaf {
     @Override
     public boolean isValid() {
         return Inventory.contains("Coins")
-                && Inventory.count("Coins") >= 20
+                && Inventory.count("Coins") >= 50
                 && !Inventory.isFull();
     }
 
@@ -22,25 +22,28 @@ public class BuyWoadLeavesLeaf extends Leaf {
         NPC wyson = NPCs.closest(npc -> npc.getName().contains("Wyson the gardener") && npc.isClickable());
         final String[] dialogueOptions = {"Yes please, I need woad leaves.", "How about 20 coins?"};
 
-        if (!Dialogues.inDialogue()) {
-            if (wyson != null) {
-                if (wyson.interact("Talk-to")) {
-                    DyeMakerConfig.dyeConfig().setStatus("Talking to Wyson");
-                    Sleep.sleepUntil(Dialogues::inDialogue, 6000, 100);
-                }
-            }
-        }
+        DyeMakerConfig.dyeConfig().getPricedItem().update();
 
         if (Dialogues.inDialogue()) {
             if (Dialogues.canContinue()) {
                 Dialogues.spaceToContinue();
             }
+
             if (Dialogues.getOptions() != null) {
                 Dialogues.chooseFirstOptionContaining(dialogueOptions);
             }
         }
 
-        DyeMakerConfig.dyeConfig().getPricedItem().update();
+        if (!Dialogues.inDialogue()) {
+            if (wyson != null) {
+                if (wyson.interact("Talk-to")) {
+                    DyeMakerConfig.dyeConfig().setStatus("Talking to Wyson");
+                    Sleep.sleepUntil(Dialogues::inDialogue, 5000, 400);
+                }
+            }
+        }
+
+
         return 300;
     }
 }
