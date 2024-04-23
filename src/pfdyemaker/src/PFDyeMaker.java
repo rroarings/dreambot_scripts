@@ -2,11 +2,11 @@ package pfdyemaker.src;
 
 import org.dreambot.api.Client;
 import org.dreambot.api.methods.walking.impl.Walking;
-import org.dreambot.api.methods.walking.pathfinding.impl.web.WebFinder;
-import org.dreambot.api.methods.walking.web.node.impl.teleports.MagicTeleport;
 import org.dreambot.api.script.Category;
+import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.script.ScriptManifest;
 import org.dreambot.api.script.frameworks.treebranch.TreeScript;
+import org.dreambot.api.utilities.Timer;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.paint.PaintHandler;
 import pfdyemaker.src.ui.Frame;
