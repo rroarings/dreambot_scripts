@@ -11,12 +11,12 @@ public class WalkToAggieLeaf extends Leaf {
 
     @Override
     public boolean isValid() {
-        return Inventory.contains("Coins")
-                && Inventory.count("Coins") > 100
+        return !DyeMakerConfig.dyeConfig().getAggiesHouse().contains(Players.getLocal())
+                && Inventory.contains("Coins")
+                && Inventory.count("Coins") >= 5
                 && Inventory.contains(DyeMakerConfig.dyeConfig().getDyeIngredient())
                 && Inventory.count(DyeMakerConfig.dyeConfig().getDyeIngredient()) >= 2
-                && !Inventory.contains(item -> item.getName().contains(" dye"))
-                && !DyeMakerConfig.dyeConfig().getAggiesHouse().contains(Players.getLocal());
+                && !Inventory.contains(item -> item.getName().contains(" dye"));
     }
 
     @Override
