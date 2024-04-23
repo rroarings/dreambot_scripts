@@ -53,10 +53,7 @@ public class DyeMakerConfig {
     }
 
     public static boolean isUseEnergyPotions() {
-        if (Frame.isEnergyPotions()) {
-            return true;
-        }
-        return false;
+        return Frame.isEnergyPotions();
     }
 
     public Area getAggiesHouse() {
