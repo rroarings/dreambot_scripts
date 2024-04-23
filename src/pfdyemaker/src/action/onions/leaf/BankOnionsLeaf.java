@@ -21,7 +21,7 @@ public class BankOnionsLeaf extends Leaf {
         if (!Bank.isOpen()) {
             DyeMakerConfig.dyeConfig().setStatus("Opening bank");
             if (Bank.open()) {
-                Sleep.sleepUntil(Bank::isOpen, 4000, 600);
+                Sleep.sleepUntil(Bank::isOpen, 5000, 600);
                 Logger.log("(dyes) (bankOnion) opened bank");
             }
         }
@@ -29,7 +29,7 @@ public class BankOnionsLeaf extends Leaf {
         if (Bank.isOpen()) {
             DyeMakerConfig.dyeConfig().setStatus("Depositing onions");
             if (Bank.depositAllItems()) {
-                Sleep.sleepUntil(Inventory::isEmpty, 4000, 600);
+                Sleep.sleepUntil(Inventory::isEmpty, 5000, 600);
                 Logger.log("(dyes) (bankOnion) deposited onions");
             }
         }
