@@ -100,6 +100,7 @@ public class Frame extends JFrame {
         if (DyeMakerConfig.isUseEnergyPotions()) {
             Walking.setRunThreshold(50);
         }
+        Logger.log("Dye ingredient: " + DyeMakerConfig.dyeConfig().getDyeIngredient());
         Logger.log("Use energy potions: " + isChecked);
         Logger.log("World hop delays: " + DyeMakerConfig.dyeConfig().getWorldHopDelayMin() + ", " + DyeMakerConfig.dyeConfig().getWorldHopDelayMax());
         Logger.log("Selected action: " + selectedBranch);
