@@ -4,7 +4,9 @@ import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.interactive.GameObjects;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.script.frameworks.treebranch.Leaf;
+import org.dreambot.api.utilities.Logger;
 import org.dreambot.api.utilities.Sleep;
+import org.dreambot.api.utilities.Timer;
 import org.dreambot.api.wrappers.interactive.GameObject;
 import pfdyemaker.src.data.DyeMakerConfig;
 
@@ -23,6 +25,8 @@ public class CollectOnionsLeaf extends Leaf {
             DyeMakerConfig.dyeConfig().setStatus("Waiting for onion to spawn");
             return 600;
         }
+        return 600;
+    }
 
         if (Inventory.contains("Onion seed")) {
             DyeMakerConfig.dyeConfig().setStatus("Dropping onion seed");

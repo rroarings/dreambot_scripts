@@ -4,6 +4,7 @@ import org.dreambot.api.methods.grandexchange.LivePrices;
 import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.utilities.Logger;
+import pfdyemaker.src.PFDyeMaker;
 import pfdyemaker.src.data.DyeMakerConfig;
 import pfdyemaker.src.paint.PaintUtils;
 import pfdyemaker.src.util.ActionBranch;
@@ -18,8 +19,8 @@ import java.awt.event.ActionEvent;
 
 public class Frame extends JFrame {
 
-    private static ActionBranch selectedBranch;
-    private static boolean startLoop = false;
+    private ActionBranch selectedBranch;
+    private boolean startLoop = false;
 
     private final JSpinner minHopDelaySpinner;
     private final JSpinner maxHopDelaySpinner;
@@ -38,7 +39,7 @@ public class Frame extends JFrame {
         });
     }
 
-    public static boolean isEnergyPotions() {
+    public boolean isEnergyPotions() {
         return nrgPotionCheckBox.isSelected();
     }
 
@@ -122,7 +123,7 @@ public class Frame extends JFrame {
 
         comboBox = new JComboBox<>();
         for (ActionBranch actionBranch : ActionBranch.values()) {
-            comboBox.addItem(actionBranch);
+            actionBranchComboBox.addItem(actionBranch);
         }
 
         comboBox.setBounds(BASE_X + 14, BASE_Y + 25, 150, 25);
@@ -168,6 +169,7 @@ public class Frame extends JFrame {
         worldhopLabel.setBorder(new TitledBorder(new LineBorder(PaintUtils.LIGHT_GRAY), " World Hopping ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         worldhopLabel.setBounds(BASE_X, 130, 205, 90);
         contentPane.add(worldhopLabel);
+        /* end World Hop Delays */
 
         /*
         JLabel coinsAmountLabel = new JLabel((String) null);
@@ -188,11 +190,24 @@ public class Frame extends JFrame {
         contentPane.add(exitBtn);
     }
 
-    public static boolean isStartLoop() {
+    private void adjustMaxHopDelay() {
+        int minValue = (int) minHopDelaySpinner.getValue();
+        int maxValue = (int) maxHopDelaySpinner.getValue();
+
+        if (minValue == 1 && maxValue < 2) {
+            maxHopDelaySpinner.setValue(2);
+        }
+        if (minValue >= maxValue) {
+            maxHopDelaySpinner.setValue(minValue + 1);
+        }
+    }
+
+    public ActionBranch getSelectedBranch() {
+        return selectedBranch;
+    }
+
+    public boolean isStartLoop() {
         return startLoop;
     }
 
-    public static ActionBranch getSelectedItem() {
-        return selectedBranch;
-    }
 }

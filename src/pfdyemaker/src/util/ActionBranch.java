@@ -19,19 +19,21 @@ import pfdyemaker.src.action.reddye.branch.MakeRedDyeBranch;
 import pfdyemaker.src.action.yellowdye.branch.MakeYellowDyeBranch;
 
 import pfdyemaker.src.action.onions.leaf.BankOnionsLeaf;
-import pfdyemaker.src.action.yellowdye.leaf.BankYellowDyeLeaf;
 import pfdyemaker.src.action.reddye.leaf.BankRedDyeLeaf;
 import pfdyemaker.src.action.woadleaves.leaf.BuyWoadLeavesLeaf;
 import pfdyemaker.src.action.onions.leaf.CollectOnionsLeaf;
 import pfdyemaker.src.action.bluedye.leaf.MakeBlueDyeLeaf;
 import pfdyemaker.src.action.reddye.leaf.MakeRedDyeLeaf;
+import pfdyemaker.src.action.yellowdye.leaf.DepositYellowDyeLeaf;
 import pfdyemaker.src.action.yellowdye.leaf.MakeYellowDyeLeaf;
+import pfdyemaker.src.action.yellowdye.leaf.WithdrawOnionLeaf;
+import pfdyemaker.src.action.yellowdye.leaf.YellowDyeStartLeaf;
 
 import java.util.function.Supplier;
 
 public enum ActionBranch {
 
-    BUY_WOAD_LEAFS(() -> {
+    BUY_WOAD_LEAVES("Buy woad leaves", () -> {
         Branch actionBranch = new BuyWoadLeavesBranch();
         actionBranch.addLeaves(
                 new WalkToWysonLeaf(),
@@ -40,7 +42,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    COLLECT_ONIONS(() -> {
+    COLLECT_ONIONS("Collect onions", () -> {
         Branch actionBranch = new CollectOnionsBranch();
         actionBranch.addLeaves(
                 new WalkToOnionsLeaf(),
@@ -51,7 +53,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    COLLECT_REDBERRIES(() -> {
+    COLLECT_REDBERRIES("Collect redberries", () -> {
         Branch actionBranch = new CollectRedberriesBranch();
         actionBranch.addLeaves(
                 new WalkToRedberriesLeaf(),
@@ -62,7 +64,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    MAKE_BLUE_DYE(() -> {
+    MAKE_BLUE_DYE("Make blue dye", () -> {
         Branch actionBranch = new MakeBlueDyeBranch();
         actionBranch.addLeaves(
                 new WalkToAggieLeaf(),
@@ -73,7 +75,7 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    MAKE_RED_DYE(() -> {
+    MAKE_RED_DYE("Make red dye", () -> {
         Branch actionBranch = new MakeRedDyeBranch();
         actionBranch.addLeaves(
                 new WalkToAggieLeaf(),
@@ -84,21 +86,27 @@ public enum ActionBranch {
         return actionBranch;
     }),
 
-    MAKE_YELLOW_DYE(() -> {
+    MAKE_YELLOW_DYE("Make yellow dye", () -> {
         Branch actionBranch = new MakeYellowDyeBranch();
         actionBranch.addLeaves(
+                new YellowDyeStartLeaf(),
+                new WithdrawOnionLeaf(),
                 new WalkToAggieLeaf(),
                 new MakeYellowDyeLeaf(),
                 new WalkToDraynorBankLeaf(),
-                new BankYellowDyeLeaf()
+                new DepositYellowDyeLeaf()
         );
         return actionBranch;
+
+
     });
 
+    private final String displayName;
     private final Supplier<Branch> actionBranchSupplier;
 
-    ActionBranch(Supplier<Branch> questBranchSupplier) {
-        this.actionBranchSupplier = questBranchSupplier;
+    ActionBranch(String displayName, Supplier<Branch> actionBranchSupplier) {
+        this.displayName = displayName;
+        this.actionBranchSupplier = actionBranchSupplier;
     }
 
     public Branch getActionBranch() {
@@ -112,4 +120,3 @@ public enum ActionBranch {
         return name;
     }
 }
-
