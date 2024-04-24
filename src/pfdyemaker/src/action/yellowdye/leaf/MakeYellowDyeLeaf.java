@@ -1,7 +1,6 @@
 package pfdyemaker.src.action.yellowdye.leaf;
 
 import org.dreambot.api.input.Mouse;
-import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.dialogues.Dialogues;
 import org.dreambot.api.methods.interactive.GameObjects;

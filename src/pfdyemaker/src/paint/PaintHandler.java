@@ -45,7 +45,6 @@ public class PaintHandler implements MouseListener {
         drawDebugPaintButton(graphics2D);
     }
 
-
     private void drawChatBoxBackground(Graphics2D g2d) {
         g2d.setColor(TRANSPARENT_BLACK);
         g2d.fillRoundRect(5, 342, 506, 134, 2, 2);
@@ -140,7 +139,6 @@ public class PaintHandler implements MouseListener {
             toggleDebugPaint();
         }
     }
-
 
     @Override
     public void mousePressed(MouseEvent e) {

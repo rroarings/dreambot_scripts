@@ -1,6 +1,7 @@
 package pfdyemaker.src;
 
 import org.dreambot.api.Client;
+import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.script.ScriptManifest;
@@ -18,14 +19,13 @@ public class PFDyeMaker extends TreeScript {
 
     private Timer timer;
     private PaintHandler paintHandler;
-    private Frame gui;
 
     public Timer getTimer() {
         return timer;
     }
 
     private void initTree() {
-        addBranches(gui.getSelectedBranch().getActionBranch());
+        addBranches(Frame.getSelectedItem().getActionBranch());
     }
 
     @Override
