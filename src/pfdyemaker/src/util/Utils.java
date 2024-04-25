@@ -24,5 +24,4 @@ public class Utils {
         WorldHopper.hopWorld(worldToHop);
         Sleep.sleepUntil(() -> Worlds.getCurrent() != cWorld || Client.isLoggedIn(), 8000, 600);
     }
-
 }
