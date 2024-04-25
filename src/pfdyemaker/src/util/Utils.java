@@ -11,10 +11,6 @@ import pfdyemaker.src.data.DyeMakerConfig;
 
 public class Utils {
 
-    private static final String ENERGY_POTION_NAME = "Energy potion(";
-    private static final String VIAL_NAME = "Vial";
-    private static final int ENERGY_THRESHOLD = 50;
-
     public static void worldHop() {
         World cWorld = Worlds.getCurrent();
         World worldToHop = Worlds.getRandomWorld(world -> world != null && world.isF2P() && world.isNormal() && world.getMinimumLevel() <= Players.getLocal().getLevel());
