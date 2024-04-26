@@ -19,7 +19,6 @@ import java.awt.event.ActionEvent;
 public class Frame extends JFrame {
 
     private ActionBranch selectedBranch;
-    private boolean startLoop = false;
 
     private final JSpinner minHopDelaySpinner;
     private final JSpinner maxHopDelaySpinner;
@@ -95,7 +94,7 @@ public class Frame extends JFrame {
         DyeMakerConfig.dyeConfig().setWorldHopDelayMin(minValue);
         DyeMakerConfig.dyeConfig().setWorldHopDelayMax(maxValue);
         selectedBranch = (ActionBranch) comboBox.getSelectedItem();
-        startLoop = true;
+        boolean startLoop = true;
         if (DyeMakerConfig.isUseEnergyPotions()) {
             Walking.setRunThreshold(50);
         }
@@ -186,10 +185,6 @@ public class Frame extends JFrame {
         exitBtn.setBackground(PaintUtils.GRAY);
         exitBtn.setBounds(BASE_X, 230, 205, 25);
         contentPane.add(exitBtn);
-    }
-
-    public boolean isStartLoop() {
-        return startLoop;
     }
 
     public ActionBranch getSelectedItem() {

@@ -1,7 +1,6 @@
 package pfdyemaker.src;
 
 import org.dreambot.api.Client;
-import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManager;
 import org.dreambot.api.script.ScriptManifest;
