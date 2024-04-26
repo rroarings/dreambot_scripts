@@ -18,8 +18,8 @@ import java.awt.event.ActionEvent;
 
 public class Frame extends JFrame {
 
-    private static ActionBranch selectedBranch;
-    private static boolean startLoop = false;
+    private ActionBranch selectedBranch;
+    private boolean startLoop = false;
 
     private final JSpinner minHopDelaySpinner;
     private final JSpinner maxHopDelaySpinner;
@@ -188,11 +188,11 @@ public class Frame extends JFrame {
         contentPane.add(exitBtn);
     }
 
-    public static boolean isStartLoop() {
+    public boolean isStartLoop() {
         return startLoop;
     }
 
-    public static ActionBranch getSelectedItem() {
+    public ActionBranch getSelectedItem() {
         return selectedBranch;
     }
 }
