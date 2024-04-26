@@ -19,13 +19,14 @@ public class PFDyeMaker extends TreeScript {
 
     private Timer timer;
     private PaintHandler paintHandler;
+    private Frame gui;
 
     public Timer getTimer() {
         return timer;
     }
 
     private void initTree() {
-        addBranches(Frame.getSelectedItem().getActionBranch());
+        addBranches(gui.getSelectedItem().getActionBranch());
     }
 
     @Override
@@ -39,7 +40,7 @@ public class PFDyeMaker extends TreeScript {
     }
 
     @Override
-    public void onExit() {
+    public int onLoop() {
         if (gui != null) {
             if (gui.isVisible()) {
                 gui.dispose();

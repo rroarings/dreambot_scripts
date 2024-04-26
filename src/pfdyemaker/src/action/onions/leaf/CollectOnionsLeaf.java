@@ -23,8 +23,6 @@ public class CollectOnionsLeaf extends Leaf {
             DyeMakerConfig.dyeConfig().setStatus("Waiting for onion to spawn");
             return 600;
         }
-        return 600;
-    }
 
         if (Inventory.contains("Onion seed")) {
             DyeMakerConfig.dyeConfig().setStatus("Dropping onion seed");
